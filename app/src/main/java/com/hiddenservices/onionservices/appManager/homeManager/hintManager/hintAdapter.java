@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
@@ -39,8 +40,8 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
 
-    public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
-        this.mHintList = new ArrayList();
+    public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
+        this.mHintList = new ArrayList<>();
         int maxCounter = 5;
         if (pHintList.size() < maxCounter) {
             maxCounter = pHintList.size();
@@ -52,7 +53,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch) {
+    public void onUpdateAdapter(ArrayList<historyRowModel> pHintList) {
         mHintList = pHintList;
         if (mHintList.size() == 1 && mHintList.get(0).getHeader().equals("about:blank")) {
             mHintList.clear();
@@ -108,9 +109,8 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             pHintWebIconImage = itemView.findViewById(R.id.pHintWebIconImage);
             mHindTypeIconTemp = new ImageView(mContext);
 
-            pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
-
-            pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
+            pHintWebIconImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
+            pHintWebIconImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v8)));
 
             Drawable mDrawable;
             Resources res = itemView.getContext().getResources();
@@ -171,7 +171,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             if (mURLLink.contains("167.86.99.31") || mURLLink.contains("orion.onion")) {
                 pHintWebIconImage.setImageTintList(null);
-                pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                pHintWebIconImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.genesis));
             } else {
                 mHindTypeIconTemp.setImageDrawable(null);
                 mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), homeEnums.eHintCallback.ON_FETCH_FAVICON);

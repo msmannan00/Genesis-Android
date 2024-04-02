@@ -30,9 +30,7 @@ public class activityThemeManager {
         if (status.sTheme == enums.Theme.THEME_DEFAULT) {
             if (!status.sDefaultNightMode && mIsNightMode) {
                 return true;
-            } else if (status.sDefaultNightMode && !mIsNightMode) {
-                return true;
-            }
+            } else return status.sDefaultNightMode && !mIsNightMode;
         } else {
             if (status.sTheme != enums.Theme.THEME_DARK && mIsNightMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

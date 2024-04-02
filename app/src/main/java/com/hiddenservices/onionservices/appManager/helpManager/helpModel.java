@@ -49,7 +49,7 @@ class helpModel {
         ArrayList<helpDataModel> mTempModel = (ArrayList<helpDataModel>) dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_GET_HELP, null);
 
         mHelpListModel.clear();
-        if (mTempModel.size() > 0) {
+        if (!mTempModel.isEmpty()) {
             mIsLoaded = true;
             mHelpListModel.addAll(mTempModel);
             mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
@@ -72,14 +72,11 @@ class helpModel {
                             mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
                         } catch (JSONException e) {
                             mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
-                            e.printStackTrace();
                         }
                     },
-                    error -> {
-                        mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
-                    });
+                    error -> mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE));
 
-            RequestQueue requestQueue = Volley.newRequestQueue(mContext/*, new ProxiedHurlStack()*/);
+            RequestQueue requestQueue = Volley.newRequestQueue(mContext);
             requestQueue.add(stringRequest);
         }
     }

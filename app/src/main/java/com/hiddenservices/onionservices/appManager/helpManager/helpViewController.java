@@ -43,7 +43,7 @@ class helpViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
@@ -81,9 +81,7 @@ class helpViewController {
         mRetryContainer.animate().cancel();
         mProgressBar.animate().cancel();
         mProgressBar.animate().setDuration(300).alpha(1);
-        mRetryContainer.animate().alpha(0).withEndAction(() -> {
-            mRetryContainer.setVisibility(View.GONE);
-        });
+        mRetryContainer.animate().alpha(0).withEndAction(() -> mRetryContainer.setVisibility(View.GONE));
     }
 
     public void onTrigger(helpEnums.eHelpViewController pCommands, List<Object> ignoredPData) {

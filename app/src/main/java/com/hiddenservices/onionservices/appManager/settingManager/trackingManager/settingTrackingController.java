@@ -1,12 +1,13 @@
 package com.hiddenservices.onionservices.appManager.settingManager.trackingManager;
 
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUSTED;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUESTED;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -97,7 +98,7 @@ public class settingTrackingController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         if (mSettingChanged) {
-            activityContextManager.getInstance().setCurrentActivity(this);
+            activityContextManager.getInstance().setCurrentActivity();
         }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
@@ -108,15 +109,22 @@ public class settingTrackingController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onTrigger();
+            }
+        });
+    }
+
+    void onTrigger(){
         if (mSettingChanged) {
-            activityContextManager.getInstance().setCurrentActivity(this);
+            activityContextManager.getInstance().setCurrentActivity();
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
-        activityContextManager.getInstance().onRemoveStack(this);
+        activityContextManager.getInstance().onRemoveStack(settingTrackingController.this);
         finish();
-        super.onBackPressed();
     }
 
     @Override
@@ -128,7 +136,7 @@ public class settingTrackingController extends AppCompatActivity {
     /*UI Redirection*/
 
     public void onClose(View view) {
-        onBackPressed();
+        onTrigger();
     }
 
     public void onTracking(View view) {
@@ -138,7 +146,7 @@ public class settingTrackingController extends AppCompatActivity {
         mSettingPrivacyModel.onTrigger(settingTrackingEnums.eTrackingModel.M_SET_TRACKING_PROTECTION, Collections.singletonList(view));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_TRACKING_PROTECTION, status.sSettingTrackingProtection));
         if(mTrackingProtectionCurrentStatus != status.sSettingTrackingProtection){
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUSTED);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUESTED);
         }
     }
 

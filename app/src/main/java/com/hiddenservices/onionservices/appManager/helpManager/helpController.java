@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -56,6 +57,7 @@ public class helpController extends AppCompatActivity {
         initializeViews();
         initializeAppModel();
         initializeLocalEventHandlers();
+        onBack();
     }
 
     @Override
@@ -155,7 +157,7 @@ public class helpController extends AppCompatActivity {
         mSearchInput.animate().setDuration(300).alpha(1);
     }
 
-    /*Ediitext Callback*/
+    /*Edittext Callback*/
 
     private class edittextManagerCallback implements eventObserver.eventListener {
 
@@ -241,15 +243,17 @@ public class helpController extends AppCompatActivity {
         super.onResume();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mSearchInput.hasFocus()) {
-            mSearchInput.clearFocus();
-        } else {
-            finish();
-        }
-        super.onBackPressed();
+
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mSearchInput.hasFocus()) {
+                    mSearchInput.clearFocus();
+                } else {
+                    finish();
+                }
+            }
+        });
     }
-
-
 }

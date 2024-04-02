@@ -51,7 +51,7 @@ public class tabViewController {
 
     /*Initializations*/
 
-    public tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView, TextView pEmptyView, ImageButton pNewTab) {
+    public tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, NestedScrollView pNestedScrollView, ImageButton pNewTab) {
         this.mContext = mContext;
         this.mTabs = pTabs;
         this.mRemoveSelection = pRemoveSelection;
@@ -186,11 +186,7 @@ public class tabViewController {
             mUndoLayout.setAlpha(0);
             mUndoLayout.setVisibility(View.VISIBLE);
             mDelayHandler.removeCallbacksAndMessages(null);
-            mUndoLayout.animate().setDuration(200).alpha(1).withEndAction(() -> {
-                mDelayHandler.postDelayed(() -> {
-                    mUndoLayout.animate().setDuration(200).alpha(0);
-                }, 2000);
-            });
+            mUndoLayout.animate().setDuration(200).alpha(1).withEndAction(() -> mDelayHandler.postDelayed(() -> mUndoLayout.animate().setDuration(200).alpha(0), 2000));
         }
     }
 
@@ -208,7 +204,7 @@ public class tabViewController {
         }
     }
 
-    private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
+    private void onDrawSweepableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
 
         Bitmap icon;
         if (pActionState == ItemTouchHelper.ANIMATION_TYPE_SWIPE_SUCCESS) {
@@ -258,8 +254,8 @@ public class tabViewController {
             onShowSelectionMenu((boolean) pData.get(0), (int) pData.get(1));
         } else if (pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_SELECTION)) {
             onShowSelection();
-        } else if (pCommands.equals(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)) {
-            onDrawSwipableBackground((Canvas) pData.get(0), (RecyclerView.ViewHolder) pData.get(1), (float) pData.get(2), (int) pData.get(3));
+        } else if (pCommands.equals(tabEnums.eTabViewCommands.ON_GENERATE_SWEEPABLE_BACKGROUND)) {
+            onDrawSweepableBackground((Canvas) pData.get(0), (RecyclerView.ViewHolder) pData.get(1), (float) pData.get(2), (int) pData.get(3));
         } else if (pCommands.equals(tabEnums.eTabViewCommands.ON_EXIT)) {
             initExitUI();
         } else if (pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT)) {

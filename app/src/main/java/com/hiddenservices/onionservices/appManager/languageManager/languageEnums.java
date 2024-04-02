@@ -6,7 +6,7 @@ class languageEnums {
         M_SUPPORTED_LANGUAGE, M_ACTIVE_LANGUAGE
     }
 
-    public enum eLanguagevViewController {
+    public enum eLanguageViewController {
         M_UPDATE_BLOCKER
     }
 

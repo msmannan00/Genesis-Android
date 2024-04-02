@@ -48,9 +48,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
             mProgress = progress;
 
             if (progress <= 20) {
-                mContext.get().runOnUiThread(() -> {
-                    mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE);
-                });
+                mContext.get().runOnUiThread(() -> mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE));
             } else {
                 if (progress == 100) {
                     mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.ON_INVOKE_PARSER);
@@ -58,9 +56,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
                         checkApplicationRate();
                     }
                 }
-                mContext.get().runOnUiThread(() -> {
-                    mEvent.invokeObserver(Arrays.asList(mProgress, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE);
-                });
+                mContext.get().runOnUiThread(() -> mEvent.invokeObserver(Arrays.asList(mProgress, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE));
             }
         }
     }
@@ -157,7 +153,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
         mProgress = 5;
     }
 
-    public boolean getSecurtityState(){
+    public boolean getSecurityState(){
         if(mGeckoDataModel.mCurrentURL.equals("about:blank") || mGeckoDataModel.mCurrentURL.startsWith("resource://android/assets/policy")){
             return true;
         }

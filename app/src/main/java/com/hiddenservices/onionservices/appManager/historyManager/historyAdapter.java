@@ -12,6 +12,7 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiddenservices.onionservices.constants.constants;
@@ -49,7 +50,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     private ArrayList<Integer> mLongSelectedID = new ArrayList<>();
 
     private AppCompatActivity mContext;
-    private historyAdapterView mHistroyAdapterView;
+    private historyAdapterView mHistoryAdapterView;
     private Context mListHolderContext;
     private PopupWindow mPopupWindow = null;
     private eventObserver.eventListener mEvent;
@@ -66,13 +67,12 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         this.mCurrentList = new ArrayList<>();
         this.mPassedList = pModelList;
         this.mContext = pMainContext;
-        this.mHistroyAdapterView = new historyAdapterView(mContext);
+        this.mHistoryAdapterView = new historyAdapterView(mContext);
 
         initializeModelWithDate(false);
     }
 
     public void onLoadMore(ArrayList<historyRowModel> pModelList) {
-        //notifyDataSetChanged();
         initializeModelWithDate(false);
     }
 
@@ -141,7 +141,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     /*Initializations*/
 
-    private ArrayList<String> getLongSelectedleURL() {
+    private ArrayList<String> getLongSelectableURL() {
         return mLongSelectedIndex;
     }
 
@@ -154,15 +154,9 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                     invokeFilter(false);
                     mEvent.invokeObserver(Collections.singletonList(m_counter_inner), historyEnums.eHistoryAdapterCallback.IS_EMPTY);
 
-                    boolean mDateVerify = false;
-                    if (mCurrentList.size() > 0 && mCurrentList.size() < m_counter_inner + 1 && mCurrentList.get(m_counter_inner - 1).getDescription() == null && (mCurrentList.size() > m_counter_inner + 1 && mCurrentList.get(m_counter_inner + 1).getDescription() == null || mCurrentList.size() == m_counter_inner + 1)) {
-                        mDateVerify = true;
-                    }
+                    boolean mDateVerify = !mCurrentList.isEmpty() && mCurrentList.size() < m_counter_inner + 1 && mCurrentList.get(m_counter_inner - 1).getDescription() == null && (mCurrentList.size() > m_counter_inner + 1 && mCurrentList.get(m_counter_inner + 1).getDescription() == null || mCurrentList.size() == m_counter_inner + 1);
 
-                    if (m_counter_inner == 0) {
-                        //notifyDataSetChanged();
-                    } else {
-
+                    if (m_counter_inner != 0) {
                         if (mDateVerify) {
                             notifyItemRemoved(m_counter_inner - 1);
                             mCurrentList.remove(m_counter_inner - 1);
@@ -235,9 +229,8 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     public void onSelectView(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate) {
         if (!mSearchEnabled) {
             try {
-                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(pItemView, pMenuItem, pLogoImage, pIsForced, true));
-            } catch (Exception e) {
-                e.printStackTrace();
+                mPopupWindow = (PopupWindow) mHistoryAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(pItemView, pMenuItem, pLogoImage, pIsForced, true));
+            } catch (Exception ignored) {
             }
             if (!pIsForced) {
                 mLongSelectedDate.add(pDate);
@@ -255,16 +248,12 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
     }
 
-    public boolean isSwipable(int mIndex) {
-        if (mCurrentList.get(mIndex).getID() == -1) {
-            return false;
-        } else {
-            return true;
-        }
+    public boolean isSweepable(int mIndex) {
+        return mCurrentList.get(mIndex).getID() != -1;
     }
 
     public void onVerifyLongSelectedURL(boolean pIsComputing) {
-        if (mLongSelectedIndex.size() > 0) {
+        if (!mLongSelectedIndex.isEmpty()) {
             mEvent.invokeObserver(Collections.singletonList(false), historyEnums.eHistoryAdapterCallback.ON_VERIFY_SELECTED_URL_MENU);
         } else {
             if (!pIsComputing) {
@@ -276,13 +265,12 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     public void onClearHighlight(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate) {
         try {
-            mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(pItemView, pMenuItem, pLogoImage, pIsForced));
+            mPopupWindow = (PopupWindow) mHistoryAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(pItemView, pMenuItem, pLogoImage, pIsForced));
             mLongSelectedDate.remove(pDate);
             mLongSelectedIndex.remove(pUrl);
             mLongSelectedID.remove((Integer) pId);
             onVerifyLongSelectedURL(false);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -305,7 +293,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 pItemView.clearFocus();
             }
 
-            if (mFilter.length() > 0) {
+            if (!mFilter.isEmpty()) {
                 initializeModelWithDate(true);
                 notifyDataSetChanged();
             }
@@ -315,7 +303,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
 
-                if (mLongSelectedIndex.size() > 0) {
+                if (!mLongSelectedIndex.isEmpty()) {
                     if (!mLongPressedMenuActive) {
                         if (mLongSelectedIndex.contains(pUrl) && mLongSelectedID.contains(pId)) {
                             handler.removeCallbacks(mLongPressed);
@@ -364,7 +352,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle) {
         LayoutInflater layoutInflater = (LayoutInflater) pView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.history_bookmark__row_menu, null);
-        mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_OPEN_MENU, Arrays.asList(mPopupWindow, pView, mPopupView));
+        mPopupWindow = (PopupWindow) mHistoryAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_OPEN_MENU, Arrays.asList(mPopupWindow, pView, mPopupView));
 
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuCopy), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuShare), pUrl, pPosition, pTitle);
@@ -372,7 +360,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuOpenNewTab), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuDelete), pUrl, pPosition, pTitle);
 
-        if (mFilter.length() > 0) {
+        if (!mFilter.isEmpty()) {
             initializeModelWithDate(true);
             notifyDataSetChanged();
         }
@@ -420,7 +408,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), historyEnums.eHistoryAdapterCallback.ON_URL_CLEAR_AT);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), historyEnums.eHistoryAdapterCallback.IS_EMPTY);
 
-        if (mPassedList.size() == 0) {
+        if (mPassedList.isEmpty()) {
             mCurrentList.clear();
             return;
         }
@@ -484,7 +472,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mDateContainer.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.GONE);
                 mRowContainer.setVisibility(View.VISIBLE);
-                if (mLongSelectedID.size() > 0) {
+                if (!mLongSelectedID.isEmpty()) {
                     mRowMenu.setVisibility(View.INVISIBLE);
                     mRowMenu.setClickable(false);
                 } else {
@@ -512,7 +500,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 if(status.sLowMemory != enums.MemoryStatus.LOW_MEMORY && status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
                     if (model.getDescription().contains("167.86.99.31") || model.getDescription().contains("orion.onion")) {
                         setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
-                        mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                        mFaviconLogo.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.genesis));
                     } else {
                         setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
                         mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), historyEnums.eHistoryAdapterCallback.ON_FETCH_FAVICON);
@@ -520,7 +508,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 }
             }
 
-            if (mLongSelectedID.size() > 0) {
+            if (!mLongSelectedID.isEmpty()) {
                 mRowMenu.setVisibility(View.INVISIBLE);
                 mRowMenu.setClickable(false);
             } else {
@@ -529,9 +517,9 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             }
 
             if (mLongSelectedIndex.contains("https://" + model.getDescription()) && mLongSelectedID.contains(model.getID())) {
-                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
+                mPopupWindow = (PopupWindow) mHistoryAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
             } else if (mLogoImage.getAlpha() > 0) {
-                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
+                mPopupWindow = (PopupWindow) mHistoryAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
             }
         }
 
@@ -548,7 +536,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     }
 
     private boolean isLongPressMenuActive() {
-        return mLongSelectedIndex.size() > 0;
+        return !mLongSelectedIndex.isEmpty();
     }
 
     public Object onTrigger(historyEnums.eHistoryAdapterCommands pCommands, List<Object> pData) {
@@ -557,7 +545,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         } else if (pCommands == historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL) {
             clearLongSelectedURL();
         } else if (pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL) {
-            return getLongSelectedleURL();
+            return getLongSelectableURL();
         } else if (pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS) {
             return isLongPressMenuActive();
         } else if (pCommands == historyEnums.eHistoryAdapterCommands.ON_CLOSE) {

@@ -1,7 +1,5 @@
 package com.hiddenservices.onionservices.appManager.settingManager.privacyManager;
 
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_STRICT_POLICY_JAVASCRIPT;
-
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.view.View;
@@ -9,27 +7,19 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-
 import com.hiddenservices.onionservices.constants.status;
-import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.hiddenservices.onionservices.pluginManager.pluginController;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_ALL;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NONE;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NON_TRACKERS;
-
 import org.mozilla.geckoview.ContentBlocking;
 
 class settingPrivacyViewController {
@@ -65,7 +55,7 @@ class settingPrivacyViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
@@ -80,29 +70,10 @@ class settingPrivacyViewController {
             mOption0.setAlpha(0.3f);
         }
 
-        if (status.sSettingJavaStatus) {
-            this.mJavaScript.setChecked(true);
-        } else {
-            this.mJavaScript.setChecked(false);
-        }
-
-        if (status.sSettingPopupStatus) {
-            this.mPopup.setChecked(true);
-        } else {
-            this.mPopup.setChecked(false);
-        }
-
-        if (status.sClearOnExit) {
-            this.mClearDataOnExit.setChecked(true);
-        } else {
-            this.mClearDataOnExit.setChecked(false);
-        }
-
-        if (status.sStatusDoNotTrack) {
-            this.mDoNotTrack.setChecked(true);
-        } else {
-            this.mDoNotTrack.setChecked(false);
-        }
+        this.mJavaScript.setChecked(status.sSettingJavaStatus);
+        this.mPopup.setChecked(status.sSettingPopupStatus);
+        this.mClearDataOnExit.setChecked(status.sClearOnExit);
+        this.mDoNotTrack.setChecked(status.sStatusDoNotTrack);
 
         clearCookieSetting();
         if (status.sSettingCookieStatus == ACCEPT_ALL) {

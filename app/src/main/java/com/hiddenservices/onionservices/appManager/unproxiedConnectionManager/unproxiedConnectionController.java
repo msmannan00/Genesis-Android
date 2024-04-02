@@ -3,7 +3,6 @@ package com.hiddenservices.onionservices.appManager.unproxiedConnectionManager;
 import static android.webkit.WebSettings.LOAD_NO_CACHE;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -28,7 +27,7 @@ public class unproxiedConnectionController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adview_controller);
 
-        onCrashInit(this);
+        onCrashInit();
         initializeViews();
         onInitializeController();
 
@@ -58,7 +57,7 @@ public class unproxiedConnectionController extends AppCompatActivity {
         mWebView.clearCache(true);
     }
 
-    public void onCrashInit(Context mContext){
+    public void onCrashInit(){
     }
 
     private void onInitializeController() {
@@ -76,7 +75,7 @@ public class unproxiedConnectionController extends AppCompatActivity {
             mWebView.loadUrl(mURL);
             finish();
         }else {
-            mWebView.setWebViewClient(new unproxiedConnectionWebViewClient(new webivewViewCallback()));
+            mWebView.setWebViewClient(new unproxiedConnectionWebViewClient(new webViewViewCallback()));
             mWebView.loadUrl(mURL);
         }
     }
@@ -87,7 +86,7 @@ public class unproxiedConnectionController extends AppCompatActivity {
     }
 
     /* Callbacks */
-    public class webivewViewCallback implements eventObserver.eventListener {
+    public class webViewViewCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object event_type) {
             if (event_type.equals(unproxiedConnectionEnums.eAdvertClientCallback.M_UPDATE_PROGRESSBAR)) {

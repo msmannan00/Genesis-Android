@@ -1,7 +1,5 @@
 package com.hiddenservices.onionservices.dataManager.models;
 
-import android.widget.ImageView;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,10 +28,6 @@ public class historyRowModel {
 
     public void setURL(String pURL) {
         this.mDescription = pURL;
-    }
-
-    public void setLogo(ImageView pLogo) {
-        //this.mLogo = pLogo;
     }
 
     public void setDate(Date pDate) {

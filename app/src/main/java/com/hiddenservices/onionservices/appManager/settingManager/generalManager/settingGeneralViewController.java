@@ -60,7 +60,7 @@ class settingGeneralViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
@@ -84,17 +84,8 @@ class settingGeneralViewController {
             mThemeDefault.setChecked(true);
         }
 
-        if (status.sFullScreenBrowsing) {
-            mFullScreenMode.setChecked(true);
-        } else {
-            mFullScreenMode.setChecked(false);
-        }
-
-        if (status.sOpenURLInNewTab) {
-            mOpenURLInNewTab.setChecked(true);
-        } else {
-            mOpenURLInNewTab.setChecked(false);
-        }
+        mFullScreenMode.setChecked(status.sFullScreenBrowsing);
+        mOpenURLInNewTab.setChecked(status.sOpenURLInNewTab);
 
         mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("167.86.99.31", "orion.onion")));
     }

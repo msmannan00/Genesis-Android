@@ -50,7 +50,7 @@ public class downloadHandler {
 
     public void downloadRequestedFile(geckoDownloadManager mDownloadManager) {
         if (mDownloadManager.getDownloadURL() != null && mDownloadManager.getDownloadFile() != null) {
-            if (!createAndSaveFileFromBase64Url(mDownloadManager.getDownloadURL().toString())) {
+            if (createAndSaveFileFromBase64Url(mDownloadManager.getDownloadURL().toString())) {
                 pluginController.getInstance().onDownloadInvoke(Arrays.asList(mDownloadManager.getDownloadURL(), mDownloadManager.getDownloadFile()), pluginEnums.eDownloadManager.M_WEB_DOWNLOAD_REQUEST);
             }
         }
@@ -58,7 +58,7 @@ public class downloadHandler {
 
     public void downloadRequestedFile(Uri downloadURL, String downloadFile) {
         if (downloadURL != null && downloadFile != null) {
-            if (!createAndSaveFileFromBase64Url(downloadURL.toString())) {
+            if (createAndSaveFileFromBase64Url(downloadURL.toString())) {
                 pluginController.getInstance().onDownloadInvoke(Arrays.asList(downloadURL, downloadFile), pluginEnums.eDownloadManager.M_WEB_DOWNLOAD_REQUEST);
             }
         }
@@ -72,7 +72,7 @@ public class downloadHandler {
 
         try {
             if (!url.startsWith("data") && !url.startsWith("blob")) {
-                return false;
+                return true;
             }
 
             File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
@@ -82,7 +82,7 @@ public class downloadHandler {
 
             if (url.startsWith("blob")) {
                 mGeckoSession.loadUri((String) pluginController.getInstance().onDownloadInvoke(Collections.singletonList(url), pluginEnums.eDownloadManager.M_BLOB_DOWNLOAD_REQUEST));
-                return true;
+                return false;
             }
 
             filetype = url.substring(url.indexOf("/") + 1, url.indexOf(";"));
@@ -120,10 +120,8 @@ public class downloadHandler {
                     mUriPermission = uri_temp;
                     mContext.get().getApplicationContext().grantUriPermission(packageName, uri_temp, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 }
-                PendingIntent pIntent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    pIntent = PendingIntent.getActivity(mContext.get().getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-                }
+                PendingIntent pIntent;
+                pIntent = PendingIntent.getActivity(mContext.get().getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                 String channel_id = createNotificationChannel(mContext.get().getApplicationContext());
 
@@ -138,16 +136,14 @@ public class downloadHandler {
                 NotificationManager notificationManager = (NotificationManager) mContext.get().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(notificationId, notificationBuilder.build());
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
 
-            return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            return false;
+        } catch (Exception ignored) {
         }
 
-        return true;
+        return false;
     }
 
     private static String createNotificationChannel(Context context) {

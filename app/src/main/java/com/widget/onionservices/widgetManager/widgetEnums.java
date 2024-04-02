@@ -8,7 +8,7 @@ public class widgetEnums {
     }
 
     public enum eModelViewController {
-        M_ON_RECIEVE
+        M_ON_RECEIVE
     }
 
     /*Widget Manager Callback*/

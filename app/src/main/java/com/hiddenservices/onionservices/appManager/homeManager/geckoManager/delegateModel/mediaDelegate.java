@@ -17,7 +17,7 @@ import com.hiddenservices.onionservices.appManager.homeManager.homeController.ho
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotificationReciever;
+import com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotificationReceiver;
 import org.mozilla.geckoview.GeckoSession;
 
 import java.lang.ref.WeakReference;
@@ -55,15 +55,15 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
         PendingIntent playPauseIntent;
         int playPauseIcon;
         if (!media_status) {
-            playPauseIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_play", enums.MediaNotificationReciever.PLAY);
+            playPauseIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReceiver.class, S_NOTIFICATION_ID, "media_play", enums.MediaNotificationReceiver.PLAY);
             playPauseIcon = R.drawable.ic_baseline_play_arrow;
         } else {
-            playPauseIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_pause", enums.MediaNotificationReciever.PAUSE);
+            playPauseIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReceiver.class, S_NOTIFICATION_ID, "media_pause", enums.MediaNotificationReceiver.PAUSE);
             playPauseIcon = R.drawable.ic_baseline_pause;
         }
 
-        PendingIntent nextIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReciever.SKIP_FORWARD);
-        PendingIntent prevIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReciever.SKIP_BACKWARD);
+        PendingIntent nextIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReceiver.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReceiver.SKIP_FORWARD);
+        PendingIntent prevIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReceiver.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReceiver.SKIP_BACKWARD);
 
         PendingIntent actionIntent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

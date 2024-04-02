@@ -3,8 +3,6 @@ package com.hiddenservices.onionservices.dataManager;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.os.AsyncTask;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.dataManager.models.bookmarkRowModel;
@@ -23,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static com.hiddenservices.onionservices.constants.constants.CONST_DATABASE_NAME;
 
@@ -53,8 +53,7 @@ public class sqlCipherDataModel {
             sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
             sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB, theme VARCHAR, session VARCHAR);");
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ignored) {
         }
 
     }
@@ -94,37 +93,32 @@ public class sqlCipherDataModel {
 
     @SuppressLint("StaticFieldLeak")
     private void execSQL(final String query, final Object params) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                try {
-                    if (params == null) {
-                        sDatabaseInstance.execSQL(query);
-                    } else {
-                        sDatabaseInstance.execSQL(query, (String[]) params);
-                    }
-                } catch (Exception ignored) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                if (params == null) {
+                    sDatabaseInstance.execSQL(query);
+                } else {
+                    sDatabaseInstance.execSQL(query, (String[]) params);
                 }
-                return null;
+            } catch (Exception ignored) {
             }
-        }.execute();
+        });
     }
 
-    private void execSQL(String query, Object params, boolean pContentValues, String whereClause, String[] whereArgs) {
+    private void execSQL(String query, Object params, String whereClause, String[] whereArgs) {
         try {
             if (params == null) {
                 sDatabaseInstance.execSQL(query);
-            } else if (pContentValues) {
-                sDatabaseInstance.update(query, (ContentValues) params, whereClause, whereArgs);
             } else {
-                sDatabaseInstance.execSQL(query, (String[]) params);
+                sDatabaseInstance.update(query, (ContentValues) params, whereClause, whereArgs);
             }
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
     }
 
     private ArrayList<historyRowModel> selectHistory(int pStartIndex, int pEndIndex) {
-        ArrayList<historyRowModel> tempmodel = new ArrayList<>();
+        ArrayList<historyRowModel> tempModel = new ArrayList<>();
 
         Cursor c = sDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date DESC LIMIT " + pEndIndex + " OFFSET " + pStartIndex, null);
         if (c.moveToFirst()) {
@@ -133,19 +127,18 @@ public class sqlCipherDataModel {
                 try {
                     Date m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).parse(c.getString(1));
                     model.setDate(m_date);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ignored) {
                 }
                 if (Calendar.getInstance().getTime().getTime() < model.getDate().getTime()) {
-                    tempmodel.add(model);
+                    tempModel.add(model);
                 } else {
-                    tempmodel.add(model);
+                    tempModel.add(model);
                 }
             } while (c.moveToNext());
         }
         c.close();
 
-        return tempmodel;
+        return tempModel;
     }
 
     private ArrayList<tabRowModel> selectTabs() {
@@ -160,14 +153,13 @@ public class sqlCipherDataModel {
                 try {
                     session = GeckoSession.SessionState.fromString(c.getString(6));
                     model.setSession(mSession, c.getString(3), c.getString(2), c.getString(5), session);
-                    model.getSession().setSessionID(model.getmId());
+                    model.getSession().setSessionID(model.getId());
                     if (session != null) {
                         mTempListModel.add(0, model);
                     } else {
                         mTempListModel.add(model);
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (Exception ignored) {
                 }
             } while (c.moveToNext());
         }
@@ -195,17 +187,17 @@ public class sqlCipherDataModel {
     }
 
     private ArrayList<bookmarkRowModel> selectBookmark() {
-        ArrayList<bookmarkRowModel> tempmodel = new ArrayList<>();
+        ArrayList<bookmarkRowModel> tempModel = new ArrayList<>();
         Cursor c = sDatabaseInstance.rawQuery("SELECT * FROM bookmark ORDER BY id DESC ", null);
 
         if (c.moveToFirst()) {
             do {
-                tempmodel.add(new bookmarkRowModel(c.getString(1), c.getString(2), Integer.parseInt(c.getString(0))));
+                tempModel.add(new bookmarkRowModel(c.getString(1), c.getString(2), Integer.parseInt(c.getString(0))));
             } while (c.moveToNext());
         }
         c.close();
 
-        return tempmodel;
+        return tempModel;
     }
 
     private void deleteFromList(int index, String table) {
@@ -220,7 +212,7 @@ public class sqlCipherDataModel {
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL) {
             execSQL((String) pData.get(0), pData.get(1));
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL_USING_CONTENT) {
-            execSQL((String) pData.get(0), pData.get(1), true, (String) pData.get(2), (String[]) pData.get(3));
+            execSQL((String) pData.get(0), pData.get(1), (String) pData.get(2), (String[]) pData.get(3));
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_SELECT_BOOKMARK) {
             return selectBookmark();
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_SELECT_HISTORY) {

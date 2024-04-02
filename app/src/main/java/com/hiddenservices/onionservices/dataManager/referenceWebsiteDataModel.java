@@ -46,9 +46,7 @@ public class referenceWebsiteDataModel {
                             mLoading = false;
                         }
                     },
-                    error -> {
-                        mLoading = false;
-                    });
+                    error -> mLoading = false);
 
             RequestQueue requestQueue = Volley.newRequestQueue(pContext);
             requestQueue.add(stringRequest);

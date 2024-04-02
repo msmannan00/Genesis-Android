@@ -46,9 +46,7 @@ public class tabModel {
 
     private ArrayList<tabRowModel> onLoadBackup() {
         mModelList.addAll(0, mBackupIndex);
-        ArrayList<tabRowModel> mModelListTemp = new ArrayList<>();
-        mModelListTemp.addAll(mBackupIndex);
-        return mModelListTemp;
+        return new ArrayList<>(mBackupIndex);
     }
 
 

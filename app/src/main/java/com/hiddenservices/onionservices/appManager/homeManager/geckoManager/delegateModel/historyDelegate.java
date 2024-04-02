@@ -59,7 +59,7 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
                 if (mID != null) {
                     mGeckoDataModel.mCurrentURL_ID = (int) mID;
                 }
-            }catch (Exception ex){}
+            }catch (Exception ignored){}
         }
         mCurrentIndex = var2.getCurrentIndex();
     }

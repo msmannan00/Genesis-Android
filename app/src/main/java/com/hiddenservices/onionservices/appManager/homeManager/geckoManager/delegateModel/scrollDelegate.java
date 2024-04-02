@@ -17,7 +17,7 @@ public class scrollDelegate implements GeckoSession.ScrollDelegate {
     private eventObserver.eventListener mEvent;
     private geckoDataModel mGeckoDataModel;
 
-    private int mScollOffset = 0;
+    private int mScrollOffset = 0;
 
     /*Initializations*/
 
@@ -29,7 +29,7 @@ public class scrollDelegate implements GeckoSession.ScrollDelegate {
     /*Scroll Delegate*/
     @UiThread
     public void onScrollChanged(@NonNull GeckoSession session, int scrollX, int scrollY) {
-        mScollOffset = scrollY;
+        mScrollOffset = scrollY;
         mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.M_UPDATE_PIXEL_BACKGROUND);
         if (scrollY <= 3) {
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.M_ON_SCROLL_TOP_BOUNDARIES);
@@ -42,7 +42,7 @@ public class scrollDelegate implements GeckoSession.ScrollDelegate {
     }
 
     public int getScrollOffset() {
-        return mScollOffset;
+        return mScrollOffset;
     }
 
 }

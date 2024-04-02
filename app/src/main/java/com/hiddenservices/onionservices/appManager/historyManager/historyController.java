@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import static com.hiddenservices.onionservices.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.hiddenservices.onionservices.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERIFY_SELECTION_MENU;
 import static com.hiddenservices.onionservices.constants.sql.SQL_CLEAR_HISTORY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_CLEAR_HISTORY;
 
@@ -79,6 +81,7 @@ public class historyController extends AppCompatActivity {
         initializeList();
         initCustomListeners();
         initSwipe();
+        onBack();
     }
 
     @Override
@@ -154,9 +157,7 @@ public class historyController extends AppCompatActivity {
         });
 
         mClearButton.requestFocusFromTouch();
-        mClearButton.setOnClickListener(v -> {
-            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this), M_CLEAR_HISTORY);
-        });
+        mClearButton.setOnClickListener(v -> pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this), M_CLEAR_HISTORY));
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
@@ -170,9 +171,7 @@ public class historyController extends AppCompatActivity {
         });
 
         mSearchInput.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                // mSearchInput.clearFocus();
-            } else {
+            if (hasFocus) {
                 mHistoryAdapter.setFilter(mSearchInput.getText().toString());
                 mHistoryAdapter.invokeFilter(true);
                 mHistoryAdapter.notifyDataSetChanged();
@@ -211,14 +210,14 @@ public class historyController extends AppCompatActivity {
             }
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
+                int position = viewHolder.getLayoutPosition();
                 mHistoryAdapter.invokeSwipeClose(position);
             }
 
             @Override
             public int getMovementFlags(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
-                if (mHistoryAdapter.isSwipable(position)) {
+                int position = viewHolder.getLayoutPosition();
+                if (mHistoryAdapter.isSweepable(position)) {
                     final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
                     final int swipeFlags = 0;
                     return makeMovementFlags(swipeFlags, dragFlags);
@@ -229,7 +228,7 @@ public class historyController extends AppCompatActivity {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Canvas mCanvas = (Canvas) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
+                Canvas mCanvas = (Canvas) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.ON_GENERATE_SWAPPABLEBACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
                 super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         };
@@ -269,7 +268,7 @@ public class historyController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         status.sSettingIsAppPaused = false;
         super.onResume();
     }
@@ -293,17 +292,21 @@ public class historyController extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mSearchInput.getVisibility() == View.VISIBLE) {
-            onHideSearch(null);
-        } else if ((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
-            onClearMultipleSelection(null);
-        } else {
-            activityContextManager.getInstance().onRemoveStack(this);
-            finish();
-        }
-        super.onBackPressed();
+
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mSearchInput.getVisibility() == View.VISIBLE) {
+                    onHideSearch(null);
+                } else if ((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
+                    onClearMultipleSelection(null);
+                } else {
+                    activityContextManager.getInstance().onRemoveStack(this);
+                    finish();
+                }
+            }
+        });
     }
 
     /*External XML Listeners*/
@@ -340,7 +343,7 @@ public class historyController extends AppCompatActivity {
     public void onClearMultipleSelection(View view) {
         mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL, null);
         mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_CLOSE_MENU, null);
-        mHistoryViewController.onTrigger(M_VERTIFY_SELECTION_MENU, Collections.singletonList(true));
+        mHistoryViewController.onTrigger(M_VERIFY_SELECTION_MENU, Collections.singletonList(true));
     }
 
     public void onDeleteSelected(View view) {
@@ -350,7 +353,7 @@ public class historyController extends AppCompatActivity {
 
     /*Helper Methods*/
 
-    public void onclearData() {
+    public void unclearData() {
         mHistoryModel.clearList();
         mHistoryAdapter.invokeFilter(true);
         mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_CLEAR_LIST, null);
@@ -375,7 +378,6 @@ public class historyController extends AppCompatActivity {
                         sleep(500);
                         isUpdatingRecyclerView = false;
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
                         isUpdatingRecyclerView = false;
                     }
                 }
@@ -417,7 +419,7 @@ public class historyController extends AppCompatActivity {
             } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.IS_EMPTY)) {
                 mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mHistoryModel.getList().size(), 300));
             } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_VERIFY_SELECTED_URL_MENU)) {
-                mHistoryViewController.onTrigger(M_VERTIFY_SELECTION_MENU, data);
+                mHistoryViewController.onTrigger(M_VERIFY_SELECTION_MENU, data);
             }
             return null;
         }

@@ -66,7 +66,7 @@ public class dataController {
         mBridgeWebsiteDataModel.onTrigger(dataEnums.eBridgeWebsiteCommands.M_LOAD, Collections.singletonList(activityContextManager.getInstance().getHomeController()));
 
         ArrayList<bookmarkRowModel> mBookmarks = (ArrayList<bookmarkRowModel>) invokeSQLCipher(dataEnums.eSqlCipherCommands.M_SELECT_BOOKMARK, null);
-        mBookmarkDataModel.initializebookmark(mBookmarks);
+        mBookmarkDataModel.initializeBookmark(mBookmarks);
         if (!status.sClearOnExit) {
             ArrayList<Object> mHistory = (ArrayList<Object>) invokeSQLCipher(dataEnums.eSqlCipherCommands.M_SELECT_HISTORY, Arrays.asList(0, constants.CONST_FETCHABLE_LIST_SIZE));
             int mHistoryID = (int) invokeSQLCipher(dataEnums.eSqlCipherCommands.M_HISTORY_ID, null);

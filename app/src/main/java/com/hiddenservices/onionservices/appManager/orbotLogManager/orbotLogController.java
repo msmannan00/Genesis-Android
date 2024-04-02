@@ -2,14 +2,14 @@ package com.hiddenservices.onionservices.appManager.orbotLogManager;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuProvider;
 import androidx.core.widget.NestedScrollView;
@@ -17,7 +17,6 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogController;
 import com.hiddenservices.onionservices.constants.constants;
@@ -68,7 +67,6 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
 
     /* INITIALIZATIONS */
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
@@ -82,6 +80,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
         initializeViews();
         initializeLogs();
         initListener();
+        onBack();
     }
 
     public void initializeStartupAnimation() {
@@ -107,7 +106,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     }
 
     private void initScrollPositionOnConfigurationChanged() {
-        helperMethod.onDelayHandler(orbotLogController.this, 150, () -> {
+        helperMethod.onDelayHandler(150, () -> {
             if (!orbotLogStatus.sUIInteracted && ((int) mOrbotModel.onTrigger(M_GET_LIST_SIZE) > 1)) {
                 if (mOrbotLogNestedScroll.canScrollVertically(enums.ScrollDirection.VERTICAL)) {
                     mOrbotLogViewController.onTrigger(M_SCROLL_BOTTOM);
@@ -181,14 +180,12 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
             }
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            mOrbotLogNestedScroll.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                orbotLogStatus.sScrollPosition = scrollY;
-                if (!mOrbotLogNestedScroll.canScrollVertically(1)) {
-                    orbotLogStatus.sScrollPosition = -1;
-                }
-            });
-        }
+        mOrbotLogNestedScroll.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            orbotLogStatus.sScrollPosition = scrollY;
+            if (!mOrbotLogNestedScroll.canScrollVertically(1)) {
+                orbotLogStatus.sScrollPosition = -1;
+            }
+        });
 
         mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
         mOrbotLogRecycleView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -203,7 +200,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
                 orbotLogStatus.sUIInteracted = false;
             }
         } else if (mOrbotLogNestedScroll.getScrollY() == 0) {
-            helperMethod.onDelayHandler(orbotLogController.this, 300, () -> {
+            helperMethod.onDelayHandler(300, () -> {
                 if (mOrbotLogNestedScroll.getScrollY() == 0) {
                     mOrbotLogViewController.onTrigger(M_SHOW_FLOATING_TOOLBAR);
                 }
@@ -274,13 +271,11 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     /* View Callback */
 
     public void onUITriggered(View view) {
-        if (view.getId() == R.id.pOrbotLogFloatingToolbar) {
-            if (!orbotLogStatus.sUIInteracted || view != null) {
+        if (view.getId() == R.id.pOrbotLogFloatingToolbar && view != null) {
+            if (!orbotLogStatus.sUIInteracted) {
                 onScrollDownByFloatingToolabar();
             }
-            if (view != null) {
-                mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
-            }
+            mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
         } else if (view.getId() == R.id.pOrbotLogSettings) {
             helperMethod.openActivity(settingLogController.class, constants.CONST_LIST_HISTORY, this, true);
         }
@@ -320,7 +315,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
         @Override
         public Object invokeObserver(List<Object> pData, Object pType) {
             if (pType.equals(orbotLogEnums.eOrbotLogAdapterCommands.M_CLOSE)) {
-                helperMethod.onDelayHandler(orbotLogController.this, 500, () -> {
+                helperMethod.onDelayHandler(500, () -> {
                     finish();
                     return null;
                 });
@@ -354,15 +349,18 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     @Override
     public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
 
         super.onResume();
     }
 
-    @Override
-    public void onBackPressed() {
-        onCloseTriggered(null);
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onCloseTriggered(null);
+            }
+        });
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +58,7 @@ public class settingPrivacyController extends AppCompatActivity {
         setContentView(R.layout.setting_privacy_view);
 
         viewsInitializations();
+        onBack();
     }
 
     @Override
@@ -115,7 +117,7 @@ public class settingPrivacyController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         if (mSettingChanged) {
-            activityContextManager.getInstance().setCurrentActivity(this);
+            activityContextManager.getInstance().setCurrentActivity();
         }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
@@ -126,16 +128,23 @@ public class settingPrivacyController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                backTrigger();
+            }
+        });
+    }
+
+    void backTrigger(){
         if (mSettingChanged) {
-            activityContextManager.getInstance().setCurrentActivity(this);
+            activityContextManager.getInstance().setCurrentActivity();
             if (activityContextManager.getInstance().getHomeController() != null) {
                 activityContextManager.getInstance().getHomeController().initRuntimeSettings();
             }
         }
         finish();
-        super.onBackPressed();
     }
 
     @Override
@@ -147,7 +156,7 @@ public class settingPrivacyController extends AppCompatActivity {
     /*UI Redirection*/
 
     public void onClose(View view) {
-        onBackPressed();
+        backTrigger();
     }
 
     public void onJavaScript(View view) {

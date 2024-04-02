@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class languageModel {
-    private ArrayList<languageDataModel> mSupportedLanaguage;
+    private ArrayList<languageDataModel> mSupportedLanguage;
 
     public languageModel() {
-        mSupportedLanaguage = new ArrayList<>();
+        mSupportedLanguage = new ArrayList<>();
     }
 
     protected void onInit(){
@@ -17,34 +17,33 @@ class languageModel {
     }
 
     private void onInitLanguage() {
-        mSupportedLanaguage.add(new languageDataModel("Follow Device Language", "Default Language", "default", "default"));
-        mSupportedLanaguage.add(new languageDataModel("English (United States)", "United States", "en", "Us"));
-        mSupportedLanaguage.add(new languageDataModel("Deutsche", "German", "de", "De"));
-        mSupportedLanaguage.add(new languageDataModel("Català", "Catalan", "ca", "Es"));
-        mSupportedLanaguage.add(new languageDataModel("中文（中国）", "Chinese (China)", "zh", "Cn"));
-        mSupportedLanaguage.add(new languageDataModel("čeština", "Czech", "ch", "Cz"));
-        mSupportedLanaguage.add(new languageDataModel("Dutch (Netherland)", "Dutch (Netherland)", "nl", "Nl"));
-        mSupportedLanaguage.add(new languageDataModel("France (francaise)", "French (France)", "fr", "Fr"));
-        mSupportedLanaguage.add(new languageDataModel("Ελληνικά", "Greek", "el", "Gr"));
-        mSupportedLanaguage.add(new languageDataModel("Magyar", "Hungarian", "hu", "Hu"));
-        mSupportedLanaguage.add(new languageDataModel("bahasa Indonesia", "Indonesian", "in", "Id"));
-        mSupportedLanaguage.add(new languageDataModel("Italiana", "Italian", "it", "It"));
-        mSupportedLanaguage.add(new languageDataModel("日本人", "Japanese", "ja", "Jp"));
-        mSupportedLanaguage.add(new languageDataModel("韓国語", "Korean", "ko", "Kr"));
-        mSupportedLanaguage.add(new languageDataModel("Português", "Portuguese (Portugal)", "pt", "Pt"));
-        mSupportedLanaguage.add(new languageDataModel("Română", "Romanian", "ro", "Ro"));
-        //mSupportedLanaguage.add(new languageDataModel("Urdu (اردو)", "Urdu", "ur", "Ur"));
-        mSupportedLanaguage.add(new languageDataModel("русский", "Russian", "ru", "Ru"));
-        mSupportedLanaguage.add(new languageDataModel("ไทย", "Thai", "th", "Th"));
-        mSupportedLanaguage.add(new languageDataModel("Türk", "Turkish", "tr", "Tr"));
-        mSupportedLanaguage.add(new languageDataModel("عربى", "Arabic", "ar", "Ar"));
-        mSupportedLanaguage.add(new languageDataModel("Український", "Ukrainian", "uk", "Ua"));
-        mSupportedLanaguage.add(new languageDataModel("Tiếng Việt", "Vietnamese", "vi", "Vn"));
+        mSupportedLanguage.add(new languageDataModel("Follow Device Language", "Default Language", "default", "default"));
+        mSupportedLanguage.add(new languageDataModel("English (United States)", "United States", "en", "Us"));
+        mSupportedLanguage.add(new languageDataModel("Deutsche", "German", "de", "De"));
+        mSupportedLanguage.add(new languageDataModel("Català", "Catalan", "ca", "Es"));
+        mSupportedLanguage.add(new languageDataModel("中文（中国）", "Chinese (China)", "zh", "Cn"));
+        mSupportedLanguage.add(new languageDataModel("čeština", "Czech", "ch", "Cz"));
+        mSupportedLanguage.add(new languageDataModel("Dutch (Netherland)", "Dutch (Netherland)", "nl", "Nl"));
+        mSupportedLanguage.add(new languageDataModel("France (francaise)", "French (France)", "fr", "Fr"));
+        mSupportedLanguage.add(new languageDataModel("Ελληνικά", "Greek", "el", "Gr"));
+        mSupportedLanguage.add(new languageDataModel("Magyar", "Hungarian", "hu", "Hu"));
+        mSupportedLanguage.add(new languageDataModel("bahasa Indonesia", "Indonesian", "in", "Id"));
+        mSupportedLanguage.add(new languageDataModel("Italiana", "Italian", "it", "It"));
+        mSupportedLanguage.add(new languageDataModel("日本人", "Japanese", "ja", "Jp"));
+        mSupportedLanguage.add(new languageDataModel("韓国語", "Korean", "ko", "Kr"));
+        mSupportedLanguage.add(new languageDataModel("Português", "Portuguese (Portugal)", "pt", "Pt"));
+        mSupportedLanguage.add(new languageDataModel("Română", "Romanian", "ro", "Ro"));
+        mSupportedLanguage.add(new languageDataModel("русский", "Russian", "ru", "Ru"));
+        mSupportedLanguage.add(new languageDataModel("ไทย", "Thai", "th", "Th"));
+        mSupportedLanguage.add(new languageDataModel("Türk", "Turkish", "tr", "Tr"));
+        mSupportedLanguage.add(new languageDataModel("عربى", "Arabic", "ar", "Ar"));
+        mSupportedLanguage.add(new languageDataModel("Український", "Ukrainian", "uk", "Ua"));
+        mSupportedLanguage.add(new languageDataModel("Tiếng Việt", "Vietnamese", "vi", "Vn"));
     }
 
     private int getActiveLanguageIndex() {
-        for (int mCounter = 0; mCounter < mSupportedLanaguage.size(); mCounter++) {
-            if (mSupportedLanaguage.get(mCounter).getTag().equals(status.sSettingLanguage)) {
+        for (int mCounter = 0; mCounter < mSupportedLanguage.size(); mCounter++) {
+            if (mSupportedLanguage.get(mCounter).getTag().equals(status.sSettingLanguage)) {
                 return mCounter;
             }
         }
@@ -53,7 +52,7 @@ class languageModel {
 
     public Object onTrigger(languageEnums.eLanguageModel pCommands, List<Object> ignoredPData) {
         if (pCommands.equals(languageEnums.eLanguageModel.M_SUPPORTED_LANGUAGE)) {
-            return mSupportedLanaguage;
+            return mSupportedLanguage;
         } else if (pCommands.equals(languageEnums.eLanguageModel.M_ACTIVE_LANGUAGE)) {
             return getActiveLanguageIndex();
         }

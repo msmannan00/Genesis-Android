@@ -46,7 +46,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
     private eventObserver.eventListener mEvent;
     private ArrayList<String> mSelectedList = new ArrayList<>();
     private Boolean mLongPressMenuEnabled = false;
-    private boolean mViewLoaded = false;
 
 
     tabAdapter(ArrayList<tabRowModel> pModelList, eventObserver.eventListener event) {
@@ -58,7 +57,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
         this.mModelList.clear();
         this.mModelList.addAll(pModelList);
         mModelList.add(new tabRowModel(null, null, null));
-        mViewLoaded = false;
     }
 
 
@@ -77,13 +75,13 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
     @NonNull
     @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
         if (status.sTabGridLayoutEnabled) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_grid_view, parent, false);
-            return new listViewHolder(view);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_grid_view, parent, false);
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
-            return new listViewHolder(view);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
         }
+        return new listViewHolder(view);
     }
 
     @Override
@@ -92,14 +90,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
         holder.itemView.setTag(position);
         holder.itemView.findViewById(R.id.pOrbotRowRemove).setTag(position);
         holder.itemView.findViewById(R.id.pLoadSession).setTag(position);
-
-        if (position == 0 && status.sTabGridLayoutEnabled && !mViewLoaded) {
-
-        } else {
-        }
     }
 
-    public void scaleView(View v, tabRowModel mTabRowModel) {
+    public void scaleView(tabRowModel mTabRowModel) {
 
         mEvent.invokeObserver(Arrays.asList(mTabRowModel.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
         onTriggerURL(mTabRowModel);
@@ -118,11 +111,11 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
     }
 
     private void onRemoveAllSelection() {
-        if (mSelectedList.size() > 0) {
+        if (!mSelectedList.isEmpty()) {
             int mSelectionInitialSize = mSelectedList.size();
             for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
                 for (int mCounterInner = 0; mCounterInner < mModelList.size(); mCounterInner++) {
-                    if (mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())) {
+                    if (mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getId())) {
                         mSelectedList.remove(mCounter);
                         mModelList.remove(mCounterInner);
                         notifyItemRemoved(mCounterInner);
@@ -142,7 +135,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
 
     private void onNotifyItemSwiped(int pIndex) {
         for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
-            if (mSelectedList.get(mCounter).equals(mModelList.get(pIndex).getmId())) {
+            if (mSelectedList.get(mCounter).equals(mModelList.get(pIndex).getId())) {
                 mSelectedList.remove(mCounter);
                 break;
             }
@@ -177,7 +170,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
         for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
             boolean mIsChanged = false;
             for (int mCounterInner = 0; mCounterInner < mModelList.size(); mCounterInner++) {
-                if (mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())) {
+                if (mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getId())) {
                     notifyItemChanged(mCounterInner, null);
                     mIsChanged = true;
                 }
@@ -188,7 +181,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
             }
         }
 
-        if (mSelectedList.size() == 0) {
+        if (mSelectedList.isEmpty()) {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
         } else {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
@@ -209,10 +202,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
 
     private void onSelectionClear(FrameLayout mSelectedView) {
         mSelectedView.animate().alpha(0).withEndAction(() -> mSelectedView.setVisibility(View.GONE));
-        //if(mSelectedList.size()==0){
-        //    mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
-        //   mLongPressMenuEnabled = false;
-        //}
     }
 
     private void onTriggerURL(tabRowModel model) {
@@ -229,12 +218,12 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
 
     private void onRemoveRowCross(int mIndex) {
         for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
-            if (mSelectedList.get(mCounter).equals(mModelList.get(mIndex).getmId())) {
+            if (mSelectedList.get(mCounter).equals(mModelList.get(mIndex).getId())) {
                 mSelectedList.remove(mCounter);
                 break;
             }
         }
-        if (mSelectedList.size() == 0) {
+        if (mSelectedList.isEmpty()) {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
             onClearAllSelection();
         }
@@ -291,7 +280,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
             itemView.setEnabled(true);
             mRemoveRow.setEnabled(true);
 
-            if (model.getmId() == null) {
+            if (model.getId() == null) {
                 mItemSelectionMenu.setVisibility(View.VISIBLE);
                 mItemSelectionMenuButton.setOnClickListener(this);
 
@@ -342,7 +331,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
 
                 if (status.sTabGridLayoutEnabled) {
                     if (model.getSession().getCurrentURL().contains("167.86.99.31") || model.getSession().getCurrentURL().contains("orion.onion")) {
-                        mLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                        mLogo.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.genesis));
                     } else {
                         if (mLogo.getDrawable() == null) {
                             mEvent.invokeObserver(Arrays.asList(mLogo, "https://" + helperMethod.getDomainName(model.getSession().getCurrentURL())), tabEnums.eTabAdapterCallback.ON_FETCH_FAVICON);
@@ -455,7 +444,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                 }
 
                 if (this.getLayoutPosition() == mModelList.size() - 1) {
-                    if (mSelectedList.size() > 0) {
+                    if (!mSelectedList.isEmpty()) {
                         itemView.setVisibility(View.GONE);
                     } else {
                         itemView.setVisibility(View.VISIBLE);
@@ -490,8 +479,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                                 v.setClickable(false);
                                 v.setFocusable(false);
                                 try {
-                                    scaleView(itemView, mModelList.get(this.getLayoutPosition()));
-                                }catch (Exception ex){}
+                                    scaleView(mModelList.get(this.getLayoutPosition()));
+                                }catch (Exception ignored){}
                             } else {
                                 onTriggerURL(mModelList.get(this.getLayoutPosition()));
                             }
@@ -501,7 +490,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                     for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
                         if (mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getSession().getSessionID())) {
                             mSelectedList.remove(mCounter);
-                            if (mSelectedList.size() == 0) {
+                            if (mSelectedList.isEmpty()) {
                                 mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
                                 onClearAllSelection();
                             } else {
@@ -553,7 +542,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
             onEnableLongClickMenu();
         } else if (pCommands.equals(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW)) {
             initFirstRow();
-        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.REINIT_DATA)) {
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.RE_INIT_DATA)) {
             reInitData((ArrayList<tabRowModel>) pData.get(0));
         } else if (pCommands.equals(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE)) {
             onNotifyItemSwiped((int) pData.get(0));

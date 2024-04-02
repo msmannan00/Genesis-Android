@@ -1,10 +1,8 @@
 package com.hiddenservices.onionservices.pluginManager.downloadPluginManager;
 
-import android.content.Context;
-
 public class blobDownloader {
 
-    public blobDownloader(Context context) {
+    public blobDownloader() {
 
     }
 

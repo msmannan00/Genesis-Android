@@ -81,7 +81,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         /* Create Pending Intent */
 
-        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", enums.DownloadNotificationReciever.DOWNLOAD_CANCEL);
+        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", enums.DownloadNotificationReceiver.DOWNLOAD_CANCEL);
 
         /* Create Notification */
 
@@ -209,8 +209,8 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         /* Create Pending Intent */
 
-        PendingIntent pendingIntentOpen = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Open", enums.DownloadNotificationReciever.DOWNLOAD_OPEN);
-        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", enums.DownloadNotificationReciever.DOWNLOAD_CANCEL);
+        PendingIntent pendingIntentOpen = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Open", enums.DownloadNotificationReceiver.DOWNLOAD_OPEN);
+        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", enums.DownloadNotificationReceiver.DOWNLOAD_CANCEL);
 
         /* Create Notification */
 

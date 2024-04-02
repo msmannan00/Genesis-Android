@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,6 +62,7 @@ public class languageController extends AppCompatActivity {
         initializeAppModel();
         initializeAdapter();
         onInitScroll();
+        onBack();
     }
 
     @Override
@@ -186,9 +189,9 @@ public class languageController extends AppCompatActivity {
                 changeLanguage((String) data.get(0), (String) data.get(1));
                 return true;
             } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_DISABLE_VIEW_CLICK)) {
-                mLanguageViewController.onTrigger(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER, Collections.singletonList(false));
+                mLanguageViewController.onTrigger(languageEnums.eLanguageViewController.M_UPDATE_BLOCKER, Collections.singletonList(false));
             } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_ENABLE_VIEW_CLICK)) {
-                mLanguageViewController.onTrigger(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER, Collections.singletonList(true));
+                mLanguageViewController.onTrigger(languageEnums.eLanguageViewController.M_UPDATE_BLOCKER, Collections.singletonList(true));
             } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_SYSTEM_LANGUAGE_SUPPORT_INFO)) {
                 return pluginController.getInstance().onLanguageInvoke(Collections.singletonList(status.sSettingLanguage), M_SUPPORTED_SYSTEM_LANGUAGE_INFO);
             }
@@ -214,8 +217,8 @@ public class languageController extends AppCompatActivity {
             helperMethod.updateResources(activityContextManager.getInstance().getHomeController(), status.mSystemLocale.getLanguage());
             activityContextManager.getInstance().onResetTheme();
 
-            String mSystemLangugage = status.mSystemLocale.toString();
-            if (mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ur_UR") || mLanguagePrevious.toString().equals("ur_PK") || mLanguagePrevious.toString().equals("ur_UR")) {
+            String mSystemLanguage = status.mSystemLocale.toString();
+            if (mSystemLanguage.equals("ur_PK") || mSystemLanguage.equals("ur_UR") || mLanguagePrevious.toString().equals("ur_PK") || mLanguagePrevious.toString().equals("ur_UR")) {
                 activityContextManager.getInstance().getHomeController().recreate();
             }
             mLanguagePrevious = status.mSystemLocale;
@@ -224,9 +227,12 @@ public class languageController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        onClose(null);
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onClose(null);
+            }
+        });
     }
 }

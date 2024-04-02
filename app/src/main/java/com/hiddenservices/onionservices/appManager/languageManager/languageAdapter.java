@@ -122,8 +122,7 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
                     mHeader.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
                     mDescription.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v6));
                     mMarker.setVisibility(View.GONE);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (Exception ignored) {
                 }
             }
             mContainer.setOnClickListener(this);

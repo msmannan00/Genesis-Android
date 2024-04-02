@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -41,6 +42,7 @@ public class settingNotificationController extends AppCompatActivity {
         setContentView(R.layout.setting_notification_view);
 
         viewsInitializations();
+        onBack();
     }
 
     @Override
@@ -90,10 +92,10 @@ public class settingNotificationController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
 
-        int notificationStatus = status.sNotificaionStatus;
+        int notificationStatus = status.sNotificationStatus;
         if (notificationStatus == 0) {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
             if(activityContextManager.getInstance().getHomeController()!=null){
@@ -112,10 +114,13 @@ public class settingNotificationController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -141,6 +146,6 @@ public class settingNotificationController extends AppCompatActivity {
     public void onSaveLocalNotificationSettings(View view) {
         mSettingNotificationModel.onTrigger(settingNotificationEnums.eNotificationModel.M_UPDATE_LOCAL_NOTIFICATION, Collections.singletonList(!mNotificationManual.isChecked()));
         mNotificationManual.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, status.sNotificaionStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, status.sNotificationStatus));
     }
 }

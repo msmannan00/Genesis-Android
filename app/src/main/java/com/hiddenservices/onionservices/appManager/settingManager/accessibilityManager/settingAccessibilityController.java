@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +58,7 @@ public class settingAccessibilityController extends AppCompatActivity {
 
         viewsInitializations();
         initializeListeners();
+        onBack();
     }
 
     @Override
@@ -135,7 +137,7 @@ public class settingAccessibilityController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
     }
 
@@ -144,10 +146,15 @@ public class settingAccessibilityController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        onClose(null);
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onClose(null);
+            }
+        });
     }
+
 
     /*UI Redirection*/
 
@@ -176,10 +183,7 @@ public class settingAccessibilityController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ZOOM, status.sSettingEnableZoom));
         mZoom.toggle();
 
-        new Handler().postDelayed(() ->
-        {
-            activityContextManager.getInstance().getHomeController().onReload(null);
-        }, 300);
+        new Handler().postDelayed(() -> activityContextManager.getInstance().getHomeController().onReload(null), 300);
 
     }
 

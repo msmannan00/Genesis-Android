@@ -51,7 +51,7 @@ class settingAccessibilityViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
@@ -62,16 +62,8 @@ class settingAccessibilityViewController {
     }
 
     private void initViews() {
-        if (status.sSettingEnableZoom) {
-            mZoom.setChecked(true);
-        } else {
-            mZoom.setChecked(false);
-        }
-        if (status.sSettingEnableVoiceInput) {
-            mVoiceInput.setChecked(true);
-        } else {
-            mVoiceInput.setChecked(false);
-        }
+        mZoom.setChecked(status.sSettingEnableZoom);
+        mVoiceInput.setChecked(status.sSettingEnableVoiceInput);
 
         mSeekBar.setProgress((int) status.sSettingFontSize / 10 - 5);
         float percentage = status.sSettingFontSize;

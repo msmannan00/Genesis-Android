@@ -53,7 +53,7 @@ public class activityContextManager {
     }
 
     public void setHistoryController(historyController history_controller) {
-        this.pHistoryController = new WeakReference(history_controller);
+        this.pHistoryController = new WeakReference<>(history_controller);
     }
 
     public bookmarkController getBookmarkController() {
@@ -64,7 +64,7 @@ public class activityContextManager {
     }
 
     public void setBookmarkController(bookmarkController bookmark_controller) {
-        this.pBookmarkController = new WeakReference(bookmark_controller);
+        this.pBookmarkController = new WeakReference<>(bookmark_controller);
     }
 
     public bridgeController getBridgeController() {
@@ -75,7 +75,7 @@ public class activityContextManager {
     }
 
     public void setBridgeController(bridgeController bridge_controller) {
-        this.pBridgeController = new WeakReference(bridge_controller);
+        this.pBridgeController = new WeakReference<>(bridge_controller);
     }
 
     public homeController getHomeController() {
@@ -93,11 +93,11 @@ public class activityContextManager {
     }
 
     public void setApplicationContext(Context pContext) {
-        this.pApplicationContext = new WeakReference(pContext);
+        this.pApplicationContext = new WeakReference<>(pContext);
     }
 
     public void setHomeController(homeController home_controller) {
-        this.pHomeController = new WeakReference(home_controller);
+        this.pHomeController = new WeakReference<>(home_controller);
     }
 
     public tabController getTabController() {
@@ -108,7 +108,7 @@ public class activityContextManager {
     }
 
     public void setTabController(tabController tab_controller) {
-        this.pTabController = new WeakReference(tab_controller);
+        this.pTabController = new WeakReference<>(tab_controller);
     }
 
     public orbotLogController getOrbotLogController() {
@@ -119,7 +119,7 @@ public class activityContextManager {
     }
 
     public void setOrbotLogController(orbotLogController pOrbotLogController) {
-        this.pOrbotLogController = new WeakReference(pOrbotLogController);
+        this.pOrbotLogController = new WeakReference<>(pOrbotLogController);
     }
 
 
@@ -131,7 +131,7 @@ public class activityContextManager {
     }
 
     public void setSettingGeneralController(settingGeneralController pSettingGeneralController) {
-        this.pSettingGeneralController = new WeakReference(pSettingGeneralController);
+        this.pSettingGeneralController = new WeakReference<>(pSettingGeneralController);
     }
 
     public settingHomeController getSettingController() {
@@ -142,20 +142,20 @@ public class activityContextManager {
     }
 
     public void setSettingController(settingHomeController pSettingController) {
-        this.pSettingController = new WeakReference(pSettingController);
+        this.pSettingController = new WeakReference<>(pSettingController);
     }
 
-    public void setCurrentActivity(android.app.Activity pCurrentActivity) {
+    public void setCurrentActivity() {
     }
 
     public void onStack(AppCompatActivity pActivity) {
         try {
-            if (mStackList.size() > 0) {
+            if (!mStackList.isEmpty()) {
                 if (!mStackList.get(mStackList.size() - 1).get().getLocalClassName().equals(pActivity.getLocalClassName())) {
-                    mStackList.add(new WeakReference(pActivity));
+                    mStackList.add(new WeakReference<>(pActivity));
                 }
             } else {
-                mStackList.add(new WeakReference(pActivity));
+                mStackList.add(new WeakReference<>(pActivity));
             }
         } catch (Exception ignored) {
         }

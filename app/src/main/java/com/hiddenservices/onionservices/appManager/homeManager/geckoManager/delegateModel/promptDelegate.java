@@ -15,7 +15,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
-import android.os.Build;
 import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -70,7 +69,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
     public void stopMedia(){
         try {
             activityContextManager.getInstance().getHomeController().onKillMedia();
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
     }
 
     @Override
@@ -132,8 +131,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                 try {
                     sleep(4000);
                     mPopupOpened = false;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ignored) {
                 }
             }
         }.start();
@@ -153,7 +151,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                     .setChooserTitle(prompt.title)
                     .setText(m_data)
                     .startChooser();
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
 
         return GeckoResult.fromValue(prompt.confirm(SharePrompt.Result.SUCCESS));
 
@@ -192,7 +190,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             {
                 createStandardDialog(builder, prompt, res).show();
             }
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
         return res;
     }
 
@@ -236,7 +234,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             final int padding = attr.getDimensionPixelSize(0, 1);
             attr.recycle();
             return padding;
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
         return 0;
     }
 
@@ -455,9 +453,10 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                                 item.choice.items == null);
             }
 
+            @NonNull
             @Override
             public View getView(final int position, View view,
-                                final ViewGroup parent) {
+                                @NonNull final ViewGroup parent) {
                 final int itemType = getItemViewType(position);
                 final int layoutId;
                 if (itemType == TYPE_SEPARATOR) {
@@ -558,7 +557,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             {
                 dialog.show();
             }
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
     }
 
     @Override
@@ -571,11 +570,11 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         return res;
     }
 
-    private static int parseColor(final String value, final int def) {
+    private static int parseColor(final String value) {
         try {
             return Color.parseColor(value);
         } catch (final IllegalArgumentException e) {
-            return def;
+            return 0;
         }
     }
 
@@ -590,7 +589,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         addStandardLayout(builder, prompt.title, /* msg */ null);
 
-        final int initial = parseColor(prompt.defaultValue, /* def */ 0);
+        final int initial = parseColor(prompt.defaultValue /* def */);
         final ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(
                 builder.getContext(), android.R.layout.simple_list_item_1) {
             private LayoutInflater mInflater;
@@ -605,9 +604,10 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                 return (getItem(position) == initial) ? 1 : 0;
             }
 
+            @NonNull
             @Override
             public View getView(final int position, View view,
-                                final ViewGroup parent) {
+                                @NonNull final ViewGroup parent) {
                 if (mInflater == null) {
                     mInflater = LayoutInflater.from(builder.getContext());
                 }
@@ -660,31 +660,19 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             if (value != null && !value.isEmpty()) {
                 return formatter.parse(value);
             }
-        } catch (final ParseException e) {
+        } catch (final ParseException ignored) {
         }
         return defaultToNow ? new Date() : null;
     }
 
-    @SuppressWarnings("deprecation")
     private static void setTimePickerTime(final TimePicker picker, final Calendar cal) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            picker.setHour(cal.get(Calendar.HOUR_OF_DAY));
-            picker.setMinute(cal.get(Calendar.MINUTE));
-        } else {
-            picker.setCurrentHour(cal.get(Calendar.HOUR_OF_DAY));
-            picker.setCurrentMinute(cal.get(Calendar.MINUTE));
-        }
+        picker.setHour(cal.get(Calendar.HOUR_OF_DAY));
+        picker.setMinute(cal.get(Calendar.MINUTE));
     }
 
-    @SuppressWarnings("deprecation")
     private static void setCalendarTime(final Calendar cal, final TimePicker picker) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            cal.set(Calendar.HOUR_OF_DAY, picker.getHour());
-            cal.set(Calendar.MINUTE, picker.getMinute());
-        } else {
-            cal.set(Calendar.HOUR_OF_DAY, picker.getCurrentHour());
-            cal.set(Calendar.MINUTE, picker.getCurrentMinute());
-        }
+        cal.set(Calendar.HOUR_OF_DAY, picker.getHour());
+        cal.set(Calendar.MINUTE, picker.getMinute());
     }
 
     @Override
@@ -695,22 +683,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
-        final String format;
-        if (prompt.type == DateTimePrompt.Type.DATE) {
-            format = "yyyy-MM-dd";
-        } else if (prompt.type == DateTimePrompt.Type.MONTH) {
-            format = "yyyy-MM";
-        } else if (prompt.type == DateTimePrompt.Type.WEEK) {
-            format = "yyyy-'W'ww";
-        } else if (prompt.type == DateTimePrompt.Type.TIME) {
-            format = "HH:mm";
-        } else if (prompt.type == DateTimePrompt.Type.DATETIME_LOCAL) {
-            format = "yyyy-MM-dd'T'HH:mm";
-        } else {
-            throw new UnsupportedOperationException();
-        }
-
-        final SimpleDateFormat formatter = new SimpleDateFormat(format, Locale.ROOT);
+        final SimpleDateFormat formatter = getSimpleDateFormat(prompt);
         final Date minDate = parseDate(formatter, prompt.minValue, /* defaultToNow */ false);
         final Date maxDate = parseDate(formatter, prompt.maxValue, /* defaultToNow */ false);
         final Date date = parseDate(formatter, prompt.defaultValue, /* defaultToNow */ true);
@@ -728,7 +701,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             if (resId != 0) {
                 try {
                     picker = (DatePicker) inflater.inflate(resId, /* root */ null);
-                } catch (final ClassCastException | InflateException e) {
+                } catch (final ClassCastException | InflateException ignored) {
                 }
             }
             if (picker == null) {
@@ -755,7 +728,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             if (resId != 0) {
                 try {
                     picker = (TimePicker) inflater.inflate(resId, /* root */ null);
-                } catch (final ClassCastException | InflateException e) {
+                } catch (final ClassCastException | InflateException ignored) {
                 }
             }
             if (picker == null) {
@@ -803,6 +776,26 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         return res;
     }
 
+    @NonNull
+    private static SimpleDateFormat getSimpleDateFormat(@NonNull DateTimePrompt prompt) {
+        final String format;
+        if (prompt.type == DateTimePrompt.Type.DATE) {
+            format = "yyyy-MM-dd";
+        } else if (prompt.type == DateTimePrompt.Type.MONTH) {
+            format = "yyyy-MM";
+        } else if (prompt.type == DateTimePrompt.Type.WEEK) {
+            format = "yyyy-'W'ww";
+        } else if (prompt.type == DateTimePrompt.Type.TIME) {
+            format = "HH:mm";
+        } else if (prompt.type == DateTimePrompt.Type.DATETIME_LOCAL) {
+            format = "yyyy-MM-dd'T'HH:mm";
+        } else {
+            throw new UnsupportedOperationException();
+        }
+
+        return new SimpleDateFormat(format, Locale.ROOT);
+    }
+
     @Override
     public GeckoResult<PromptResponse> onFilePrompt(@NonNull GeckoSession session, @NonNull FilePrompt prompt) {
         stopMedia();
@@ -811,7 +804,31 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             return GeckoResult.fromValue(prompt.dismiss());
         }
 
-        // Merge all given MIME types into one, using wildcard if needed.
+        final Intent intent = getIntent(prompt);
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        if (prompt.type == FilePrompt.Type.MULTIPLE) {
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        }
+        if (prompt.mimeTypes.length > 0) {
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, prompt.mimeTypes);
+        }
+
+        GeckoResult<PromptResponse> res = new GeckoResult<>();
+
+        try {
+            mFileResponse = res;
+            mFilePrompt = prompt;
+            activity.startActivityForResult(intent, filePickerRequestCode);
+        } catch (final ActivityNotFoundException e) {
+            Log.e(LOGTAG, "Cannot launch activity", e);
+            return GeckoResult.fromValue(prompt.dismiss());
+        }
+
+        return res;
+    }
+
+    @NonNull
+    private static Intent getIntent(@NonNull FilePrompt prompt) {
         String mimeType = null;
         String mimeSubtype = null;
         if (prompt.mimeTypes != null) {
@@ -841,26 +858,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         intent.setType((mimeType != null ? mimeType : "*") + '/' +
                 (mimeSubtype != null ? mimeSubtype : "*"));
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        if (prompt.type == FilePrompt.Type.MULTIPLE) {
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        }
-        if (prompt.mimeTypes.length > 0) {
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, prompt.mimeTypes);
-        }
-
-        GeckoResult<PromptResponse> res = new GeckoResult<>();
-
-        try {
-            mFileResponse = res;
-            mFilePrompt = prompt;
-            activity.startActivityForResult(intent, filePickerRequestCode);
-        } catch (final ActivityNotFoundException e) {
-            Log.e(LOGTAG, "Cannot launch activity", e);
-            return GeckoResult.fromValue(prompt.dismiss());
-        }
-
-        return res;
+        return intent;
     }
 
     @SuppressLint("Range")
@@ -914,7 +912,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             inChannel.transferTo(0, inChannel.size(), outChannel);
             in.close();
             out.close();
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
 
         final Uri uri = Uri.parse("file:///"+myFile.getAbsolutePath());
 
@@ -935,7 +933,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                 }
                 res.complete(prompt.confirm(mActivity, uris.toArray(new Uri[0])));
             }
-        }catch (Exception ex){
+        }catch (Exception ignored){
         }
     }
 
@@ -954,8 +952,9 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                         return view;
                     }
 
+                    @NonNull
                     @Override
-                    public View getView(final int position, View view, final ViewGroup parent) {
+                    public View getView(final int position, View view, @NonNull final ViewGroup parent) {
                         return convertView(position, super.getView(position, view, parent));
                     }
 
@@ -975,7 +974,6 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
     }
 
     public void onMediaPrompt(
-            final GeckoSession session,
             final String title,
             final MediaSource[] video,
             final MediaSource[] audio,

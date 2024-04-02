@@ -37,7 +37,7 @@ class languageViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
@@ -55,8 +55,8 @@ class languageViewController {
         }
     }
 
-    public Object onTrigger(languageEnums.eLanguagevViewController pCommands, List<Object> pData) {
-        if (languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER.equals(pCommands)) {
+    public Object onTrigger(languageEnums.eLanguageViewController pCommands, List<Object> pData) {
+        if (languageEnums.eLanguageViewController.M_UPDATE_BLOCKER.equals(pCommands)) {
             initBlocker((boolean) pData.get(0));
         }
         return null;

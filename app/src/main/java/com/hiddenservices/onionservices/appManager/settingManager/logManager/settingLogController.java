@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +51,7 @@ public class settingLogController extends AppCompatActivity {
         setContentView(R.layout.setting_log_view);
 
         initializeViews();
+        onBack();
     }
 
     @Override
@@ -100,13 +102,17 @@ public class settingLogController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
     }
 
-    @Override
-    public void onBackPressed() {
-        onClose(null);
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onClose(null);
+            }
+        });
     }
 
     @Override
@@ -127,7 +133,7 @@ public class settingLogController extends AppCompatActivity {
             mSettingLogViewController.onTrigger(M_toggle_LOG_VIEW);
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogThemeStyleAdvanced));
 
-            helperMethod.onDelayHandler(this, 250, () -> {
+            helperMethod.onDelayHandler(250, () -> {
                 activityContextManager.getInstance().getOrbotLogController().onRefreshLayoutTheme();
                 return null;
             });

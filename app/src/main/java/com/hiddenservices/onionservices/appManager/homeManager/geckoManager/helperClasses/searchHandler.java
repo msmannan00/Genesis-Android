@@ -34,16 +34,14 @@ public class searchHandler {
                         if (mCounter > 100) {
                             return;
                         }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (InterruptedException ignored) {
                     }
                 }
 
                 try {
                     GeckoSession.FinderResult mResult = mFinder.poll(1000);
                     mEvent.invokeObserver(Arrays.asList(mResult.total, mResult.current), homeEnums.eGeckoCallback.FINDER_RESULT_CALLBACK);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                } catch (Throwable ignored) {
                 }
             }
         }.start();

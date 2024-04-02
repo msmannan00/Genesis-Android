@@ -46,14 +46,14 @@ public class enums {
         public static final String OPEN_VOICE = "mOpenVoice";
     }
 
-    public static class MediaNotificationReciever {
+    public static class MediaNotificationReceiver {
         public static final int PLAY = 0;
         public static final int PAUSE = 1;
         public static final int SKIP_FORWARD = 2;
         public static final int SKIP_BACKWARD = 3;
     }
 
-    public static class DownloadNotificationReciever {
+    public static class DownloadNotificationReceiver {
         public static final int DOWNLOAD_CANCEL = 0;
         public static final int DOWNLOAD_OPEN = 1;
     }

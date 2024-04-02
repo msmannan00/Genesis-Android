@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -36,8 +37,7 @@ import java.util.List;
 
 import static com.hiddenservices.onionservices.constants.sql.SQL_CLEAR_BOOKMARK;
 import static com.hiddenservices.onionservices.constants.sql.SQL_CLEAR_HISTORY;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_DATA_CLEARED;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUSTED;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUESTED;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
 public class settingClearController extends AppCompatActivity {
@@ -55,6 +55,7 @@ public class settingClearController extends AppCompatActivity {
         setContentView(R.layout.setting_clear_view);
 
         viewsInitializations();
+        onBack();
     }
 
     @Override
@@ -171,7 +172,7 @@ public class settingClearController extends AppCompatActivity {
 
         if (mClearInvoked) {
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUSTED);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUESTED);
 
             if (mHomeInvoked) {
                 activityContextManager.getInstance().getHomeController().onClearSettings();
@@ -238,7 +239,7 @@ public class settingClearController extends AppCompatActivity {
 
         if (mIsThemeChangable) {
             status.mThemeApplying = true;
-            onBackPressed();
+            onClose(null);
             overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
             activityContextManager.getInstance().getHomeController().onResetData();
             activityContextManager.getInstance().getHomeController().onReInitTheme();
@@ -253,7 +254,7 @@ public class settingClearController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
     }
 
@@ -262,9 +263,13 @@ public class settingClearController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        onClose(null);
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onClose(null);
+            }
+        });
     }
 
     /*UI Redirection*/

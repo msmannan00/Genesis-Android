@@ -172,7 +172,7 @@ public class historyDataModel {
             mHistoryCache.put(pHistory.get(count).getID(), pHistory.get(0));
         }
 
-        return pHistory.size() > 0;
+        return !pHistory.isEmpty();
     }
 
     /* External Triggers */

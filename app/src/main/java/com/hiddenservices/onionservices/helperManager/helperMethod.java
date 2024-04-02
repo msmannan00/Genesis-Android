@@ -46,11 +46,9 @@ import androidx.core.graphics.ColorUtils;
 import com.hiddenservices.onionservices.BuildConfig;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.DefaultBrowser;
-import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
-import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.R;
 import java.io.BufferedReader;
@@ -68,7 +66,6 @@ import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -80,7 +77,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import javax.net.ssl.HttpsURLConnection;
 import org.mozilla.geckoview.ContentBlocking;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -106,18 +102,13 @@ public class helperMethod {
     }
 
     @SuppressLint({"UnspecifiedImmutableFlag", "LaunchActivityFromNotification"})
-    public static PendingIntent onCreateActionIntent(Context pContext, Class<?> pBroadcastReciever, int pNotificationID, String pTitle, int pCommandID) {
+    public static PendingIntent onCreateActionIntent(Context pContext, Class<?> pBroadcastReceiver, int pNotificationID, String pTitle, int pCommandID) {
         PendingIntent pendingIntent;
-        Intent pendingIntentTrigger = new Intent(pContext, pBroadcastReciever);
+        Intent pendingIntentTrigger = new Intent(pContext, pBroadcastReceiver);
         pendingIntentTrigger.setAction(pTitle);
         pendingIntentTrigger.putExtra("N_ID", pNotificationID);
         pendingIntentTrigger.putExtra("N_COMMAND", pCommandID);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            pendingIntent = PendingIntent.getBroadcast(pContext, pNotificationID, pendingIntentTrigger, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        } else {
-            pendingIntent = PendingIntent.getBroadcast(pContext, pNotificationID, pendingIntentTrigger, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        pendingIntent = PendingIntent.getBroadcast(pContext, pNotificationID, pendingIntentTrigger, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         return pendingIntent;
     }
@@ -134,8 +125,7 @@ public class helperMethod {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
 
         String mYAML = helperMethod.readFromFile(cacheFile.getPath());
@@ -209,38 +199,23 @@ public class helperMethod {
         return cacheFile.getAbsolutePath();
     }
 
-    public static String setGenesisVerificationToken(String pString) {
-        try {
-            if (pString.contains("?")) {
-                pString += "&" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken();
-            } else {
-                pString += "?" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken();
-            }
-            return pString;
-        } catch (Exception ex) {
-            return pString;
-        }
-    }
-
     public static int getResId(String resName, Class<?> c) {
 
         try {
             Field idField = c.getDeclaredField(resName);
             return idField.getInt(idField);
         } catch (Exception e) {
-            e.printStackTrace();
             return -1;
         }
     }
 
-    public static void onDelayHandler(AppCompatActivity pActivity, int pTime, Callable<Void> pMethodParam) {
+    public static void onDelayHandler(int pTime, Callable<Void> pMethodParam) {
         final Handler handler = new Handler();
         handler.postDelayed(() ->
         {
             try {
                 pMethodParam.call();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
         }, pTime);
     }
@@ -251,7 +226,7 @@ public class helperMethod {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pFilePath), StandardCharsets.UTF_8));
             writer.write(content);
             writer.close();
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -281,7 +256,7 @@ public class helperMethod {
             ds = new DatagramSocket(port);
             ds.setReuseAddress(true);
             return true;
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         } finally {
             if (ds != null) {
                 ds.close();
@@ -303,35 +278,14 @@ public class helperMethod {
         if (pURL.contains("167.86.99.31") || pURL.equals("about:blank") || pURL.equals("about:config") || pURL.startsWith("resource://") || pURL.startsWith("data")) {
             return pURL;
         }
-        URL weburl;
-        try {
-            weburl = new URL(pURL);
-            URLConnection result = weburl.openConnection();
 
-            if (result instanceof HttpsURLConnection) {
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (!pURL.startsWith("http://") && !pURL.startsWith("https://")) {
-            if (pURL.startsWith("www")) {
-                pURL = "http://" + pURL;
-            } else {
-                pURL = "http://" + pURL;
-            }
-        } else {
+        if (pURL.startsWith("http://") || pURL.startsWith("https://")) {
             if (pURL.startsWith("https://")) {
                 return pURL;
             }
             pURL = pURL.replace("https://", "").replace("http://", "");
-            if (pURL.startsWith("www")) {
-                pURL = "http://" + pURL;
-            } else {
-                pURL = "http://" + pURL;
-            }
         }
+        pURL = "http://" + pURL;
         return pURL;
     }
 
@@ -341,8 +295,7 @@ public class helperMethod {
 
     public static int createUniqueNotificationID() {
         Date now = new Date();
-        int id = Integer.parseInt(new SimpleDateFormat("ddHHmmss", Locale.US).format(now));
-        return id;
+        return Integer.parseInt(new SimpleDateFormat("ddHHmmss", Locale.US).format(now));
     }
 
     public static int getScreenHeight(AppCompatActivity context) {
@@ -359,7 +312,7 @@ public class helperMethod {
         return size.x;
     }
 
-    public static SpannableString urlDesigner(boolean protocol, String url, Context pContext, int pDefColor, int pTheme, boolean sTorBrowsing) {
+    public static SpannableString urlDesigner(String url, int pTheme, boolean sTorBrowsing) {
 
         int mColor;
         int mTextColor;
@@ -377,8 +330,8 @@ public class helperMethod {
         }
 
         if (url.startsWith("https://") || url.startsWith("http://")) {
+            SpannableString span = new SpannableString(url);
             if(url.startsWith("https://")){
-                SpannableString span = new SpannableString(url);
                 span.setSpan(new ForegroundColorSpan(mColor), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 span.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -387,9 +340,7 @@ public class helperMethod {
                 }else {
                     span.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                return span;
             }else {
-                SpannableString span = new SpannableString(url);
                 if(sTorBrowsing){
                     span.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }else {
@@ -403,8 +354,8 @@ public class helperMethod {
                 }else {
                     span.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                return span;
             }
+            return span;
         } else {
             SpannableString ss = new SpannableString(url);
 
@@ -465,15 +416,14 @@ public class helperMethod {
     }
 
     public static int invertedShadeColor(int pColor, float pPercent) {
-        int mColor = pColor;
         if (ColorUtils.calculateLuminance(pColor) <= 0.5) {
             if (ColorUtils.calculateLuminance(pColor) == 1) {
                 return Color.DKGRAY;
             }
-            int a = Color.alpha(mColor);
-            int r = Math.round(Color.red(mColor) / pPercent);
-            int g = Math.round(Color.green(mColor) / pPercent);
-            int b = Math.round(Color.blue(mColor) / pPercent);
+            int a = Color.alpha(pColor);
+            int r = Math.round(Color.red(pColor) / pPercent);
+            int g = Math.round(Color.green(pColor) / pPercent);
+            int b = Math.round(Color.blue(pColor) / pPercent);
             return Color.argb(a, Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
         } else {
             pPercent = pPercent + 0.05f;
@@ -566,7 +516,6 @@ public class helperMethod {
             url = new URL(link);
             return url.getHost();
         } catch (MalformedURLException e) {
-            e.printStackTrace();
             return "";
         }
 
@@ -678,11 +627,7 @@ public class helperMethod {
     }
 
     public static boolean isDayMode(AppCompatActivity pContext) {
-        if (pContext.getResources().getString(R.string.mode).equals("Day")) {
-            return true;
-        } else {
-            return false;
-        }
+        return pContext.getResources().getString(R.string.mode).equals("Day");
     }
 
     public static String getDomainName(String url) {

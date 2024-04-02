@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-import com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReciever;
+import com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReceiver;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class downloadManager {
 
     private void onStartDownload(String pPath, String pFile) {
         int mNotificationID = helperMethod.createUniqueNotificationID();
-        downloadReciever mFileDownloader = (downloadReciever) new downloadReciever(mAppContext.get(), pPath, pFile, mNotificationID, mEvent, downloadNotificationReciever.class).execute(pPath);
+        downloadReciever mFileDownloader = (downloadReciever) new downloadReciever(mAppContext.get(), pPath, pFile, mNotificationID, mEvent, downloadNotificationReceiver.class).execute(pPath);
         mDownloads.put(mNotificationID, mFileDownloader);
     }
 

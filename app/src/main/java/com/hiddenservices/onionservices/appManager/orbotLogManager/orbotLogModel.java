@@ -12,6 +12,9 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_FLOATING_BUTTON;
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_LOGS;
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_RECYCLE_VIEW;
@@ -26,7 +29,7 @@ class orbotLogModel {
     private eventObserver.eventListener mEvent;
     private LogHandler mLogHandler;
     private int mLogCounter;
-
+    private static final Executor LOG_HANDLER_EXECUTOR = Executors.newSingleThreadExecutor();
     /*Helper Methods*/
 
     public orbotLogModel(AppCompatActivity pContext, eventObserver.eventListener pEvent) {
@@ -41,11 +44,11 @@ class orbotLogModel {
 
     private void initLogHandler() {
         this.mLogHandler = new LogHandler();
-        this.mLogHandler.execute();
+        LOG_HANDLER_EXECUTOR.execute((Runnable) mLogHandler);
     }
 
     private void initList(ArrayList<logRowModel> pModel) {
-        if (pModel.size() > 0) {
+        if (!pModel.isEmpty()) {
             mModelList.clear();
             mModelList.addAll(pModel);
         } else {
@@ -87,7 +90,7 @@ class orbotLogModel {
                                 }
 
                                 if (!orbotLogStatus.sUIInteracted) {
-                                    helperMethod.onDelayHandler(mContext, 150, () -> {
+                                    helperMethod.onDelayHandler(150, () -> {
                                         if (!orbotLogStatus.sUIInteracted) {
                                             mEvent.invokeObserver(null, M_UPDATE_FLOATING_BUTTON);
                                         }
@@ -99,8 +102,7 @@ class orbotLogModel {
                         });
                     }
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
             }
             return null;
         }

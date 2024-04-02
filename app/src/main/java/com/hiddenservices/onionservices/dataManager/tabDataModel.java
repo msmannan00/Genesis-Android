@@ -38,7 +38,7 @@ class tabDataModel {
 
     private ArrayList<tabRowModel> mTabs = new ArrayList<>();
 
-    void initializeTab(ArrayList<tabRowModel> pTabMdel) {
+    void initializeTab(ArrayList<tabRowModel> pTabModel) {
         for (int counter = 0; counter < mTabs.size(); counter++) {
             if (mTabs.get(counter).getSession() != null) {
                 mTabs.get(counter).getSession().setActive(false);
@@ -46,11 +46,11 @@ class tabDataModel {
                 mTabs.get(counter).getSession().close();
             }
         }
-        for (int counter = 0; counter < pTabMdel.size(); counter++) {
-            pTabMdel.get(counter).getSession().close();
+        for (int counter = 0; counter < pTabModel.size(); counter++) {
+            pTabModel.get(counter).getSession().close();
         }
         mTabs.clear();
-        mTabs.addAll(pTabMdel);
+        mTabs.addAll(pTabModel);
     }
 
     /* Helper Methods */
@@ -72,7 +72,7 @@ class tabDataModel {
     }
 
     geckoSession getHomePage() {
-        if (mTabs.size() > 0) {
+        if (!mTabs.isEmpty()) {
             return mTabs.get(0).getSession();
         } else {
             return null;
@@ -82,7 +82,7 @@ class tabDataModel {
     int addTabs(geckoSession mSession, boolean pIsDataSavable) {
 
         tabRowModel mTabModel = new tabRowModel(mSession);
-        if(mTabs.size() > 0 && (status.sLowMemory == enums.MemoryStatus.LOW_MEMORY || status.sLowMemory == enums.MemoryStatus.CRITICAL_MEMORY)){
+        if(!mTabs.isEmpty() && (status.sLowMemory == enums.MemoryStatus.LOW_MEMORY || status.sLowMemory == enums.MemoryStatus.CRITICAL_MEMORY)){
             getCurrentTab().getSession().close();
             getCurrentTab().getSession().stop();
         }
@@ -122,7 +122,7 @@ class tabDataModel {
     void clearTab() {
         int size = mTabs.size();
         for (int counter = 0; counter < size; counter++) {
-            if (mTabs.size() > 0) {
+            if (!mTabs.isEmpty()) {
                 mTabs.get(0).getSession().stop();
                 mTabs.get(0).getSession().setActive(false);
                 mTabs.get(0).getSession().purgeHistory();
@@ -130,7 +130,7 @@ class tabDataModel {
                 mTabs.remove(0);
             }
         }
-        if (mTabs.size() > 0) {
+        if (!mTabs.isEmpty()) {
             mTabs.get(0).getSession().setActive(false);
             mTabs.get(0).getSession().purgeHistory();
             mTabs.get(0).getSession().close();
@@ -155,15 +155,14 @@ class tabDataModel {
                     mTabs.get(counter).getSession().purgeHistory();
                     mTabs.get(counter).getSession().stop();
                     mTabs.get(counter).getSession().close();
-                    mID = mTabs.get(counter).getmId();
+                    mID = mTabs.get(counter).getId();
                     mTabs.remove(counter);
                     break;
                 }
             }
 
             mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + mID + "'", null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -174,7 +173,7 @@ class tabDataModel {
                 if (mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID())) {
                     String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
-                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET date = '" + m_date + "' WHERE mid='" + mTabs.get(counter).getmId() + "'", null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET date = '" + m_date + "' WHERE mid='" + mTabs.get(counter).getId() + "'", null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                     mTabs.add(0, mTabs.remove(counter));
                     mTabs.get(0).getSession().setActive(true);
                     break;
@@ -193,7 +192,7 @@ class tabDataModel {
                     String[] params = new String[1];
                     params[0] = mSessionState;
 
-                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET session = ? WHERE mid='" + mTabs.get(counter).getmId() + "'", params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET session = ? WHERE mid='" + mTabs.get(counter).getId() + "'", params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                     mTabs.add(0, mTabs.remove(counter));
                     break;
                 }
@@ -203,7 +202,7 @@ class tabDataModel {
         }
     }
 
-    boolean updateTab(String mSessionID, geckoSession pSession) {
+    void updateTab(String mSessionID, geckoSession pSession) {
         for (int counter = 0; counter < mTabs.size(); counter++) {
 
             if (mTabs.get(counter).getSession().getSessionID().equals(mSessionID)) {
@@ -214,30 +213,29 @@ class tabDataModel {
                 String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
                 if(status.sLowMemory != enums.MemoryStatus.STABLE){
-                    mTabs.get(counter).decodeByteArraysetmBitmap(null);
+                    mTabs.get(counter).decodeByteArraylistBitmap(null);
                 }
 
                 if (mTabs.get(counter).getSession().getTitle().equals("about:blank") || mTabs.get(counter).getSession().getTitle().equals("$TITLE") || mTabs.get(counter).getSession().getTitle().startsWith("http://loading") || mTabs.get(counter).getSession().getTitle().startsWith("loading")) {
-                    return false;
+                    return;
                 }
 
                 if (mTabs.get(counter).getSession().getCurrentURL().equals("about:blank") || mTabs.get(counter).getSession().getCurrentURL().equals("$TITLE") || mTabs.get(counter).getSession().getCurrentURL().startsWith("http://loading") || mTabs.get(counter).getSession().getCurrentURL().startsWith("loading")) {
-                    return false;
+                    return;
                 }
 
-                if (mTabs.get(counter).getmId() != null) {
-                    mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('" + mTabs.get(counter).getmId() + "','" + m_date + "',?,?,?);", params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                if (mTabs.get(counter).getId() != null) {
+                    mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('" + mTabs.get(counter).getId() + "','" + m_date + "',?,?,?);", params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                 }
-                return true;
+                return;
             }
         }
         addTabs(pSession, true);
-        return false;
     }
 
 
     tabRowModel getCurrentTab() {
-        if (mTabs.size() > 0) {
+        if (!mTabs.isEmpty()) {
             return mTabs.get(0);
         } else {
             return null;
@@ -253,7 +251,7 @@ class tabDataModel {
     }
 
     tabRowModel getLastTab() {
-        if (mTabs.size() > 0) {
+        if (!mTabs.isEmpty()) {
             return mTabs.get(mTabs.size() - 1);
         } else {
             return null;
@@ -289,7 +287,6 @@ class tabDataModel {
         protected String doInBackground(String... strings) {
             try {
                 for (int counter = 0; counter < mTabs.size(); counter++) {
-                    int finalCounter = counter;
                     if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID) && pBitmapManager!=null) {
                         Bitmap mBitmap = pBitmapManager.poll(10000);
 
@@ -299,13 +296,12 @@ class tabDataModel {
                         Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                         Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
                         if (!decoded.sameAs(emptyBitmap)) {
-                            mTabs.get(finalCounter).decodeByteArraysetmBitmap(decoded);
+                            mTabs.get(counter).decodeByteArraylistBitmap(decoded);
                         }
                         break;
                     }
                 }
-            } catch (Throwable ex) {
-                ex.printStackTrace();
+            } catch (Throwable ignored) {
             }
             if (pOpenTabView) {
                 activityContextManager.getInstance().getHomeController().onLoadFirstElement();

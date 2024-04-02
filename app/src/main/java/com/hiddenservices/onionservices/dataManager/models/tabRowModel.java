@@ -68,11 +68,11 @@ public class tabRowModel {
         }
     }
 
-    public String getmId() {
+    public String getId() {
         return mId;
     }
 
-    public void decodeByteArraysetmBitmap(Bitmap pBitmap) {
+    public void decodeByteArraylistBitmap(Bitmap pBitmap) {
         mBitmap = pBitmap;
     }
 

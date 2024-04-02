@@ -77,12 +77,11 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
             } else {
                 try {
                     String mTitle = var4.title;
-                    if (mTitle == null || mTitle.length() == 0) {
+                    if (mTitle == null || mTitle.isEmpty()) {
                         mTitle = helperMethod.getDomainName(mGeckoDataModel.mCurrentURL) + "\n" + var4.srcUri;
                     }
                     mEvent.invokeObserver(Arrays.asList(var4.srcUri, mGeckoDataModel.mSessionID, mTitle, mGeckoDataModel.mTheme, mGeckoSession, mContext.get()), homeEnums.eGeckoCallback.ON_LONG_PRESS);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (Exception ignored) {
                 }
             }
         } else if (var4.linkUri != null) {
@@ -124,8 +123,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
             mGeckoDataModel.mTheme = var2.getString("theme_color");
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL,mGeckoDataModel.mSessionID,mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.M_INDEX_WEBSITE);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ignored) {
         }
         mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE);
     }

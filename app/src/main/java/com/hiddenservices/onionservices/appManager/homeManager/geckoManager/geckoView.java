@@ -46,8 +46,7 @@ public class geckoView extends GeckoView {
 
     @Override
     protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
-        final boolean result = super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
-        return result;
+        return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
     }
 
     @Override
@@ -215,7 +214,7 @@ public class geckoView extends GeckoView {
         return mPressed;
     }
 
-    public void setmForcedScroll(boolean pScroll) {
+    public void setForcedScroll(boolean pScroll) {
         mForcedScroll = pScroll;
     }
 

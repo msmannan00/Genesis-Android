@@ -1,6 +1,6 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -9,10 +9,8 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 import android.util.Log;
 import android.view.ActionMode;
@@ -75,7 +73,6 @@ public class selectionDelegate implements ActionMode.Callback,
         mFullScreen = pFullScreen;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     private class Callback2Wrapper extends ActionMode.Callback2 {
         @Override
         public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
@@ -100,7 +97,7 @@ public class selectionDelegate implements ActionMode.Callback,
         @Override
         public void onGetContentRect(final ActionMode mode, final View view, final Rect outRect) {
             super.onGetContentRect(mode, view, outRect);
-            selectionDelegate.this.onGetContentRect(mode, view, outRect);
+            selectionDelegate.this.onGetContentRect(outRect);
         }
     }
 
@@ -145,8 +142,9 @@ public class selectionDelegate implements ActionMode.Callback,
      * @param id Action ID.
      * @return True if the action is presently available.
      */
+    @SuppressLint("ObsoleteSdkInt")
     protected boolean isActionAvailable(final @NonNull String id) {
-        if (mSelection == null || mSelection.text.length() < 1 || mSelection.text.getBytes().length >= 500000) {
+        if (mSelection == null || mSelection.text.isEmpty() || mSelection.text.getBytes().length >= 500000) {
             return false;
         }
 
@@ -282,7 +280,6 @@ public class selectionDelegate implements ActionMode.Callback,
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private Intent getProcessTextIntent() {
         final Intent intent = new Intent(Intent.ACTION_PROCESS_TEXT);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
@@ -298,9 +295,7 @@ public class selectionDelegate implements ActionMode.Callback,
         final String[] allActions = getAllActions();
         for (final String actionId : allActions) {
             if (isActionAvailable(actionId)) {
-                if (!mUseFloatingToolbar && (
-                        Build.VERSION.SDK_INT == 22 || Build.VERSION.SDK_INT == 23)) {
-                    // Android bug where onPrepareActionMode is not called initially.
+                if (!mUseFloatingToolbar && (Build.VERSION.SDK_INT == 23)) {
                     onPrepareActionMode(actionMode, menu);
                 }
                 return true;
@@ -326,12 +321,10 @@ public class selectionDelegate implements ActionMode.Callback,
 
             if (ACTION_PROCESS_TEXT.equals(actionId)) {
                 if (mExternalActionsEnabled && !mSelection.text.isEmpty()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        menu.addIntentOptions(menuId, menuId, menuId,
-                                mActivity.getComponentName(),
-                                /* specifiec */ null, getProcessTextIntent(),
-                                /* flags */ 0, /* items */ null);
-                    }
+                    menu.addIntentOptions(menuId, menuId, menuId,
+                            mActivity.getComponentName(),
+                            null, getProcessTextIntent(),
+                            0, null);
                     changed = true;
                 } else if (menu.findItem(menuId) != null) {
                     menu.removeGroup(menuId);
@@ -394,8 +387,7 @@ public class selectionDelegate implements ActionMode.Callback,
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
-    public void onGetContentRect(final @Nullable ActionMode mode, final @Nullable View view,
-                                 final @NonNull Rect outRect) {
+    public void onGetContentRect(final @NonNull Rect outRect) {
         ThreadUtils.assertOnUiThread();
         if (mSelection == null || mSelection.screenRect == null) {
             return;
@@ -405,7 +397,6 @@ public class selectionDelegate implements ActionMode.Callback,
         mTempRect.roundOut(outRect);
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onShowActionRequest(@NonNull final GeckoSession session, @NonNull final Selection selection) {
         ThreadUtils.assertOnUiThread();
@@ -424,7 +415,7 @@ public class selectionDelegate implements ActionMode.Callback,
             }
             if (mUseFloatingToolbar) {
                 String strManufacturer = android.os.Build.MANUFACTURER;
-                if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1 || (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && (strManufacturer.toLowerCase().contains("samsung") || android.os.Build.MODEL.toLowerCase().contains("samsung") || Build.PRODUCT.toLowerCase().contains("samsung")))) {
+                if ((android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && (strManufacturer.toLowerCase().contains("samsung") || android.os.Build.MODEL.toLowerCase().contains("samsung") || Build.PRODUCT.toLowerCase().contains("samsung")))) {
                     mActionMode = mActivity.startActionMode(this);
                 } else {
                     mActionMode = mActivity.startActionMode(new Callback2Wrapper(), ActionMode.TYPE_FLOATING);

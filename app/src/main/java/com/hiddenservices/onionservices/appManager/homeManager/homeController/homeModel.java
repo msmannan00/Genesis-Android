@@ -39,8 +39,7 @@ public class homeModel {
                 if (isUrlValid && host.getHost().replace("www.", "").contains(".")) {
                     return pURL;
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception ignored) {
             }
 
             String mURL = pSearchEngine.replace("$s", pURL.replaceAll(" ", "+"));

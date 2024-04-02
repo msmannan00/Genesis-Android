@@ -22,19 +22,14 @@ public class widgetViewController extends AppWidgetProvider {
         this.mViews = pViews;
     }
 
-    private void initialize(int pSize) {
-        if (pSize <= 3) {
-            mViews.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
-            mViews.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);
-        } else {
-            mViews.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
-            mViews.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);
-        }
+    private void initialize() {
+        mViews.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
+        mViews.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);
     }
 
     public Object onTrigger(widgetEnums.eWidgetViewController pCommands, List<Object> pData) {
         if (pCommands.equals(widgetEnums.eWidgetViewController.M_INIT)) {
-            initialize((int) pData.get(0));
+            initialize();
         }
         return null;
     }

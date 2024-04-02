@@ -49,7 +49,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
 
     geckoSession(eventObserver.eventListener pEvent, String pSessionID, AppCompatActivity pContext, GeckoView pGeckoView) {
 
-        this.mContext = new WeakReference(pContext);
+        this.mContext = new WeakReference<>(pContext);
         this.mEvent = pEvent;
         this.mGeckoDataModel = new geckoDataModel();
         this.mGeckoDataModel.mSessionID = pSessionID;
@@ -65,7 +65,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
         this.mNavigationDelegate = new navigationDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mProgressDelegate = new progressDelegate(this.mContext, mEvent, mGeckoDataModel);
         this.mPermissionDelegate = new permissionDelegate(this.mContext, this);
-        this.mMediaDelegate = new mediaDelegate(new WeakReference(pContext));
+        this.mMediaDelegate = new mediaDelegate(new WeakReference<>(pContext));
 
         setMediaDelegate(this.mMediaDelegate);
         setSelectionActionDelegate(this.mSelectionActionDelegate);
@@ -82,7 +82,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
 
     public void onInit(AppCompatActivity pContext){
         setMediaSessionDelegate(null);
-        this.mMediaSessionDelegate = new mediaSessionDelegate(new WeakReference(pContext), mGeckoDataModel, mMediaDelegate);
+        this.mMediaSessionDelegate = new mediaSessionDelegate(new WeakReference<>(pContext), mGeckoDataModel, mMediaDelegate);
         setMediaSessionDelegate(this.mMediaSessionDelegate);
     }
 
@@ -237,7 +237,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
     }
 
     public boolean getSSL() {
-        return mProgressDelegate.getSecurtityState();
+        return mProgressDelegate.getSecurityState();
     }
 
 }

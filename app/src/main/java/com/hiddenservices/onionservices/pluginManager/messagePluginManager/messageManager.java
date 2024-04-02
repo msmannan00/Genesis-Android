@@ -156,10 +156,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mPopupToastNext.setTextColor(Color.WHITE);
         }
 
-        mToastHandler.postDelayed(() ->
-        {
-            onDismiss();
-        }, pDelay);
+        mToastHandler.postDelayed(this::onDismiss, pDelay);
     }
 
     private void onPanic() {
@@ -192,7 +189,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
-        TextView mCertificateDesciption = mDialog.findViewById(R.id.pCertificateDesciption);
+        TextView mCertificateDescription = mDialog.findViewById(R.id.pCertificateDesciption);
         ImageView mCertificateRootBackground = mDialog.findViewById(R.id.pCertificateRootBackground);
         ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
         ImageView mCertificateRootBlocker = mDialog.findViewById(R.id.pCertificateRootBlocker);
@@ -202,12 +199,12 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mCertificateRootHeader.setTextColor(Color.RED);
         }
 
-        mCertificateDesciption.setText(message);
+        mCertificateDescription.setText(message);
         mCertificateRootBackground.animate().setStartDelay(100).setDuration(400).alpha(1);
 
         mDialog.setOnDismissListener(this);
         mCertificateRootBackground.setOnClickListener(this);
-        mCertificateDesciption.setOnClickListener(this);
+        mCertificateDescription.setOnClickListener(this);
 
         if (mInfo.equals(MESSAGE_SECURE_ONION_SERVICE) || mInfo.equals(MESSAGE_NOT_SECURE_HTTPS_SERVICE)) {
             ViewGroup.LayoutParams params = mCertificateScrollView.getLayoutParams();
@@ -228,7 +225,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         LinearLayout mPopupRate3 = mDialog.findViewById(R.id.pPopupRateus3);
         LinearLayout mPopupRate4 = mDialog.findViewById(R.id.pPopupRateus4);
         LinearLayout mPopupRate5 = mDialog.findViewById(R.id.pPopupRateus5);
-        ImageButton mPopupRateusClose = mDialog.findViewById(R.id.pPopupRateusClose);
+        ImageButton mPopupRatesClose = mDialog.findViewById(R.id.pPopupRateusClose);
 
 
         mPopupRate1.setOnClickListener(this);
@@ -237,7 +234,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupRate4.setOnClickListener(this);
         mPopupRate5.setOnClickListener(this);
         mPopupRate5.setOnClickListener(this);
-        mPopupRateusClose.setOnClickListener(this);
+        mPopupRatesClose.setOnClickListener(this);
     }
 
     private void sendBridgeMail() {
@@ -314,20 +311,20 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     }
 
     private void downloadSingle() {
-        if (mData.size() > 0) {
+        if (!mData.isEmpty()) {
             initializeDialog(R.layout.popup_download_url, Gravity.BOTTOM);
 
-            Button mDownloadPopuInfoNext = mDialog.findViewById(R.id.pDownloadPopuInfoNext);
-            Button mDownloadPopuInfoDismiss = mDialog.findViewById(R.id.pDownloadPopuInfoDismiss);
-            TextView mDownloadPopuInfo = mDialog.findViewById(R.id.pDownloadPopuInfo);
-            TextView mDownloadPopuInfoLong = mDialog.findViewById(R.id.pDownloadPopuInfoLong);
+            Button mDownloadPopInfoNext = mDialog.findViewById(R.id.pDownloadPopuInfoNext);
+            Button mDownloadPopInfoDismiss = mDialog.findViewById(R.id.pDownloadPopuInfoDismiss);
+            TextView mDownloadPopInfo = mDialog.findViewById(R.id.pDownloadPopuInfo);
+            TextView mDownloadPopInfoLong = mDialog.findViewById(R.id.pDownloadPopuInfoLong);
 
-            mDownloadPopuInfoDismiss.setOnClickListener(this);
-            mDownloadPopuInfoNext.setOnClickListener(this);
+            mDownloadPopInfoDismiss.setOnClickListener(this);
+            mDownloadPopInfoNext.setOnClickListener(this);
             mDialog.setOnDismissListener(this);
 
-            mDownloadPopuInfo.setText(mData.get(0).toString());
-            mDownloadPopuInfoLong.setText(mData.get(2).toString());
+            mDownloadPopInfo.setText(mData.get(0).toString());
+            mDownloadPopInfoLong.setText(mData.get(2).toString());
         }
     }
 
@@ -369,31 +366,19 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mSecurePopupPrivacy.setOnClickListener(this);
 
 
-            if ((boolean) mData.get(1)) {
-                mSecureJavascriptStatus.setChecked(true);
-            } else {
-                mSecureJavascriptStatus.setChecked(false);
-            }
-            if ((boolean) mData.get(2)) {
-                mSecureTrackingStatus.setChecked(true);
-            } else {
-                mSecureTrackingStatus.setChecked(false);
-            }
-            if ((int) mData.get(3) != ContentBlocking.AntiTracking.NONE) {
-                mSecureTrackingProtectionStatus.setChecked(true);
-            } else {
-                mSecureTrackingProtectionStatus.setChecked(false);
-            }
-        }catch (Exception ex){}
+            mSecureJavascriptStatus.setChecked((boolean) mData.get(1));
+            mSecureTrackingStatus.setChecked((boolean) mData.get(2));
+            mSecureTrackingProtectionStatus.setChecked((int) mData.get(3) != ContentBlocking.AntiTracking.NONE);
+        }catch (Exception ignored){}
     }
 
     private void downloadFileLongPress() {
-        if (mData == null || mData.size() < 1) {
+        if (mData == null || mData.isEmpty()) {
             return;
         }
 
         String title = mData.get(2).toString();
-        if (title.length() > 0) {
+        if (!title.isEmpty()) {
             title = title + " | ";
         }
 
@@ -467,10 +452,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mDescription = data_local;
         }
 
-        if(mDescription.equals("")){
+        if(mDescription.isEmpty()){
             mDescription = url;
         }
-        if(mDescriptionShort.equals("")){
+        if(mDescriptionShort.isEmpty()){
             mDescription = "";
             mDescriptionShort = mDescription;
         }
@@ -516,8 +501,6 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             return CONST_PLAYSTORE_URL;
         } else if (status.sStoreType == enums.StoreType.AMAZON) {
             return CONST_AMAZON_URL;
-        } else if (status.sStoreType == enums.StoreType.HUAWEI) {
-            return CONST_HUAWEI_URL;
         } else {
             return CONST_SAMSUNG_URL;
         }
@@ -541,7 +524,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
         } else if (view.getId() == R.id.pDownloadPopuInfoNext) {
             onDismiss();
-            helperMethod.onDelayHandler(mContext, 1000, () -> {
+            helperMethod.onDelayHandler(1000, () -> {
                 mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
                 onClearReference();
                 return null;
@@ -563,7 +546,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             helperMethod.hideKeyboard(mContext);
         } else if (view.getId() == R.id.pSecurePopupPrivacy) {
             mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
-            helperMethod.onDelayHandler(mContext, 250, () -> {
+            helperMethod.onDelayHandler(250, () -> {
                 mEvent.invokeObserver(null, M_OPEN_PRIVACY);
                 onDismiss();
                 return null;
@@ -573,7 +556,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
         } else if (view.getId() == R.id.pPopupLongPressOptionNewTab) {
             onDismiss();
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
                 return null;
             });
@@ -587,7 +570,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
 
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 onTrigger(mData, M_COPY);
                 return null;
             });
@@ -598,10 +581,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         } else if (view.getId() == R.id.pSecurePopupCertificate) {
             mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
             onDismiss();
-            new Handler().postDelayed(() ->
-            {
-                mEvent.invokeObserver(null, M_SECURITY_INFO);
-            }, 500);
+            new Handler().postDelayed(() -> mEvent.invokeObserver(null, M_SECURITY_INFO), 500);
         } else if (view.getId() == R.id.pPopupCreateBookmarkNext) {
             onDismiss();
             helperMethod.hideKeyboard(mContext);
@@ -635,7 +615,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 onDismiss();
             }
         } else if (view.getId() == R.id.pBridgeSettingCustomRequest) {
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 try {
                     onDismiss();
                     mEvent.invokeObserver(null, M_GET_BRIDGES);
@@ -667,7 +647,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     mTextView.animate().setDuration(250).alpha(1);
                     if (mBridgeTypeExist) {
                         mTextView.setText(BRIDGE_CUSTOM_INVALID_TYPE_STRING);
-                    } else if (mBridgeSize) {
+                    } else {
                         mTextView.setText(BRIDGE_CUSTOM_INVALID_TYPE);
                     }
                 }
@@ -681,7 +661,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText) mDialog.findViewById(R.id.pBridgeSettingBridgeType)).getText().toString()), M_SET_BRIDGES);
         } else if (view.getId() == R.id.pPopupRateFailureNext) {
             onDismiss();
-            helperMethod.onDelayHandler(mContext, 1000, () -> {
+            helperMethod.onDelayHandler(1000, () -> {
                 try {
                     onDismiss();
                     helperMethod.sendIssueEmail(mContext);
@@ -693,7 +673,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             });
         } else if (view.getId() == R.id.pBridgeMailPopupNext) {
             onDismiss();
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 try {
                     onDismiss();
                     mEvent.invokeObserver(null, M_GET_BRIDGES);
@@ -709,7 +689,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             onDismiss();
 
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 onTrigger(mData, M_COPY);
                 return null;
             });
@@ -723,7 +703,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             onDismiss();
 
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 onTrigger(mData, M_COPY);
                 return null;
             });
@@ -737,7 +717,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mEvent.invokeObserver(Collections.singletonList(mData.get(2)), M_COPY_LINK);
             onDismiss();
 
-            helperMethod.onDelayHandler(mContext, 200, () -> {
+            helperMethod.onDelayHandler(200, () -> {
                 onTrigger(mData, M_COPY);
                 return null;
             });
@@ -933,7 +913,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
-                case M_SETTING_CHANGED_RESTART_REQUSTED:
+                case M_SETTING_CHANGED_RESTART_REQUESTED:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
                     break;

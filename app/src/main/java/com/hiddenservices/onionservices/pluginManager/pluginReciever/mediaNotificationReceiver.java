@@ -9,16 +9,16 @@ import android.content.Intent;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.enums;
 
-public class mediaNotificationReciever extends BroadcastReceiver {
+public class mediaNotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         int mCommand = intent.getExtras().getInt(CONST_NOTIFICATION_COMMAND);
-        if (mCommand == enums.MediaNotificationReciever.PLAY) {
+        if (mCommand == enums.MediaNotificationReceiver.PLAY) {
             activityContextManager.getInstance().getHomeController().onPlayMedia();
-        } else if (mCommand == enums.MediaNotificationReciever.PAUSE) {
+        } else if (mCommand == enums.MediaNotificationReceiver.PAUSE) {
             activityContextManager.getInstance().getHomeController().onPauseMedia();
-        } else if (mCommand == enums.MediaNotificationReciever.SKIP_FORWARD) {
+        } else if (mCommand == enums.MediaNotificationReceiver.SKIP_FORWARD) {
             activityContextManager.getInstance().getHomeController().onSkipForwardMedia();
-        } else if (mCommand == enums.MediaNotificationReciever.SKIP_BACKWARD) {
+        } else if (mCommand == enums.MediaNotificationReceiver.SKIP_BACKWARD) {
             activityContextManager.getInstance().getHomeController().onSkipBackwardMedia();
         }
     }

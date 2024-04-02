@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -49,7 +51,6 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //onInitTheme();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         if (!status.mThemeApplying) {
@@ -59,6 +60,7 @@ public class settingGeneralController extends AppCompatActivity {
         setContentView(R.layout.setting_general_view);
         activityContextManager.getInstance().setSettingGeneralController(this);
         viewsInitializations();
+        onBack();
     }
 
     @Override
@@ -99,26 +101,7 @@ public class settingGeneralController extends AppCompatActivity {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
             if (settingGeneralEnums.eGeneralViewCallback.M_RESET_THEME_INVOKED_BACK.equals(e_type)) {
-                boolean mIsThemeChangable = false;
-                if (status.sTheme == enums.Theme.THEME_DARK) {
-                    if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
-                        mIsThemeChangable = true;
-                    }
-                } else if (status.sTheme == enums.Theme.THEME_LIGHT) {
-                    if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                        mIsThemeChangable = true;
-                    }
-                } else {
-                    if (!status.sDefaultNightMode) {
-                        if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO) {
-                            mIsThemeChangable = true;
-                        }
-                    } else {
-                        if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
-                            mIsThemeChangable = true;
-                        }
-                    }
-                }
+                boolean mIsThemeChangable = ismIsThemeChangable();
 
                 if (mIsThemeChangable) {
                     status.mThemeApplying = true;
@@ -126,7 +109,7 @@ public class settingGeneralController extends AppCompatActivity {
                     activityContextManager.getInstance().getHomeController().onReInitTheme();
                     if (android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.O || android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.O_MR1) {
                         activityContextManager.getInstance().onGoHome();
-                        onBackPressed();
+                        finish();
                     }
                     new Handler().postDelayed(() ->
                     {
@@ -135,17 +118,41 @@ public class settingGeneralController extends AppCompatActivity {
                                 activityContextManager.getInstance().getSettingController().onInitTheme();
                                 activityContextManager.getInstance().getHomeController().onCloseAllTabs();
 
-                                onBackPressed();
+                                finish();
                                 overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
                                 helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this, true);
 
                             }
-                        }catch (Exception ex){}
+                        }catch (Exception ignored){}
                     }, 100);
 
                 }
             }
             return null;
+        }
+
+        private boolean ismIsThemeChangable() {
+            boolean mIsThemeChangable = false;
+            if (status.sTheme == enums.Theme.THEME_DARK) {
+                if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
+                    mIsThemeChangable = true;
+                }
+            } else if (status.sTheme == enums.Theme.THEME_LIGHT) {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                    mIsThemeChangable = true;
+                }
+            } else {
+                if (!status.sDefaultNightMode) {
+                    if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO) {
+                        mIsThemeChangable = true;
+                    }
+                } else {
+                    if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
+                        mIsThemeChangable = true;
+                    }
+                }
+            }
+            return mIsThemeChangable;
         }
     }
 
@@ -165,11 +172,8 @@ public class settingGeneralController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         activityContextManager.getInstance().getHomeController().onKillMedia();
-        if (status.mThemeApplying) {
-            // activityContextManager.getInstance().onStack(this);
-        }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
     }
 
@@ -178,10 +182,13 @@ public class settingGeneralController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+            }
+        });
     }
 
     /*External Redirection*/
@@ -230,10 +237,8 @@ public class settingGeneralController extends AppCompatActivity {
                     mSettingGeneralModel.onTrigger(settingGeneralEnums.eGeneralModel.M_SELECT_THEME, Collections.singletonList(enums.Theme.THEME_DARK));
                     dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME, status.sTheme));
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER, Collections.singletonList(enums.Theme.THEME_DARK));
-                    mIsThemeChanging = false;
-                } else {
-                    mIsThemeChanging = false;
                 }
+                mIsThemeChanging = false;
             } else if (view.getId() == R.id.pSearchSettingOption2) {
                 if (status.sTheme != enums.Theme.THEME_LIGHT) {
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_RESET_THEME, null);
@@ -241,10 +246,8 @@ public class settingGeneralController extends AppCompatActivity {
                     mSettingGeneralModel.onTrigger(settingGeneralEnums.eGeneralModel.M_SELECT_THEME, Collections.singletonList(enums.Theme.THEME_LIGHT));
                     dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME, status.sTheme));
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER, Collections.singletonList(enums.Theme.THEME_LIGHT));
-                    mIsThemeChanging = false;
-                } else {
-                    mIsThemeChanging = false;
                 }
+                mIsThemeChanging = false;
             } else {
                 if (status.sTheme != enums.Theme.THEME_DEFAULT) {
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_RESET_THEME, null);
@@ -252,10 +255,8 @@ public class settingGeneralController extends AppCompatActivity {
                     mSettingGeneralModel.onTrigger(settingGeneralEnums.eGeneralModel.M_SELECT_THEME, Collections.singletonList(enums.Theme.THEME_DEFAULT));
                     dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME, status.sTheme));
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER, Collections.singletonList(enums.Theme.THEME_DEFAULT));
-                    mIsThemeChanging = false;
-                } else {
-                    mIsThemeChanging = false;
                 }
+                mIsThemeChanging = false;
             }
         }
     }

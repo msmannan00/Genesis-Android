@@ -2,8 +2,6 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.os.Build;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -26,13 +24,8 @@ public class permissionDelegate implements PermissionDelegate {
 
     @Override
     public void onAndroidPermissionsRequest(@NonNull final GeckoSession session, final String[] permissions, @NonNull final Callback callback) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            callback.grant();
-            mContext.get().requestPermissions(permissions, androidPermissionRequestCode);
-        } else {
-            mGeckoSession.reload();
-            callback.grant();
-        }
+        callback.grant();
+        mContext.get().requestPermissions(permissions, androidPermissionRequestCode);
     }
 
     private String[] normalizeMediaName(final MediaSource[] sources) {
@@ -95,6 +88,6 @@ public class permissionDelegate implements PermissionDelegate {
 
         final promptDelegate prompt =
                 mGeckoSession.getPromptDelegate();
-        prompt.onMediaPrompt(session, title, video, audio, videoNames, audioNames, callback);
+        prompt.onMediaPrompt(title, video, audio, videoNames, audioNames, callback);
     }
 }

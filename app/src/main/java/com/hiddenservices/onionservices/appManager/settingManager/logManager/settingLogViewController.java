@@ -27,11 +27,7 @@ class settingLogViewController {
     }
 
     private void initViews(boolean pLogThemeStyle) {
-        if (pLogThemeStyle) {
-            mSettingLogStatusSwitch.setChecked(true);
-        } else {
-            mSettingLogStatusSwitch.setChecked(false);
-        }
+        mSettingLogStatusSwitch.setChecked(pLogThemeStyle);
     }
 
     /*Helper Methods*/

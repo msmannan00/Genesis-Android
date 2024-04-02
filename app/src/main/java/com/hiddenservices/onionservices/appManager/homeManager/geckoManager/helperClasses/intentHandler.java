@@ -3,29 +3,26 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.hel
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-
 import org.mozilla.geckoview.GeckoSession;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class intentHandler {
 
-    public static boolean actionIntent(String pIntentHander, WeakReference<AppCompatActivity> mContext) {
-        if(pIntentHander.startsWith("tel:")){
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(pIntentHander));
+    public static boolean actionIntent(String pIntentHandler, WeakReference<AppCompatActivity> mContext) {
+        if(pIntentHandler.startsWith("tel:")){
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(pIntentHandler));
             mContext.get().startActivity(intent);
             return false;
         }
-        if(pIntentHander.startsWith("intent:")){
+        if(pIntentHandler.startsWith("intent:")){
             try {
                 if(status.sSettingTrackingProtection == 0){
-                    Uri data = Uri.parse(pIntentHander);
+                    Uri data = Uri.parse(pIntentHandler);
                     Intent intent = new Intent(Intent.ACTION_VIEW, data);
                     String packageName = data.getQueryParameter("package");
                     if (packageName != null && !packageName.isEmpty()) {
@@ -47,9 +44,8 @@ public class intentHandler {
 
             String mAlternativeNames = strings.GENERIC_EMPTY_STR;
             try {
-                for (List name : securityInfo.certificate.getSubjectAlternativeNames()) {
+                for (List name : securityInfo.certificate.getSubjectAlternativeNames())
                     mAlternativeNames = mAlternativeNames + name.get(1) + "<br>";
-                }
 
             } catch (Exception ignored) {
             }

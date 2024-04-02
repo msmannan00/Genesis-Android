@@ -24,8 +24,7 @@ public class errorHandler {
             StringBuilder builder = new StringBuilder();
             try {
 
-                InputStream stream = mResourceURL;
-                BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(mResourceURL));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     builder.append(line);
@@ -39,9 +38,6 @@ public class errorHandler {
         }
         String title = helperMethod.getHost(url);
 
-        if (url == null) {
-            url = "Hidden Error";
-        }
         if (title == null) {
             title = "Hidden Error";
         }
@@ -171,9 +167,8 @@ public class errorHandler {
                 return null;
             }
         }
-        String replaceUrl = mErrorTemplate.replace("$URL", url);
 
-        return replaceUrl;
+        return mErrorTemplate.replace("$URL", url);
     }
 
 }

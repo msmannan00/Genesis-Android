@@ -59,7 +59,7 @@ public class pluginController {
     }
 
     public void preInitialize(homeController context) {
-        mLangManager = new langManager(context, new langCallback(), new Locale(status.sSettingLanguage), status.mSystemLocale, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying);
+        mLangManager = new langManager(context, new langCallback(), new Locale(status.sSettingLanguage), status.mSystemLocale, status.sSettingLanguage, status.sSettingLanguageRegion);
     }
 
     public void initialize() {
@@ -68,7 +68,7 @@ public class pluginController {
     }
 
     private void instanceObjectInitialization() {
-        mHomeController = new WeakReference(activityContextManager.getInstance().getHomeController());
+        mHomeController = new WeakReference<>(activityContextManager.getInstance().getHomeController());
         mContextManager = activityContextManager.getInstance();
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -165,7 +165,7 @@ public class pluginController {
                 if(activityContextManager.getInstance().getSettingController()!=null){
                     activityContextManager.getInstance().getSettingController().moveTaskToBack(true);
                 }
-                helperMethod.onDelayHandler(mHomeController.get(), 150, () -> {
+                helperMethod.onDelayHandler(150, () -> {
                     activityContextManager.getInstance().getHomeController().panicExitInvoked();
                     return null;
                 });
@@ -206,7 +206,7 @@ public class pluginController {
                 mContextManager.getBookmarkController().unclearData();
             } else if (pEventType.equals(M_CLEAR_HISTORY)) {
                 dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY, pData);
-                mContextManager.getHistoryController().onclearData();
+                mContextManager.getHistoryController().unclearData();
             } else if (pEventType.equals(M_BOOKMARK)) {
                 String[] dataParser = pData.get(0).toString().split("split");
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK, Arrays.asList(dataParser[0], pData.get(1).toString()));
@@ -221,7 +221,7 @@ public class pluginController {
             } else if (pEventType.equals(ON_FETCH_FAVICON)) {
                 activityContextManager.getInstance().getHomeController().onGetFavIcon((ImageView) pData.get(0), (String) pData.get(1));
             } else if (pEventType.equals(M_LOAD_NEW_TAB)) {
-                ((homeController) mHomeController.get()).onLoadTabHidden(false, false, true, true);
+                ((homeController) mHomeController.get()).onLoadTabHidden(false, false, true);
             } else if (pEventType.equals(M_OPEN_LINK_NEW_TAB)) {
 
                 ((homeController) mHomeController.get()).postNewLinkTabAnimationInBackgroundTrigger(pData.get(0).toString());
@@ -231,27 +231,27 @@ public class pluginController {
                 helperMethod.copyURL(pData.get(0).toString(), mContextManager.getHomeController());
             } else if (pEventType.equals(M_CLEAR_TAB)) {
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
-                ((homeController) mHomeController.get()).initTab(true);
+                ((homeController) mHomeController.get()).initTab();
                 ((homeController) mHomeController.get()).onDisableTabViewController();
             } else if (pEventType.equals(M_REQUEST_BRIDGES)) {
                 pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
             } else if (pEventType.equals(M_SET_BRIDGES)) {
                 activityContextManager.getInstance().getBridgeController().onUpdateBridges((String) pData.get(0), (String) pData.get(1));
             } else if (pEventType.equals(M_UNDO_TAB)) {
-                activityContextManager.getInstance().getTabController().onRestoreTab(null);
+                activityContextManager.getInstance().getTabController().onRestoreTab();
             } else if (pEventType.equals(M_SECURITY_INFO)) {
                 mMessageManager.onTrigger(Arrays.asList(activityContextManager.getInstance().getHomeController().getSecurityInfo(), mHomeController.get()), M_SECURITY_INFO);
             } else if (pEventType.equals(M_ADJUST_INPUT_RESIZE)) {
                 mHomeController.get().runOnUiThread(() -> mHomeController.get().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE));
             } else if (pEventType.equals(M_IMAGE_UPDATE_RESTART)) {
-                helperMethod.onDelayHandler(mHomeController.get(), 250, () -> {
+                helperMethod.onDelayHandler(250, () -> {
                     onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
                     helperMethod.restartAndOpen(false);
                     return null;
                 });
             } else if (pEventType.equals(M_TOR_SWITCH_RESTART)) {
                 activityContextManager.getInstance().getHomeController().torSwitch();
-                helperMethod.onDelayHandler(mHomeController.get(), 250, () -> {
+                helperMethod.onDelayHandler(250, () -> {
                     onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
                     helperMethod.restartAndOpen(false);
                     return null;

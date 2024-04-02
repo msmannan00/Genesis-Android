@@ -36,7 +36,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             pQuery = "hidden web";
         }
         mCurrentList.clear();
-        if (!pQuery.equals(strings.GENERIC_EMPTY_STR) && !pQuery.equals("about:blank") && !pQuery.contains("?") && !pQuery.contains("/") && !pQuery.contains(" ") && !pQuery.contains("  ") && !pQuery.contains("\n")) {
+        if (!pQuery.equals("about:blank") && !pQuery.contains("?") && !pQuery.contains("/") && !pQuery.contains(" ") && !pQuery.contains("  ") && !pQuery.contains("\n")) {
             mCurrentList.size();
             int sepPos = pQuery.indexOf(".");
             if (sepPos == -1) {
@@ -60,7 +60,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         return mCurrentList;
     }
 
-    private ArrayList<historyRowModel> getDefaultSuggestions(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned) {
+    private void getDefaultSuggestions(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChanged) {
 
         if (pQuery.trim().isEmpty()) {
             pQuery = "";
@@ -70,7 +70,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             if (mHintListLocalCache.get(count).getHeader().toLowerCase().contains(pQuery)) {
                 if (mHintListLocalCache.get(count).getHeader().toLowerCase().startsWith(pQuery)) {
                     if (mDuplicationHandler != null && !mDuplicationHandler.contains(mHintListLocalCache.get(count).getDescriptionParsed())) {
-                        if (pDefaultHostChaned) {
+                        if (pDefaultHostChanged) {
                             mCurrentList.add(1, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
                         } else {
                             mCurrentList.add(0, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
@@ -87,7 +87,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             } else if (mHintListLocalCache.get(count).getDescriptionParsed().toLowerCase().contains(pQuery)) {
                 if (mHintListLocalCache.get(count).getHeader().toLowerCase().startsWith(pQuery)) {
                     if (mDuplicationHandler != null && !mDuplicationHandler.contains(mHintListLocalCache.get(count).getDescriptionParsed())) {
-                        if (pDefaultHostChaned) {
+                        if (pDefaultHostChanged) {
                             mCurrentList.add(1, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
                         } else {
                             mCurrentList.add(0, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
@@ -104,7 +104,6 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
-        return mCurrentList;
     }
 
     private ArrayList<historyRowModel> getSuggestions(String pQuery, ArrayList<historyRowModel> pHistory, ArrayList<bookmarkRowModel> pBookmarks) {
@@ -116,25 +115,23 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         mCurrentList = new ArrayList<>();
         String mQueryOriginal = pQuery;
         pQuery = pQuery.replace("+", "%").replace(" ", "+");
-        ArrayList<historyRowModel> mHistory = pHistory;
-        ArrayList<bookmarkRowModel> mBookmarks = pBookmarks;
 
         pQuery = pQuery.toLowerCase();
         ArrayList<String> mDuplicationHandler = new ArrayList<>();
 
         if (status.sSettingSearchHistory) {
             pQuery = pQuery.toLowerCase();
-            for (int count = 0; count <= mHistory.size() - 1 && mHistory.size() < 500; count++) {
+            for (int count = 0; count <= pHistory.size() - 1 && pHistory.size() < 500; count++) {
                 historyRowModel mTempModel;
-                if (!mDuplicationHandler.contains(mHistory.get(count).getDescription())) {
-                    if (mHistory.get(count).getHeader().toLowerCase().contains(pQuery)) {
-                        mTempModel = new historyRowModel(mHistory.get(count).getHeader(), mHistory.get(count).getDescription(), -1);
+                if (!mDuplicationHandler.contains(pHistory.get(count).getDescription())) {
+                    if (pHistory.get(count).getHeader().toLowerCase().contains(pQuery)) {
+                        mTempModel = new historyRowModel(pHistory.get(count).getHeader(), pHistory.get(count).getDescription(), -1);
                         if (!mCurrentList.contains(mTempModel)) {
                             mDuplicationHandler.add(mTempModel.getDescription());
                             mCurrentList.add(mTempModel);
                         }
-                    } else if (mHistory.get(count).getDescription().toLowerCase().contains(pQuery)) {
-                        mTempModel = new historyRowModel(mHistory.get(count).getHeader(), mHistory.get(count).getDescription(), -1);
+                    } else if (pHistory.get(count).getDescription().toLowerCase().contains(pQuery)) {
+                        mTempModel = new historyRowModel(pHistory.get(count).getHeader(), pHistory.get(count).getDescription(), -1);
                         if (!mCurrentList.contains(mTempModel)) {
                             mDuplicationHandler.add(mTempModel.getDescription());
                             mCurrentList.add(mTempModel);
@@ -148,14 +145,14 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
 
         if (status.sSettingSearchHistory && mCurrentList.size() > 4) {
-            for (int count = 0; count <= mBookmarks.size() - 1 && mBookmarks.size() < 500; count++) {
-                if (!mDuplicationHandler.contains(mBookmarks.get(count).getDescription())) {
-                    if (mBookmarks.get(count).getHeader().toLowerCase().contains(pQuery)) {
-                        mDuplicationHandler.add(mBookmarks.get(count).getDescription());
-                        mCurrentList.add(mCurrentList.size() - 1, new historyRowModel(mBookmarks.get(count).getHeader(), mBookmarks.get(count).getDescription(), -1));
-                    } else if (mCurrentList.size() > 0 && mBookmarks.get(count).getDescription().toLowerCase().contains(pQuery)) {
-                        mDuplicationHandler.add(mBookmarks.get(count).getDescription());
-                        mCurrentList.add(mCurrentList.size() - 1, new historyRowModel(mBookmarks.get(count).getHeader(), mBookmarks.get(count).getDescription(), -1));
+            for (int count = 0; count <= pBookmarks.size() - 1 && pBookmarks.size() < 500; count++) {
+                if (!mDuplicationHandler.contains(pBookmarks.get(count).getDescription())) {
+                    if (pBookmarks.get(count).getHeader().toLowerCase().contains(pQuery)) {
+                        mDuplicationHandler.add(pBookmarks.get(count).getDescription());
+                        mCurrentList.add(mCurrentList.size() - 1, new historyRowModel(pBookmarks.get(count).getHeader(), pBookmarks.get(count).getDescription(), -1));
+                    } else if (!mCurrentList.isEmpty() && pBookmarks.get(count).getDescription().toLowerCase().contains(pQuery)) {
+                        mDuplicationHandler.add(pBookmarks.get(count).getDescription());
+                        mCurrentList.add(mCurrentList.size() - 1, new historyRowModel(pBookmarks.get(count).getHeader(), pBookmarks.get(count).getDescription(), -1));
                     }
                     if (mCurrentList.size() > 6) {
                         break;
@@ -164,7 +161,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
-        boolean mDefaultHostChaned = false;
+        boolean mDefaultHostChanged = false;
         if (mCurrentList.size() > 3) {
             String mHost1 = helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(0).getDescription()));
             String mHost2 = helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(1).getDescription()));
@@ -175,15 +172,12 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
                 mCurrentList.add(0, new historyRowModel(mHostReal, strings.GENERIC_EMPTY_STR, -1));
                 mDuplicationHandler.add(mHostReal);
             }
-            mDefaultHostChaned = true;
+            mDefaultHostChanged = true;
         }
 
-        getDefaultSuggestions(pQuery, mCurrentList.size(), mDuplicationHandler, mDefaultHostChaned);
+        getDefaultSuggestions(pQuery, mCurrentList.size(), mDuplicationHandler, mDefaultHostChanged);
 
-        boolean mHostAppend = false;
-        if (mCurrentList.size() > 1 && helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(0).getDescription())).equals(helperMethod.completeURL(mCurrentList.get(1).getDescription()))) {
-            mHostAppend = true;
-        }
+        boolean mHostAppend = mCurrentList.size() > 1 && helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(0).getDescription())).equals(helperMethod.completeURL(mCurrentList.get(1).getDescription()));
 
         int mSize = mCurrentList.size();
         if (mCurrentList.size() < 3) {
@@ -215,12 +209,12 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
-        if (pQuery.length() > 0) {
+        if (!pQuery.isEmpty()) {
             if (!pQuery.equals("about:blank")) {
                 mCurrentList.add(0, new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR, -1));
             }
         }
-        if (mCurrentList.size() == 0) {
+        if (mCurrentList.isEmpty()) {
             if (status.sTorBrowsing) {
                 mCurrentList.add(mSize, new historyRowModel("Orion Search", "orion.onion", -1));
             }else {

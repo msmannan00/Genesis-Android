@@ -37,14 +37,13 @@ public class geckoDownloadManager {
 
         try {
             String mFileName = DownloadUtils.guessFileName(response.headers.get("Content-Disposition"), "", response.uri, null);
-            String murl = response.uri;
-            if (!murl.startsWith("http")) {
-                murl = "https://" + murl;
+            String mURL = response.uri;
+            if (!mURL.startsWith("http")) {
+                mURL = "https://" + mURL;
             }
-            downloadURL = Uri.parse(murl);
+            downloadURL = Uri.parse(mURL);
             downloadFile = mFileName;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ignored) {
         }
 
 

@@ -7,10 +7,9 @@ import static com.hiddenservices.onionservices.pluginManager.orbotPluginManager.
 public class orbotLogManager {
 
     private String onGetCleanedLogs(String pLogs) {
-        String logs = pLogs;
 
-        if (logs.equals("Starting Orion | Please Wait ...")) {
-            return logs;
+        if (pLogs.equals("Starting Orion | Please Wait ...")) {
+            return pLogs;
         }
 
         if (pLogs.equals("No internet connection")) {
@@ -19,8 +18,8 @@ public class orbotLogManager {
             return pLogs;
         }
 
-        if (!logs.equals(strings.GENERIC_EMPTY_STR)) {
-            String Logs = logs;
+        if (!pLogs.equals(strings.GENERIC_EMPTY_STR)) {
+            String Logs = pLogs;
             Logs = "Installing | " + Logs.replace("FAILED", "Securing");
             return Logs;
         }

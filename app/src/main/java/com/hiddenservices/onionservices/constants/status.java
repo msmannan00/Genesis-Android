@@ -77,7 +77,7 @@ public class status {
     public static int sSettingCookieStatus = ContentBlocking.AntiTracking.DEFAULT;
     public static int sShowImages = -1;
     public static int sWidgetResponse = enums.WidgetResponse.NONE;
-    public static int sNotificaionStatus = 0;
+    public static int sNotificationStatus = 0;
     public static int sSettingTrackingProtection = 0;
     public static int sGlobalURLCount = 0;
 
@@ -95,7 +95,7 @@ public class status {
         }
     }
 
-    public static void initStatus(Context pContext, boolean reinit) {
+    public static void initStatus(Context pContext, boolean reInit) {
         versionVerifier(pContext);
 
         status.sUIInteracted = false;
@@ -124,7 +124,7 @@ public class status {
         status.sBridgeCustomBridge = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1, strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
         status.sBridgeCustomType = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE, strings.GENERIC_EMPTY_SPACE));
         status.sBridgesDefault = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_DEFAULT, strings.BRIDGES_DEFAULT));
-        status.sNotificaionStatus = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, 1));
+        status.sNotificationStatus = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, 1));
         status.sRestoreTabs = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_RESTORE_TAB, false));
         status.sCharacterEncoding = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_CHARACTER_ENCODING, false));
         status.sShowImages = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES, 0));
@@ -139,7 +139,7 @@ public class status {
         status.sGlobalURLCount = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, 0));
         status.sAppInstalled = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_INSTALLED, false));
 
-        if (!reinit && !status.sNoTorTriggered){
+        if (!reInit && !status.sNoTorTriggered){
             status.sTorBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_TOR_BROWSING, true));
             status.sSettingDefaultSearchEngine = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_GENESIS_URL));
         }

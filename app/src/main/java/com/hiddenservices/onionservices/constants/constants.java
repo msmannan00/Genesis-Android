@@ -40,7 +40,6 @@ public class constants {
     public static final String CONST_GENESIS_BADCERT_CACHED_DARK = "error/badcert-dark.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "http://167.86.99.31/";
     public static final String CONST_GENESIS_DOMAIN_URL = "http://167.86.99.31";
-    public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pSecretToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
     public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/help/help-dark.html";

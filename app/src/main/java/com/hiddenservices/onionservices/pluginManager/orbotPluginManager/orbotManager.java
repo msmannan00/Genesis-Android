@@ -44,14 +44,14 @@ public class orbotManager {
     }
 
     public void initialize(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, int pNotificationStatus) {
-        this.mAppContext = new WeakReference(pAppContext);
+        this.mAppContext = new WeakReference<>(pAppContext);
         this.mLogManger = new orbotLogManager();
 
         orbotLocalConstants.mNotificationStatus = pNotificationStatus;
         orbotLocalConstants.mSOCKSPort = checkPortOrAutoManual(mAppContext.get());
     }
 
-    private void onInitlizeOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, String pBridgesDefault) {
+    private void onInitializeOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, String pBridgesDefault) {
 
         if (helperMethod.availablePort(9050)) {
             orbotLocalConstants.mSOCKSPort = 9050;
@@ -63,7 +63,7 @@ public class orbotManager {
         orbotLocalConstants.mBridgesDefault = pBridgesDefault;
         orbotLocalConstants.mBridgesInitStatus = pBridgeStatus;
 
-        onInitailizeService();
+        onInitializeService();
     }
 
     public int checkPortOrAutoManual(Context context) {
@@ -86,7 +86,7 @@ public class orbotManager {
         return 9050;
     }
 
-    private void onInitailizeService() {
+    private void onInitializeService() {
         if (status.sTorBrowsing) {
             new Thread(){
                 public void run(){
@@ -94,8 +94,7 @@ public class orbotManager {
                         orbotLocalConstants.mIsTorInitialized = false;
                         orbotLocalConstants.mInitUpdateSnowFlake = status.sSnowFlakesStatus;
                         sleep(4000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (InterruptedException ignored) {
                     }
                     Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
                     startTorIntent.setAction(ACTION_START);
@@ -172,7 +171,7 @@ public class orbotManager {
         } else if (pEventType.equals(pluginEnums.eOrbotManager.M_GET_LOGS)) {
             return getLogs();
         } else if (pEventType.equals(pluginEnums.eOrbotManager.M_START_ORBOT)) {
-            onInitlizeOrbot((String) pData.get(0), (boolean) pData.get(1), (String) pData.get(2), (boolean) pData.get(3), (String) pData.get(6));
+            onInitializeOrbot((String) pData.get(0), (boolean) pData.get(1), (String) pData.get(2), (boolean) pData.get(3), (String) pData.get(6));
         } else if (pEventType.equals(pluginEnums.eOrbotManager.M_DESTROY)) {
             onDestroy((boolean) pData.get(0));
         }

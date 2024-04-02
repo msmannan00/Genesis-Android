@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +51,7 @@ public class orbotController extends AppCompatActivity {
 
         viewsInitializations();
         onInitListener();
+        onBack();
     }
 
     @Override
@@ -123,7 +125,7 @@ public class orbotController extends AppCompatActivity {
     @Override
     public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
     }
 
@@ -137,10 +139,14 @@ public class orbotController extends AppCompatActivity {
         super.onStop();
     }
 
-    @Override
-    public void onBackPressed() {
-        onClose(null);
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onClose(null);
+            }
+        });
     }
+
 
 }

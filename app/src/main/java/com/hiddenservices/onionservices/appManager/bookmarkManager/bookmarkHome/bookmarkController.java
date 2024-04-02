@@ -251,7 +251,7 @@ public class bookmarkController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         status.sSettingIsAppPaused = false;
         activityContextManager.getInstance().onStack(this);
         if (mbookmarkAdapter != null) {

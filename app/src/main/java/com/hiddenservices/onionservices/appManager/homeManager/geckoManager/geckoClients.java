@@ -52,7 +52,7 @@ public class geckoClients {
     private eventObserver.eventListener mEvent;
     private String mSessionID;
 
-    /*Local Initiaizations*/
+    /*Local Initialization*/
 
     public void initializeSession(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
         if (pGeckoView.getSession() != null) {
@@ -101,14 +101,14 @@ public class geckoClients {
         }
     }
 
-    public void initRestore(geckoView mNestedGeckoView, AppCompatActivity pcontext) {
+    public void initRestore(geckoView mNestedGeckoView, AppCompatActivity pContext) {
         if(mSession==null){
             return;
         }
         boolean mState = mSession.onRestoreState();
         if (!mState) {
             mSession.stop();
-            loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+            loadURL(mSession.getCurrentURL(), pContext);
         } else {
             String mURL = mSession.getCurrentURL();
             if (mURL.equals("http://167.86.99.31") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
@@ -120,7 +120,7 @@ public class geckoClients {
                 } else {
                     mSession.goBack();
                 }
-                loadURL("http://167.86.99.31", mNestedGeckoView, pcontext);
+                loadURL("http://167.86.99.31", pContext);
             }
         }
     }
@@ -158,7 +158,7 @@ public class geckoClients {
         }
     }
 
-    public void onReload(geckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall, boolean isDelayed) {
+    public void onReload(AppCompatActivity pContext, boolean isThemeCall, boolean isDelayed) {
         int mDelay = 1000;
         if(!isDelayed){
             mDelay = 0;
@@ -168,7 +168,7 @@ public class geckoClients {
             mSession.stop();
             String url = mSession.getCurrentURL();
             if (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
-                loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+                loadURL(mSession.getCurrentURL(), pContext);
             } else if (!isThemeCall) {
                 mSession.reload();
             }
@@ -184,6 +184,7 @@ public class geckoClients {
         this.mSessionID = mSession.getSessionID();
     }
 
+    @SuppressLint("WrongConstant")
     public void initStaticSettings(){
         mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
         mSession.getSettings().setFullAccessibilityTree(true);
@@ -198,7 +199,7 @@ public class geckoClients {
 
     }
 
-    public void loadURL(String url, geckoView mNestedGeckoView, AppCompatActivity pcontext) {
+    public void loadURL(String url, AppCompatActivity pContext) {
 
         if (url.startsWith("https://orion.onion/privacy")) {
             url = CONST_PRIVACY_POLICY_URL_NON_TOR;
@@ -213,7 +214,7 @@ public class geckoClients {
         if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("resource://android/assets/homepage/") || url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
             try {
                 mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
-                if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
+                if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pContext)) {
                     String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
                     mSession.getSettings().setAllowJavascript(true);
                     mSession.initURL(mURL);
@@ -225,22 +226,20 @@ public class geckoClients {
                     mSession.getSettings().setAllowJavascript(true);
                     mSession.loadUri(mURL);
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception ignored) {
             }
         } else if (url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
             try {
                 mSession.initURL(constants.CONST_GENESIS_HELP_URL);
 
-                if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
+                if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pContext)) {
                     mSession.getSettings().setAllowJavascript(true);
                     mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
                 } else {
                     mSession.getSettings().setAllowJavascript(true);
                     mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception ignored) {
             }
         } else {
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus && status.sSettingTrackingProtection!=ContentBlocking.AntiTracking.STRICT);
@@ -299,9 +298,9 @@ public class geckoClients {
         return mSession.getUserAgentMode();
     }
 
-    public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext) {
+    public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pContext) {
         if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
-            initializeIcon(pcontext);
+            initializeIcon(pContext);
             pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
             mIconManager.onLoadIconIntoView(pImageView, pURL);
         }
@@ -375,7 +374,7 @@ public class geckoClients {
         }
     }
 
-    public void onBackPressed(boolean isFinishAllowed, int mTabSize, geckoView mNestedGeckoView, AppCompatActivity pcontext) {
+    public void onBackPressed(boolean isFinishAllowed, int mTabSize) {
         if (mSession.getNavigationDelegate().canGoBack()) {
             mSession.goBackSession();
         } else if (isFinishAllowed) {
@@ -406,9 +405,9 @@ public class geckoClients {
 
     public boolean getFullScreenStatus() {
         if(mSession==null){
-            return false;
+            return true;
         }
-        return mSession.getContentDelegate().getFullScreenStatus();
+        return !mSession.getContentDelegate().getFullScreenStatus();
     }
 
     public void onExitFullScreen() {
@@ -443,8 +442,8 @@ public class geckoClients {
         }
     }
 
-    public void downloadFile(AppCompatActivity pcontext) {
-        if (helperMethod.checkPermissions(pcontext)) {
+    public void downloadFile(AppCompatActivity pContext) {
+        if (helperMethod.checkPermissions(pContext)) {
             geckoDownloadManager mDownloadManager = mSession.getContentDelegate().getDownloadManager();
             mSession.getDownloadHandler().downloadRequestedFile(mDownloadManager);
         }
@@ -466,9 +465,9 @@ public class geckoClients {
         mSession.onClose();
     }
 
-    /*Private Rrturn*/
+    /*Private Return*/
 
-    public GeckoRuntime getmRuntime() {
+    public GeckoRuntime getRuntime() {
         return mRuntime;
     }
 
@@ -498,7 +497,7 @@ public class geckoClients {
                 if (e_type.equals(homeEnums.eGeckoCallback.SESSION_ID)) {
                     return mSession.getSessionID();
                 } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(homeEnums.eGeckoCallback.M_UPDATE_SSL) || e_type.equals(homeEnums.eGeckoCallback.ON_INVOKE_PARSER) || e_type.equals(homeEnums.eGeckoCallback.M_RATE_COUNT) || e_type.equals(homeEnums.eGeckoCallback.FINDER_RESULT_CALLBACK) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_FAVICON) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_HISTORY) || e_type.equals(homeEnums.eGeckoCallback.ON_REQUEST_COMPLETED) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION_URL)) {
-                    if (mSession != null && mSession.getContentDelegate().isClosed()) {
+                    if (mSession.getContentDelegate().isClosed()) {
                         return null;
                     }
                     if (e_type.equals(homeEnums.eGeckoCallback.ON_HANDLE_EXTERNAL_INTENT)) {
@@ -507,7 +506,7 @@ public class geckoClients {
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
                             activityContextManager.getInstance().getHomeController().startActivity(intent);
-                        } catch (Exception ex) {
+                        } catch (Exception ignored) {
                         }
                     } else {
                         return mEvent.invokeObserver(data, e_type);

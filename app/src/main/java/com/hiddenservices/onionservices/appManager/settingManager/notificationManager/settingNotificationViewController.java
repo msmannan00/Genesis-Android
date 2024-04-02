@@ -34,11 +34,7 @@ class settingNotificationViewController {
     }
 
     private void initViews() {
-        if (status.sNotificaionStatus == 1) {
-            mNotificationManual.setChecked(true);
-        } else {
-            mNotificationManual.setChecked(false);
-        }
+        mNotificationManual.setChecked(status.sNotificationStatus == 1);
     }
 
     private void initPostUI() {
@@ -46,7 +42,7 @@ class settingNotificationViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {

@@ -33,12 +33,6 @@ class orbotModel {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES, status.sBridgeStatus));
     }
 
-    public void onSnowFlakeSwitch(boolean pStatus) {
-        status.sSnowFlakesStatus = pStatus;
-        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.sSnowFlakesStatus), pluginEnums.eOrbotManager.M_UPDATE_SNOWFLAKE);
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SNOWFLAKE_ENABLED, status.sSnowFlakesStatus));
-    }
-
 
     public void onTrigger(orbotEnums.eOrbotModelCommands pCommands, List<Object> pData) {
         if (pCommands == orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH) {

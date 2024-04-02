@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -66,6 +68,7 @@ public class settingHomeController extends AppCompatActivity {
         setContentView(R.layout.setting);
         viewsInitializations();
         listenersInitializations();
+        onBack();
     }
 
 
@@ -80,7 +83,7 @@ public class settingHomeController extends AppCompatActivity {
             helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
             activityContextManager.getInstance().getHomeController().updateResources(this, status.mSystemLocale.getDisplayName());
             pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
         super.onConfigurationChanged(newConfig);
     }
 
@@ -150,12 +153,8 @@ public class settingHomeController extends AppCompatActivity {
     @Override
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
-        if (status.mThemeApplying) {
-            // activityContextManager.getInstance().onStack(this);
-        }
-        //onInitTheme();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         status.sSettingIsAppPaused = false;
         super.onResume();
     }
@@ -166,10 +165,13 @@ public class settingHomeController extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+            }
+        });
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuProvider;
@@ -63,6 +64,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
         initializeAppModel();
         initializeConnections();
+        onBack();
     }
 
     @Override
@@ -130,7 +132,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
             if (!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length() <= 5) {
                 mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
             }
-        }catch (Exception ex){}
+        }catch (Exception ignored){}
     }
 
     /* VIEW LISTENERS */
@@ -214,7 +216,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
 
         super.onResume();
     }
@@ -231,10 +233,12 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
         super.onStop();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+            }
+        });
     }
-
 }

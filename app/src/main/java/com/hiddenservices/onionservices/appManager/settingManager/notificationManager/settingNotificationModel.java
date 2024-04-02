@@ -25,8 +25,7 @@ class settingNotificationModel {
 
     private void updateLocalNotification(boolean pStatus) {
 
-        int mStatus = pStatus ? 1 : 0;
-        status.sNotificaionStatus = mStatus;
+        status.sNotificationStatus = pStatus ? 1 : 0;
         if (!pStatus) {
             activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);

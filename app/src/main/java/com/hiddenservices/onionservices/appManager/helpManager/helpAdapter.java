@@ -127,7 +127,6 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
                         onCollapse();
                     } catch (Exception ex) {
                         mIsAnimating = false;
-                        ex.printStackTrace();
                     }
                 } else {
                     onCollapse();

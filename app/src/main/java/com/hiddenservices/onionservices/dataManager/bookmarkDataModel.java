@@ -26,7 +26,7 @@ public class bookmarkDataModel {
         mExternalEvents = pExternalEvents;
     }
 
-    void initializebookmark(ArrayList<bookmarkRowModel> pBookmark) {
+    void initializeBookmark(ArrayList<bookmarkRowModel> pBookmark) {
         mBookmarks = pBookmark;
         for (int mCounter = pBookmark.size()-1; mCounter >= 0; mCounter--) {
             if (mAvailableBookmark.containsKey(pBookmark.get(mCounter).getDescription())) {
@@ -51,17 +51,17 @@ public class bookmarkDataModel {
         if (pURL.length() > 1500 && !pURL.startsWith("resource://android/assets/")) {
             return;
         }
-        int autoval = 0;
+        int autoValue = 0;
         if (mBookmarks.size() > constants.CONST_MAX_BOOKMARK_SIZE) {
             mExternalEvents.invokeObserver(Arrays.asList("delete from bookmark where id=" + mBookmarks.get(mBookmarks.size() - 1).getID(), null), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
         }
 
-        if (mBookmarks.size() > 0) {
-            autoval = mBookmarks.get(0).getID() + 1;
+        if (!mBookmarks.isEmpty()) {
+            autoValue = mBookmarks.get(0).getID() + 1;
         }
 
-        if (pTitle.equals("")) {
-            pTitle = strings.BOOKMARK_DEFAULT_TITLE + autoval;
+        if (pTitle.isEmpty()) {
+            pTitle = strings.BOOKMARK_DEFAULT_TITLE + autoValue;
         }
 
         String[] params = new String[2];
@@ -69,10 +69,10 @@ public class bookmarkDataModel {
         params[1] = pURL;
 
         if (!pTitle.equals("loading")) {
-            mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES(" + autoval + ",?,?);", params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
+            mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES(" + autoValue + ",?,?);", params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
         }
-        mBookmarks.add(0, new bookmarkRowModel(pTitle, pURL, autoval));
-        mAvailableBookmark.put(pURL, autoval);
+        mBookmarks.add(0, new bookmarkRowModel(pTitle, pURL, autoValue));
+        mAvailableBookmark.put(pURL, autoValue);
     }
 
     void clearBookmark() {
@@ -89,12 +89,12 @@ public class bookmarkDataModel {
             }
         }
 
-        int autoval = 0;
+        int autoValue = 0;
         String[] params = new String[2];
         params[0] = pBookmarkName;
         params[1] = pBookmarkURL;
 
-        mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES(" + autoval + ",?,?);", params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
+        mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES(" + autoValue + ",?,?);", params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
     }
 
     void deleteBookmark(int pID) {

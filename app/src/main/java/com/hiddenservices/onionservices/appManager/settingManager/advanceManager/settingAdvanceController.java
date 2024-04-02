@@ -1,12 +1,13 @@
 package com.hiddenservices.onionservices.appManager.settingManager.advanceManager;
 
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUSTED;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUESTED;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,7 +54,7 @@ public class settingAdvanceController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.setting_advance_view);
-
+        onBack();
         viewsInitializations();
     }
 
@@ -117,7 +118,7 @@ public class settingAdvanceController extends AppCompatActivity {
     public void onResume() {
         activityContextManager.getInstance().onPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
+        activityContextManager.getInstance().setCurrentActivity();
         super.onResume();
 
         int notificationStatus = (int) pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS);
@@ -133,10 +134,14 @@ public class settingAdvanceController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        onClose(null);
-        activityContextManager.getInstance().onRemoveStack(this);
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onClose(null);
+                activityContextManager.getInstance().onRemoveStack(settingAdvanceController.this);
+            }
+        });
     }
 
     /*UI Redirection*/
@@ -163,7 +168,7 @@ public class settingAdvanceController extends AppCompatActivity {
 
     public void onShowImages(View view) {
         if (status.sShowImages == 0 && view.getId() == R.id.pAdvanceOption2 && !mImageOption.get(1).isChecked() || status.sShowImages == 2 && view.getId() == R.id.pAdvanceOption1 && !mImageOption.get(0).isChecked()) {
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUSTED);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUESTED);
         }
 
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_IMAGE, Collections.singletonList(null));

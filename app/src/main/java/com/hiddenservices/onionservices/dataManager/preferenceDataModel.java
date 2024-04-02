@@ -1,11 +1,9 @@
 package com.hiddenservices.onionservices.dataManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.List;
 
 public class preferenceDataModel {
@@ -19,7 +17,7 @@ public class preferenceDataModel {
 
     @SuppressLint("CommitPrefEdits")
     public preferenceDataModel(AppCompatActivity pAppContext) {
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(pAppContext);
+        mPrefs = pAppContext.getSharedPreferences(pAppContext.getPackageName() + "_preferences", Context.MODE_PRIVATE);
         mEdit = mPrefs.edit();
     }
 

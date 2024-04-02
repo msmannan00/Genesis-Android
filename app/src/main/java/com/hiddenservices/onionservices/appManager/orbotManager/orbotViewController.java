@@ -59,7 +59,7 @@ class orbotViewController {
         }
     }
 
-    private void initViews(boolean pGatewayStatus, boolean pSnowFlakeStatus) {
+    private void initViews(boolean pGatewayStatus) {
         updateBridgeViews(pGatewayStatus, false);
     }
 
@@ -70,7 +70,7 @@ class orbotViewController {
         else if (pCommands == orbotEnums.eOrbotViewCommands.M_INIT_POST_UI) {
             initPostUI();
         } else if (pCommands == orbotEnums.eOrbotViewCommands.M_INIT_UI) {
-            initViews((boolean) pData.get(0), (boolean) pData.get(1));
+            initViews((boolean) pData.get(0));
         } else if (pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGES) {
             updateBridgeViews((boolean) pData.get(1), (boolean) pData.get(1));
         }

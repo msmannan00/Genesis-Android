@@ -20,7 +20,6 @@ import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
@@ -59,19 +58,6 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
     @Override
     public void onCanGoForward(@NonNull GeckoSession session, boolean var2) {
         mCanGoForward = var2;
-    }
-
-    private String setGenesisVerificationToken(String pString) {
-        try {
-            if (pString.contains("?")) {
-                pString += "&" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken() + "&theme=" + status.sTheme;
-            } else {
-                pString += "?" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken() + "&theme=" + status.sTheme;
-            }
-            return pString;
-        } catch (Exception ex) {
-            return pString;
-        }
     }
 
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
@@ -175,7 +161,7 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
                             mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
                         }
                     }
-                } catch (Exception ex) {
+                } catch (Exception ignored) {
                 }
 
                 return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code, mContext.get(), var2, mResourceURL));

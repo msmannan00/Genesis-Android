@@ -164,7 +164,7 @@
             android:name="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.hiddenservices.onionservices.appManager.externalCommandManager.externalURLNavigationContoller"
+            android:name="com.hiddenservices.onionservices.appManager.externalCommandManager.externalURLNavigationController"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
@@ -229,7 +229,7 @@
         <!-- Reciever & Settings -->
 
         <receiver
-            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReciever"
+            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="Download_Cancelled" />
@@ -237,7 +237,7 @@
         </receiver>
 
         <receiver
-            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotificationReciever"
+            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotificationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="media_toggle" />
@@ -245,7 +245,7 @@
         </receiver>
 
         <receiver
-            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.defaultNotificationReciever"
+            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.defaultNotificationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="default_toggle" />

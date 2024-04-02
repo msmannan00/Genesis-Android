@@ -51,29 +51,10 @@ class settingAdvanceViewController {
     }
 
     private void initViews() {
-        if (status.sRestoreTabs) {
-            mRestoreTabs.setChecked(true);
-        } else {
-            mRestoreTabs.setChecked(false);
-        }
-
-        if (status.sShowWebFonts) {
-            mShowWebFonts.setChecked(true);
-        } else {
-            mShowWebFonts.setChecked(false);
-        }
-
-        if (status.sBackgroundMusic) {
-            mBackgroundMusic.setChecked(true);
-        } else {
-            mBackgroundMusic.setChecked(false);
-        }
-
-        if (status.sToolbarTheme) {
-            mToolbarTheme.setChecked(true);
-        } else {
-            mToolbarTheme.setChecked(false);
-        }
+        mRestoreTabs.setChecked(status.sRestoreTabs);
+        mShowWebFonts.setChecked(status.sShowWebFonts);
+        mBackgroundMusic.setChecked(status.sBackgroundMusic);
+        mToolbarTheme.setChecked(status.sToolbarTheme);
 
         clearImageOptions();
         if (status.sShowImages == 0) {
@@ -99,7 +80,7 @@ class settingAdvanceViewController {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         } else {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {

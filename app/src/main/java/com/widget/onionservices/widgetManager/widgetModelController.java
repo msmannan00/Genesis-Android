@@ -81,7 +81,7 @@ public class widgetModelController {
     }
 
     public Object onTrigger(widgetEnums.eModelViewController pCommands, List<Object> pData) {
-        if (pCommands.equals(widgetEnums.eModelViewController.M_ON_RECIEVE)) {
+        if (pCommands.equals(widgetEnums.eModelViewController.M_ON_RECEIVE)) {
             initialize((Context) pData.get(0), (Intent) pData.get(1));
         }
         return null;

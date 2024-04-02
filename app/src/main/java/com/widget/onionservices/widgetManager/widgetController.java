@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import com.hiddenservices.onionservices.R;
@@ -29,18 +28,13 @@ public class widgetController extends AppWidgetProvider {
 
     private void initializeAppWidget(Context pContext, AppWidgetManager pAppWidgetManager, int pAppWidgetId) {
         initializeModel(pContext);
-        initializeLocalEventHandler(pContext, pAppWidgetId);
+        initializeLocalEventHandler(pContext);
         pAppWidgetManager.updateAppWidget(pAppWidgetId, mViews);
     }
 
-    private void initializeLocalEventHandler(Context pContext, int pAppWidgetId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mViews.setOnClickPendingIntent(R.id.pTextInvoker, helperMethod.onCreatePendingIntent(pContext, pAppWidgetId, PendingIntent.FLAG_IMMUTABLE, "mOpenApplication"));
-            mViews.setOnClickPendingIntent(R.id.pVoiceInvoker, helperMethod.onCreatePendingIntent(pContext, pAppWidgetId, PendingIntent.FLAG_IMMUTABLE, "mOpenVoice"));
-        } else {
-            mViews.setOnClickPendingIntent(R.id.pTextInvoker, helperMethod.onCreatePendingIntent(pContext, pAppWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenApplication"));
-            mViews.setOnClickPendingIntent(R.id.pVoiceInvoker, helperMethod.onCreatePendingIntent(pContext, pAppWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenVoice"));
-        }
+    private void initializeLocalEventHandler(Context pContext) {
+        mViews.setOnClickPendingIntent(R.id.pTextInvoker, helperMethod.onCreatePendingIntent(pContext, PendingIntent.FLAG_IMMUTABLE, "mOpenApplication"));
+        mViews.setOnClickPendingIntent(R.id.pVoiceInvoker, helperMethod.onCreatePendingIntent(pContext, PendingIntent.FLAG_IMMUTABLE, "mOpenVoice"));
     }
 
     private void initializeModel(Context pContext) {
@@ -51,7 +45,7 @@ public class widgetController extends AppWidgetProvider {
 
     public void onReceive(Context context, Intent intent) {
         initializeModel(context);
-        mWidgetModelController.onTrigger(widgetEnums.eModelViewController.M_ON_RECIEVE, Arrays.asList(context, intent));
+        mWidgetModelController.onTrigger(widgetEnums.eModelViewController.M_ON_RECEIVE, Arrays.asList(context, intent));
     }
 
     /* Local Overrides */

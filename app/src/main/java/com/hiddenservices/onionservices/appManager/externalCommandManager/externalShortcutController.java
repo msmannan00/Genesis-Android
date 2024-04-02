@@ -42,7 +42,7 @@ public class externalShortcutController extends AppCompatActivity {
                     case CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE:
                         setContentView(R.layout.popup_data_cleared_shortcut);
                         panicExitInvoked();
-                        helperMethod.onDelayHandler(this, 3000, () -> {
+                        helperMethod.onDelayHandler(3000, () -> {
                             externalShortcutController.this.finishAndRemoveTask();
                             android.os.Process.killProcess(android.os.Process.myPid());
                             System.exit(1);

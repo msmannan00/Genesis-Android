@@ -9,15 +9,12 @@ import android.content.Intent;
 import android.os.Handler;
 import androidx.core.app.NotificationManagerCompat;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.appManager.settingManager.notificationManager.settingNotificationController;
-import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
-import com.hiddenservices.onionservices.helperManager.helperMethod;
 
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
-public class defaultNotificationReciever extends BroadcastReceiver {
+public class defaultNotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         int mCommand = intent.getExtras().getInt(CONST_NOTIFICATION_COMMAND);
         if (mCommand == 0) {
