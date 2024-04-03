@@ -10,8 +10,8 @@ import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dele
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.progressDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.promptDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.historyDelegate;
-import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegate;
-import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaSessionDelegate;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager.mediaDelegate;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager.mediaSessionDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.scrollDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.selectionDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.downloadHandler;

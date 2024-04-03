@@ -16,6 +16,7 @@ import java.util.Arrays;
 // Other imports as necessary
 
 public class downloadService extends Worker {
+
     private static final String S_DOWNLOAD_PATH = "DOWNLOAD_PATH";
     private static final String S_DOWNLOAD_DESTINATION_PATH = "DESTINATION_PATH";
 

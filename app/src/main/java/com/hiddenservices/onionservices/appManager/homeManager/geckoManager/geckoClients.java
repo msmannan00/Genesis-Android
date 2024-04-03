@@ -316,10 +316,11 @@ public class geckoClients {
         mSessionID = strings.GENERIC_EMPTY_STR;
     }
 
-    public void onMediaInvoke(enums.MediaController mController){
+    public Object onMediaInvoke(enums.MediaController mController){
         if(mSession.getMediaSessionDelegate()!=null){
-            mSession.getMediaSessionDelegate().onTrigger(mController);
+            return mSession.getMediaSessionDelegate().onTrigger(mController);
         }
+        return null;
     }
 
     public String getTheme() {

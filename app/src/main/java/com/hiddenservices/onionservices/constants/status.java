@@ -47,6 +47,7 @@ public class status {
     public static boolean sSettingPopupStatus = false;
     public static boolean sClearOnExit = true;
     public static boolean sSettingIsAppPaused = false;
+    public static boolean sSettingIsAppInBackground = false;
     public static boolean sSettingIsWelcomeEnabled = true;
     public static boolean sSettingIsAppStarted = false;
     public static boolean sSettingIsAppRunning = false;

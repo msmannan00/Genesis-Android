@@ -1,15 +1,14 @@
-package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
+package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager;
 
 import static com.hiddenservices.onionservices.constants.strings.GENERIC_EMPTY_STR;
-
 import android.graphics.Bitmap;
 import android.os.Handler;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
 import com.hiddenservices.onionservices.constants.enums;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.MediaSession;
@@ -24,6 +23,7 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
     private final WeakReference<AppCompatActivity> mContext;
     private final geckoDataModel mGeckoDataModel;
     private boolean mIsRunning = false;
+    private boolean isPaused = false;
 
     private Bitmap mMediaImage;
     private String mMediaTitle = GENERIC_EMPTY_STR;
@@ -63,7 +63,7 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
                 Bitmap bitmap = meta.artwork.getBitmap(250).poll(2500);
                 if (bitmap != null) {
                     mHandler.post(() -> mMediaImage = bitmap);
-                    mMediaDelegate.showNotification(mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, true);
+                    mMediaDelegate.showNotification(mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, !isPaused);
                     MediaSession.Delegate.super.onMetadata(session, mediaSession, meta);
                 }
             } catch (Throwable ignored) {
@@ -78,14 +78,20 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
 
     @Override
     public void onPlay(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        isPaused = false;
         MediaSession.Delegate.super.onPlay(session, mediaSession);
         mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, true);
     }
 
     @Override
     public void onPause(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
-        MediaSession.Delegate.super.onPause(session, mediaSession);
-        mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, false);
+        if(status.sSettingIsAppInBackground){
+            mediaSession.play();
+        }else {
+            isPaused = true;
+            MediaSession.Delegate.super.onPause(session, mediaSession);
+            mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, false);
+        }
     }
 
     @Override
@@ -110,37 +116,35 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
 
     /*Triggers*/
 
-    public void onTrigger(enums.MediaController pCommands){
-        if(mMediaSession!=null){
-            if(pCommands.equals(enums.MediaController.PLAY)){
+    public Object onTrigger(enums.MediaController pCommands) {
+        if (mMediaSession != null) {
+            if (pCommands.equals(enums.MediaController.PLAY)) {
                 mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, true);
                 mMediaSession.play();
-            }
-            else if(pCommands.equals(enums.MediaController.PAUSE)){
+            } else if (pCommands.equals(enums.MediaController.PAUSE)) {
                 mMediaSession.pause();
-                if(mIsRunning){
+                if (mIsRunning) {
                     mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, false);
                 }
-            }
-            else if(pCommands.equals(enums.MediaController.STOP)){
+            } else if (pCommands.equals(enums.MediaController.STOP)) {
                 mMediaSession.stop();
-            }
-            else if(pCommands.equals(enums.MediaController.DESTROY)){
+            } else if (pCommands.equals(enums.MediaController.DESTROY)) {
                 mMediaSession.stop();
                 mMediaDelegate.onHideDefaultNotification();
                 mIsRunning = false;
-            }
-            else if(pCommands.equals(enums.MediaController.SKIP_BACKWARD)){
+            } else if (pCommands.equals(enums.MediaController.SKIP_BACKWARD)) {
                 mMediaSession.previousTrack();
-            }
-            else if(pCommands.equals(enums.MediaController.SKIP_FORWARD)){
+            } else if (pCommands.equals(enums.MediaController.SKIP_FORWARD)) {
                 mMediaSession.nextTrack();
-            }
-            else if(pCommands.equals(enums.MediaController.RESET_MEDIA_IMAGE)){
+            } else if (pCommands.equals(enums.MediaController.IS_MEDIA_RUNNING)) {
+                return mIsRunning;
+            } else if (pCommands.equals(enums.MediaController.RESET_MEDIA_IMAGE)) {
                 resetMediaImage();
             }
-        }else {
+        } else {
             mMediaDelegate.onHideDefaultNotification();
         }
+        return null;
     }
+
 }

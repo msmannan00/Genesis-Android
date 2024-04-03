@@ -28,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -194,6 +195,7 @@ public class homeController extends AppCompatActivity {
 
     private boolean mSearchStatusCopy = false;
     private DownloadBroadcast downloadReceiver;
+    private PowerManager.WakeLock wakeLock;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
@@ -250,6 +252,7 @@ public class homeController extends AppCompatActivity {
         }
         status.mThemeApplying = false;
         onBack();
+        wakeLockInit();
     }
 
     public void initTor() {
@@ -537,6 +540,11 @@ public class homeController extends AppCompatActivity {
             method.setAccessible(true);
         } catch (Throwable ignored) {
         }
+    }
+
+    void wakeLockInit(){
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GenesisBrowser::MediaPlaybackWakeLock");
     }
 
     public void onCloseAllTabs() {
@@ -1573,6 +1581,16 @@ public class homeController extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+        status.sSettingIsAppInBackground = true;
+
+        Object isMediaRunningInstance = mGeckoClient.onMediaInvoke(enums.MediaController.IS_MEDIA_RUNNING);
+        if(isMediaRunningInstance!=null){
+            boolean isMediaRunning = (boolean) isMediaRunningInstance;
+            if (isMediaRunning && wakeLock != null && !wakeLock.isHeld()) {
+                wakeLock.acquire(1800000);
+            }
+        }
+
         if (mGeckoClient.getSession() == null)
             return;
         if (mHomeViewController != null) {
@@ -1634,6 +1652,11 @@ public class homeController extends AppCompatActivity {
 
     @Override
     public void onResume() {
+
+        status.sSettingIsAppInBackground = false;
+        if (wakeLock != null && wakeLock.isHeld()) {
+            wakeLock.release();
+        }
 
         onReloadProxy();
         orbotLocalConstants.mAppForceExit = false;

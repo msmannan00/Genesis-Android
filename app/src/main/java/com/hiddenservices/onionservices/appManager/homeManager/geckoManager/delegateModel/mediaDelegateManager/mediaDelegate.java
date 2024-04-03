@@ -1,4 +1,4 @@
-package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
+package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -75,7 +75,7 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, S_NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(url)
-                .setSmallIcon(R.drawable.ic_baseline_media)
+                .setSmallIcon(R.drawable.baseline_play_circle)
                 .setLargeIcon(mediaImage)
                 .addAction(R.drawable.ic_baseline_skip_previous, "Previous", prevIntent)
                 .addAction(playPauseIcon, "Play/Pause", playPauseIntent)
@@ -85,7 +85,7 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setContentIntent(actionIntent);  // Set the PendingIntent to open homeController
+                .setContentIntent(actionIntent);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
