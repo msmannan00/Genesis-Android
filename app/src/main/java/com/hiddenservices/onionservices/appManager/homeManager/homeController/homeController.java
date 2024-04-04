@@ -2677,13 +2677,14 @@ public class homeController extends AppCompatActivity {
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
-
             if (e_type.equals(homeEnums.eGeckoCallback.M_ON_SCROLL_BOUNDARIES)) {
                 mGeckoView.setForcedScroll(true);
             } else if (e_type.equals(homeEnums.eGeckoCallback.M_ON_SCROLL_TOP_BOUNDARIES)) {
                 if (!mGeckoView.getPressedState()) {
                     mHomeViewController.expandTopBar(true, mGeckoView.getMaxY());
                 }
+            } else if (e_type.equals(homeEnums.eGeckoCallback.BLOB_NOT_ALLOWED)) {
+                pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, homeController.this), M_BLOB_NOT_ALLOWED);
             } else if (e_type.equals(homeEnums.eGeckoCallback.M_ON_SCROLL_NO_BOUNDARIES)) {
                 mGeckoView.setForcedScroll(false);
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_EXPAND_TOP_BAR)) {

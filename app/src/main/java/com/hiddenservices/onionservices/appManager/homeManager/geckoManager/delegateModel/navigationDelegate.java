@@ -72,6 +72,13 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
         if(m_url.startsWith("tel:")){
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
+        if(m_url.startsWith("mail:")){
+            return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+        }
+        if(m_url.startsWith("blob:")){
+            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.BLOB_NOT_ALLOWED);
+            return GeckoResult.fromValue(AllowOrDeny.DENY);
+        }
         if(m_url.startsWith("intent")){
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }

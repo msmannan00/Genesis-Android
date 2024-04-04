@@ -7,7 +7,6 @@ prefs:
   browser.cache.disk.enable: true
   browser.cache.memory.enable: false
   browser.cache.disk.capacity: 1000000000
-  media.peerconnection.enabled: false
   browser.cache.disk_cache_ssl: true
   signon.formlessCapture.enabled: true
   signon.storeWhenAutocompleteOff: true
@@ -19,7 +18,6 @@ prefs:
   security.ssl3.rsa_des_ede3_sha: true
   security.ssl3.dhe_rsa_aes_256_sha: true
   media.gmp-provider.enabled: false
-  webgl.disabled: true
   pdfjs.enableWebGL: false
   privacy.clearOnShutdown.cache: true
   privacy.clearOnShutdown.downloads: true
@@ -41,11 +39,11 @@ prefs:
   # security.mixed_content.block_active_content: true
   # security.mixed_content.block_display_content: true
   # javascript.enabled: false
-  # webgl.min_capability_mode: true
-  # webgl.disable-extensions: true
+  # webgl.min_capability_mode: false
+  # webgl.disable-extensions: false
   # browser.display.use_document_fonts: 0
-  # media.autoplay.default: 5
-  # layers.acceleration.disabled: true
+  # media.autoplay.default: 0
+  # layers.acceleration.disabled: false
   # media.peerconnection.enabled: false
   # dom.battery.enabled: false
   # dom.gamepad.enabled: false
@@ -54,28 +52,9 @@ prefs:
   # dom.event.clipboardevents.enabled: false
   # dom.webnotifications.enabled: false
   # network.prefetch-next: false
-  # network.dns.disablePrefetch: true
+  # network.dns.disablePrefetch: false
   # network.http.speculative-parallel-limit: 0
   # browser.formfill.enable: false
-  # browser.download.folderList: 2
-  # webgl.enable-webgl2: false
-
-  # javascript.enabled: true
-  # webgl.disabled: false
-  # webgl.min_capability_mode: false
-  # webgl.disable-extensions: false
-  # layers.acceleration.disabled: false
-  # media.peerconnection.enabled: true
-  # media.autoplay.default: 0
-  # dom.w3c_touch_events.enabled: 1
-  # dom.event.clipboardevents.enabled: true
-  # dom.webnotifications.enabled: true
-  # network.prefetch-next: true
-  # network.dns.disablePrefetch: false
-  # network.http.speculative-parallel-limit: 6
-  # browser.formfill.enable: true
   # browser.download.folderList: 1
-  # webgl.enable-webgl2: true
-  # dom.battery.enabled: true
-  # dom.gamepad.enabled: true
-  # media.webspeech.synth.enabled: true
+  # webgl.enable-webgl2: false
+  # webgl.disabled: false

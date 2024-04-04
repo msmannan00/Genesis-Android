@@ -878,6 +878,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING), mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING_BUTTON), M_OPEN_LOGS);
                     break;
 
+                case M_BLOB_NOT_ALLOWED:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 1000, "Blob format not allowed due to security reasons", mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
                 case M_LOAD_NEW_TAB:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), M_LOAD_NEW_TAB);
