@@ -16,7 +16,7 @@ public class enums {
     }
 
     public enum MediaController {
-        DESTROY, PLAY, PAUSE, SKIP_FORWARD, RESET_MEDIA_IMAGE, IS_MEDIA_RUNNING, SKIP_BACKWARD, STOP
+        DESTROY, PLAY, PAUSE, SKIP_FORWARD, RESET_MEDIA_IMAGE, IS_MEDIA_RUNNING, RELEASE_BACKGROUND_REGISTERED, SKIP_BACKWARD, STOP
     }
 
     public static class AddTabCallback {

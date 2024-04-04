@@ -18,6 +18,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import android.os.Handler;
+import android.os.Looper;
 
 import static com.hiddenservices.onionservices.constants.constants.*;
 
@@ -27,6 +32,8 @@ class helpModel {
     private AppCompatActivity mContext;
     private ArrayList<helpDataModel> mHelpListModel;
     private boolean mIsLoaded = false;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     public helpModel(AppCompatActivity pContext, eventObserver.eventListener pEvent) {
         this.mContext = pContext;
@@ -40,45 +47,46 @@ class helpModel {
         }
     }
 
-    protected void onInit(){
+    protected void onInit() {
 
     }
 
     private void getHelpJSON() {
+        executorService.execute(() -> {
+            ArrayList<helpDataModel> mTempModel = (ArrayList<helpDataModel>) dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_GET_HELP, null);
 
-        ArrayList<helpDataModel> mTempModel = (ArrayList<helpDataModel>) dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_GET_HELP, null);
+            mHelpListModel.clear();
+            if (!mTempModel.isEmpty()) {
+                mIsLoaded = true;
+                mHelpListModel.addAll(mTempModel);
+                handler.post(() -> mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS));
+            } else {
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, mJsonPath,
+                        response -> {
+                            try {
+                                JSONArray jsonArray = new JSONArray(response);
 
-        mHelpListModel.clear();
-        if (!mTempModel.isEmpty()) {
-            mIsLoaded = true;
-            mHelpListModel.addAll(mTempModel);
-            mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
-        } else {
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, mJsonPath,
-                    response -> {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject obj = jsonArray.getJSONObject(i);
 
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject obj = jsonArray.getJSONObject(i);
-
-                                helpDataModel hero = new helpDataModel(
-                                        obj.getString(CONST_HELP_MODEL_HEADER),
-                                        obj.getString(CONST_HELP_MODEL_DESCRIPTION),
-                                        obj.getString(CONST_HELP_MODEL_ICON));
-                                mHelpListModel.add(hero);
+                                    helpDataModel hero = new helpDataModel(
+                                            obj.getString(CONST_HELP_MODEL_HEADER),
+                                            obj.getString(CONST_HELP_MODEL_DESCRIPTION),
+                                            obj.getString(CONST_HELP_MODEL_ICON));
+                                    mHelpListModel.add(hero);
+                                }
                                 dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_SET_HELP, Collections.singletonList(mHelpListModel));
+                                handler.post(() -> mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS));
+                            } catch (JSONException e) {
+                                handler.post(() -> mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE));
                             }
-                            mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
-                        } catch (JSONException e) {
-                            mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
-                        }
-                    },
-                    error -> mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE));
+                        },
+                        error -> handler.post(() -> mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE)));
 
-            RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-            requestQueue.add(stringRequest);
-        }
+                RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+                requestQueue.add(stringRequest);
+            }
+        });
     }
 
     private boolean IsLoaded() {

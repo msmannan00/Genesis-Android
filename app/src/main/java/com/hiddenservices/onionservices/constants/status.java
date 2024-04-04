@@ -73,6 +73,8 @@ public class status {
     public static boolean sSnowFlakesStatus = false;
     public static boolean sBridgeStatus = false;
     public static boolean sAppInstalled = false;
+    public static long sWakeLockAcquiredTime = 0;
+
 
     public static int sTheme = enums.Theme.THEME_DEFAULT;
     public static int sSettingCookieStatus = ContentBlocking.AntiTracking.DEFAULT;

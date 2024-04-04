@@ -90,6 +90,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     static final int NOTIFY_ID = 1;
     private static final int ERROR_NOTIFY_ID = 3;
 
+    static String percent = "0";
     //these will be set dynamically due to build flavors
     private static Uri V3_ONION_SERVICES_CONTENT_URI = null;//Uri.parse("content://org.torproject.android.ui.v3onionservice/v3");
     private static Uri V3_CLIENT_AUTH_URI = null;//Uri.parse("content://org.torproject.android.ui.v3onionservice.clientauth/v3auth");
@@ -239,6 +240,11 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     @SuppressLint({"NewApi", "RestrictedApi"})
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
+
+        if(orbotLocalConstants.mIsTorInitialized && icon == R.drawable.ic_stat_starting_tor_logo && Integer.parseInt(percent)<100){
+            icon = R.mipmap.ic_stat_tor_logo;
+        }
+
         var intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         var pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -1227,7 +1233,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         if (logMessage.contains(LOG_NOTICE_HEADER)) {
             notificationMessage = notificationMessage.substring(LOG_NOTICE_HEADER.length());
             if (notificationMessage.contains(LOG_NOTICE_BOOTSTRAPPED)) {
-                var percent = notificationMessage.substring(LOG_NOTICE_BOOTSTRAPPED.length());
+                percent = notificationMessage.substring(LOG_NOTICE_BOOTSTRAPPED.length());
                 percent = percent.substring(0, percent.indexOf('%')).trim();
                 localIntent.putExtra(LOCAL_EXTRA_BOOTSTRAP_PERCENT, percent);
                 mNotifyBuilder.setProgress(100, Integer.parseInt(percent), false);

@@ -43,7 +43,7 @@ class orbotLogModel {
     private void initLogHandler() {
         this.mLogHandler = new LogHandler();
         this.mLogHandler.startLogging();
-        LOG_HANDLER_EXECUTOR.execute((Runnable) mLogHandler);
+        LOG_HANDLER_EXECUTOR.execute(mLogHandler);
     }
 
     private void initList(ArrayList<logRowModel> pModel) {
@@ -66,8 +66,13 @@ class orbotLogModel {
     /*Triggers*/
 
     @SuppressLint("StaticFieldLeak")
-    class LogHandler {
+    class LogHandler implements Runnable {
         private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        @Override
+        public void run() {
+            startLogging();
+        }
 
         public void startLogging() {
             executorService.submit(() -> {
@@ -114,7 +119,6 @@ class orbotLogModel {
             executorService.shutdownNow();
         }
     }
-
     public void onTrigger(orbotLogEnums.eOrbotLogViewCommands ignoredPCommands, List<Object> ignoredPData) {
     }
 

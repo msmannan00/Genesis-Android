@@ -747,6 +747,7 @@ public class homeController extends AppCompatActivity {
         mGeckoClient.onMediaInvoke(enums.MediaController.DESTROY);
     }
     public void onPlayMedia(){
+        mGeckoClient.onMediaInvoke(enums.MediaController.RELEASE_BACKGROUND_REGISTERED);
         mGeckoClient.onMediaInvoke(enums.MediaController.PLAY);
     }
     public void onPauseMedia(){
@@ -1588,6 +1589,7 @@ public class homeController extends AppCompatActivity {
             boolean isMediaRunning = (boolean) isMediaRunningInstance;
             if (isMediaRunning && wakeLock != null && !wakeLock.isHeld()) {
                 wakeLock.acquire(1800000);
+                status.sWakeLockAcquiredTime = System.currentTimeMillis();
             }
         }
 
@@ -1656,6 +1658,7 @@ public class homeController extends AppCompatActivity {
         status.sSettingIsAppInBackground = false;
         if (wakeLock != null && wakeLock.isHeld()) {
             wakeLock.release();
+            status.sWakeLockAcquiredTime = 0;
         }
 
         onReloadProxy();
@@ -1727,6 +1730,9 @@ public class homeController extends AppCompatActivity {
         status.mThemeApplying = false;
 
         orbotLocalConstants.mSoftNotification = false;
+        if (mGeckoClient.getSession() != null && mGeckoClient != null) {
+            mGeckoClient.onMediaInvoke(enums.MediaController.PAUSE);
+        }
         super.onResume();
     }
 

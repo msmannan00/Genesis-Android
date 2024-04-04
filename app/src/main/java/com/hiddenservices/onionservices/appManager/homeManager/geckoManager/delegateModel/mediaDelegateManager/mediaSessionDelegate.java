@@ -1,12 +1,17 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager;
 
 import static com.hiddenservices.onionservices.constants.strings.GENERIC_EMPTY_STR;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.os.PowerManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
+import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
@@ -25,10 +30,10 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
     private boolean mIsRunning = false;
     private boolean isPaused = false;
 
+    private boolean isBackgroundRegistered = false;
+
     private Bitmap mMediaImage;
     private String mMediaTitle = GENERIC_EMPTY_STR;
-
-    // Handler for posting delayed tasks
     private final Handler mHandler = new Handler();
 
     /*Initializations*/
@@ -78,6 +83,9 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
 
     @Override
     public void onPlay(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        if(!status.sSettingIsAppInBackground){
+            isBackgroundRegistered = false;
+        }
         isPaused = false;
         MediaSession.Delegate.super.onPlay(session, mediaSession);
         mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, true);
@@ -85,9 +93,13 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
 
     @Override
     public void onPause(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
-        if(status.sSettingIsAppInBackground){
-            mediaSession.play();
+        long timeSinceAcquisition = System.currentTimeMillis() - status.sWakeLockAcquiredTime;
+        if(status.sSettingIsAppInBackground && isBackgroundRegistered && timeSinceAcquisition < constants.CONST_WAKELOCK){
+             mediaSession.play();
         }else {
+            if(status.sSettingIsAppInBackground){
+                isBackgroundRegistered = true;
+            }
             isPaused = true;
             MediaSession.Delegate.super.onPause(session, mediaSession);
             mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, false);
@@ -140,6 +152,8 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
                 return mIsRunning;
             } else if (pCommands.equals(enums.MediaController.RESET_MEDIA_IMAGE)) {
                 resetMediaImage();
+            } else if (pCommands.equals(enums.MediaController.RELEASE_BACKGROUND_REGISTERED)) {
+                isBackgroundRegistered = false;
             }
         } else {
             mMediaDelegate.onHideDefaultNotification();

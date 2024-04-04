@@ -99,4 +99,5 @@ public class constants {
     public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN = "EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN";
     public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART = "EXTERNAL_SHORTCUT_COMMAND_RESTART";
 
+    public static final int CONST_WAKELOCK = 1800000;
 }

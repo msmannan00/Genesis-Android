@@ -317,7 +317,7 @@ public class geckoClients {
     }
 
     public Object onMediaInvoke(enums.MediaController mController){
-        if(mSession.getMediaSessionDelegate()!=null){
+        if(mSession!=null && mSession.getMediaSessionDelegate()!=null){
             return mSession.getMediaSessionDelegate().onTrigger(mController);
         }
         return null;
