@@ -1,9 +1,13 @@
 package com.hiddenservices.onionservices.appManager;
 
+import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
+
 import androidx.core.app.NotificationManagerCompat;
 import com.hiddenservices.onionservices.constants.status;
 import org.torproject.android.service.OrbotService;
@@ -31,42 +35,32 @@ public class activityStateManager extends Service {
 
     @Override
     public void onDestroy() {
-
-        orbotLocalConstants.mAppForceExit = true;
-        status.sNoTorTriggered = false;
-        NotificationManagerCompat.from(this).cancel(1025);
-        NotificationManagerCompat.from(this).cancel(1030);
-        Intent mServiceIntent = new Intent(this, OrbotService.class);
-        this.stopService(mServiceIntent);
-
-        if (OrbotService.getServiceObject() != null) {
-            OrbotService.getServiceObject().onDestroy();
-        }
-
-        status.sSettingIsAppStarted = false;
-        orbotLocalConstants.mAppStarted = false;
-
+        cleanup();
         super.onDestroy();
+        System.exit(1);
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
+        cleanup();
+        stopSelf();
+        super.onTaskRemoved(rootIntent);
+        System.exit(1);
+    }
 
+    private void cleanup() {
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
         orbotLocalConstants.mAppForceExit = true;
         status.sNoTorTriggered = false;
-        NotificationManagerCompat.from(this).cancel(1025);
-        NotificationManagerCompat.from(this).cancel(1030);
+        NotificationManagerCompat.from(this).cancelAll();
         Intent mServiceIntent = new Intent(this, OrbotService.class);
         this.stopService(mServiceIntent);
         if (OrbotService.getServiceObject() != null) {
             OrbotService.getServiceObject().onDestroy();
         }
-
         status.sSettingIsAppStarted = false;
         orbotLocalConstants.mAppStarted = false;
-
-
-        stopSelf();
-        super.onDestroy();
     }
 }

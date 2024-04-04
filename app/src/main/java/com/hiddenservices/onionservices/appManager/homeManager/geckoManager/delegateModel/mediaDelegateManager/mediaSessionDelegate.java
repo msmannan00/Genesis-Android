@@ -1,12 +1,8 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager;
 
 import static com.hiddenservices.onionservices.constants.strings.GENERIC_EMPTY_STR;
-
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
-import android.os.PowerManager;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

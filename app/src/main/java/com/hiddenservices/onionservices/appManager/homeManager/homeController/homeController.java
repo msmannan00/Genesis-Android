@@ -52,6 +52,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.appExitReceiver;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.permissionHandler;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
@@ -196,7 +197,7 @@ public class homeController extends AppCompatActivity {
     private boolean mSearchStatusCopy = false;
     private DownloadBroadcast downloadReceiver;
     private PowerManager.WakeLock wakeLock;
-
+    private com.hiddenservices.onionservices.appManager.appExitReceiver appExitReceiver;
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
     @Override
@@ -875,9 +876,14 @@ public class homeController extends AppCompatActivity {
         activityContextManager.getInstance().getTabController().onRestoreTab();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "WrongConstant", "UnspecifiedRegisterReceiverFlag"})
     @Override
     protected void onDestroy() {
+        status.sSettingIsAppInBackground = false;
+        if (wakeLock != null && wakeLock.isHeld()) {
+            wakeLock.release();
+            status.sWakeLockAcquiredTime = 0;
+        }
         orbotLocalConstants.mAppForceExit = true;
         if (!status.mThemeApplying) {
             NotificationManagerCompat.from(this).cancel(1030);
@@ -896,6 +902,15 @@ public class homeController extends AppCompatActivity {
             if (!status.sSettingIsAppStarted) {
                 Intent intent = new Intent(this, OrbotService.class);
                 stopService(intent);
+
+                appExitReceiver = new appExitReceiver();
+                IntentFilter filter = new IntentFilter("com.hiddenservices.onionservices.ACTION_APP_EXIT");
+                if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    registerReceiver(appExitReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+                }else {
+                    registerReceiver(appExitReceiver, filter);
+                }
+
             } else {
                 NotificationManagerCompat.from(this).cancelAll();
             }
@@ -927,6 +942,9 @@ public class homeController extends AppCompatActivity {
             System.exit(1);
         }
 
+        unregisterReceiver(appExitReceiver);
+        Intent intent = new Intent("com.hiddenservices.onionservices.ACTION_APP_EXIT");
+        sendBroadcast(intent);
         super.onDestroy();
     }
 
@@ -1884,6 +1902,7 @@ public class homeController extends AppCompatActivity {
 
 
     public void onStartBrowser() {
+
         mGeckoClient.initRuntimeSettings(homeController.this);
         orbotLocalConstants.mAppStarted = true;
         if (!status.mThemeApplying) {

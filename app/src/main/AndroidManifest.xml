@@ -207,9 +207,6 @@
         <!-- Services & Settings -->
 
         <service
-            android:name="com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.mediaDelegateManager.mediaPlaybackService" />
-
-        <service
             android:name="com.hiddenservices.onionservices.appManager.activityStateManager"/>
 
         <service
