@@ -37,7 +37,7 @@ class settingAdvanceViewController {
 
     settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts, SwitchMaterial pBackgroundMusic, SwitchMaterial pToolbarTheme, ArrayList<RadioButton> pImageOption, ArrayList<RadioButton> pTabLayoutOption) {
         this.mContext = pContext;
-        this.mRestoreTabs = pRestoreTabs;
+        //this.mRestoreTabs = pRestoreTabs;
         this.mShowWebFonts = pShowWebFonts;
         this.mToolbarTheme = pToolbarTheme;
         this.mImageOption = pImageOption;
@@ -51,7 +51,7 @@ class settingAdvanceViewController {
     }
 
     private void initViews() {
-        mRestoreTabs.setChecked(status.sRestoreTabs);
+        //mRestoreTabs.setChecked(status.sRestoreTabs);
         mShowWebFonts.setChecked(status.sShowWebFonts);
         mBackgroundMusic.setChecked(status.sBackgroundMusic);
         mToolbarTheme.setChecked(status.sToolbarTheme);

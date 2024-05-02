@@ -127,118 +127,118 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/pSearchSettingOption2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onDefaultBrowser"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pSearchSettingOption2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onDefaultBrowser"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:padding="10dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    app:tint="@color/c_setting_icon_tint"
-                    android:src="@xml/ic_baseline_browser"
-                    android:contentDescription="@string/GENERAL_TODO" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    app:tint="@color/c_setting_icon_tint"-->
+<!--                    android:src="@xml/ic_baseline_browser"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO" />-->
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="7"
-                    android:layout_height="match_parent"
-                    android:alpha="1"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:paddingEnd="20dp"
-                    android:text="@string/SETTING_DEFAULT_BROWSER"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false"
-                    android:textColor="@color/c_text_v1"
-                    android:textSize="15sp"
-                    tools:ignore="RtlSymmetry" />
+<!--                <Button-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="7"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:alpha="1"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:paddingEnd="20dp"-->
+<!--                    android:text="@string/SETTING_DEFAULT_BROWSER"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/c_text_v1"-->
+<!--                    android:textSize="15sp"-->
+<!--                    tools:ignore="RtlSymmetry" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/c_orbot_setting_divider" />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:background="@color/c_orbot_setting_divider" />-->
 
-            <LinearLayout
-                android:id="@+id/pSearchSettingOption4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onManageSearchEngine"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pSearchSettingOption4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onManageSearchEngine"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:padding="10dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    app:tint="@color/c_setting_icon_tint"
-                    android:src="@xml/ic_baseline_search"
-                    android:contentDescription="@string/GENERAL_TODO" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    app:tint="@color/c_setting_icon_tint"-->
+<!--                    android:src="@xml/ic_baseline_search"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:textAlignment="textStart"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_SEARCH"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_SEARCH"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_SEARCH_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_SEARCH_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:clickable="false"
-                    android:layout_marginEnd="5dp"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:clickable="false"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -835,439 +835,439 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="15dp"
-                android:background="@color/c_orbot_setting_divider" />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:background="@color/c_orbot_setting_divider" />-->
 
-            <LinearLayout
-                android:id="@+id/pOption12"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onRateApplication"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                tools:ignore="TooManyViews">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pOption12"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onRateApplication"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                tools:ignore="TooManyViews">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_rate"
-                    app:tint="@color/c_setting_icon_tint" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@xml/ic_baseline_rate"-->
+<!--                    app:tint="@color/c_setting_icon_tint" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_RATEUS"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_RATEUS"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_RATEUS_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_RATEUS_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:id="@+id/pOption13"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onShareApplication"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pOption13"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onShareApplication"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_share"
-                    app:tint="@color/c_setting_icon_tint" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@xml/ic_baseline_share"-->
+<!--                    app:tint="@color/c_setting_icon_tint" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_SHARE"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_SHARE"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_SHARE_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_SHARE_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:id="@+id/pOption14"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onPrivacyPolicy"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pOption14"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onPrivacyPolicy"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_policy"
-                    app:tint="@color/c_setting_icon_tint" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@xml/ic_baseline_policy"-->
+<!--                    app:tint="@color/c_setting_icon_tint" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_PRIVACY_POLICY"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_PRIVACY_POLICY"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_PRIVACY_POLICY_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_PRIVACY_POLICY_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:id="@+id/pOption15"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onReportWebsite"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pOption15"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onReportWebsite"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_report"
-                    app:tint="@color/c_setting_icon_tint" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@xml/ic_baseline_report"-->
+<!--                    app:tint="@color/c_setting_icon_tint" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_REPORT_WEBSITE"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_REPORT_WEBSITE"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_REPORT_WEBSITE_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_REPORT_WEBSITE_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:id="@+id/pOption16"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onSitemap"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pOption16"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onSitemap"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_sitemap"
-                    app:tint="@color/c_setting_icon_tint" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@xml/ic_baseline_sitemap"-->
+<!--                    app:tint="@color/c_setting_icon_tint" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_SITEMAP"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_SITEMAP"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_SITEMAP_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/SETTING_SITEMAP_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="15dp"
-                android:background="@color/c_orbot_setting_divider" />
+<!--            <View-->
+<!--                android:id="@+id/view5"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:background="@color/c_orbot_setting_divider" />-->
 
-            <LinearLayout
-                android:id="@+id/pOption18"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onReset"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pOption18"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onReset"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_repair"
-                    app:tint="@color/c_setting_icon_tint" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@xml/ic_baseline_repair"-->
+<!--                    app:tint="@color/c_setting_icon_tint" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/GENERAL_FIX"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/GENERAL_FIX"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="15sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/GENERAL_FIX_DESCRIPTION"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:text="@string/GENERAL_FIX_DESCRIPTION"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
+<!--                <ImageButton-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_arrow_right"-->
+<!--                    app:tint="@color/c_navigation_tint" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
         </LinearLayout>
     </ScrollView>

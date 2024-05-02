@@ -26,8 +26,8 @@ class settingHomeViewController {
     settingHomeViewController(settingHomeController mContext, eventObserver.eventListener ignoredMEvent, LinearLayout pOption15, LinearLayout pOption16) {
         this.mContext = mContext;
 
-        this.mOption15 = pOption15;
-        this.mOption16 = pOption16;
+        //this.mOption15 = pOption15;
+        //this.mOption16 = pOption16;
     }
 
     protected void onInit(){
@@ -49,8 +49,8 @@ class settingHomeViewController {
         }
 
         if (!status.sTorBrowsing) {
-            this.mOption15.setVisibility(View.GONE);
-            this.mOption16.setVisibility(View.GONE);
+            //this.mOption15.setVisibility(View.GONE);
+            //this.mOption16.setVisibility(View.GONE);
         }
 
     }

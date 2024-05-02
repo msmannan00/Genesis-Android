@@ -46,8 +46,8 @@ class settingGeneralViewController {
         this.mThemeLight = pThemeLight;
         this.mThemeDark = pThemeDark;
         this.mThemeDefault = pThemeDefault;
-        this.mHomePageText = pHomePageText;
-        this.mOpenURLInNewTab = pOpenURLInNewTab;
+        //this.mHomePageText = pHomePageText;
+        //this.mOpenURLInNewTab = pOpenURLInNewTab;
     }
 
     protected void onInit(){
@@ -85,9 +85,9 @@ class settingGeneralViewController {
         }
 
         mFullScreenMode.setChecked(status.sFullScreenBrowsing);
-        mOpenURLInNewTab.setChecked(status.sOpenURLInNewTab);
+        //mOpenURLInNewTab.setChecked(status.sOpenURLInNewTab);
 
-        mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("167.86.99.31", "orion.onion")));
+        //mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("167.86.99.31", "orion.onion")));
     }
 
     private void updateThemeChanger() {

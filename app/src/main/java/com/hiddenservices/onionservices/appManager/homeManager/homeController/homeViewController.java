@@ -680,6 +680,10 @@ public class homeViewController {
 
                 try {
                     Thread.sleep(1000);
+                    onUpdateLogs("Loading please wait ...");
+                    while (!status.sFirstPaintDrawn){
+                        Thread.sleep(1000);
+                    }
                     startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                 } catch (Exception ignored) {
                 }
@@ -872,7 +876,7 @@ public class homeViewController {
         CheckBox desktop = popupView.findViewById(R.id.menu27);
         CheckBox torBrowsing = popupView.findViewById(R.id.menu30);
         LinearLayout newIdentity = popupView.findViewById(R.id.menu28);
-        LinearLayout newTab = popupView.findViewById(R.id.menu11);
+        //LinearLayout newTab = popupView.findViewById(R.id.menu11);
         LinearLayout genesisLogs = popupView.findViewById(R.id.menu12);
         desktop.setChecked(userAgent == USER_AGENT_MODE_DESKTOP);
 
@@ -930,11 +934,11 @@ public class homeViewController {
             mRefresh.setVisibility(View.GONE);
         }
 
-        newTab.setClickable(false);
+//        newTab.setClickable(false);
         close.setClickable(false);
         new Handler().postDelayed(() ->
         {
-            newTab.setClickable(true);
+//            newTab.setClickable(true);
             close.setClickable(true);
         }, 300);
 

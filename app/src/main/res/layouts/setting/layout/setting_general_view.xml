@@ -73,125 +73,125 @@
             </LinearLayout>
 
             <!-- Title Header -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <TextView
-                    android:textColor="@color/c_text_short_header"
-                    android:textSize="15sp"
-                    android:layout_width="0dp"
-                    android:textStyle="bold"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:layout_marginTop="00dp"
-                    android:text="@string/SETTING_GENERAL_HOME" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:textColor="@color/c_text_short_header"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:paddingStart="15dp"-->
+<!--                    android:paddingEnd="15dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="40"-->
+<!--                    android:layout_marginTop="00dp"-->
+<!--                    android:text="@string/SETTING_GENERAL_HOME" />-->
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@xml/gx_ripple_gray"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:id="@+id/pHomePageText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:alpha="1"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:padding="0dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:text="@string/SETTING_GENERAL_HOME_INFO"
-                    android:textAlignment="viewStart"
-                    android:textAllCaps="false"
-                    android:textColor="#757575"
-                    android:textDirection="locale"
-                    android:textSize="13.5sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/pHomePageText"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:alpha="1"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:clickable="false"-->
+<!--                    android:padding="0dp"-->
+<!--                    android:paddingStart="15dp"-->
+<!--                    android:paddingEnd="15dp"-->
+<!--                    android:text="@string/SETTING_GENERAL_HOME_INFO"-->
+<!--                    android:textAlignment="viewStart"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="#757575"-->
+<!--                    android:textDirection="locale"-->
+<!--                    android:textSize="13.5sp" />-->
 
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="0dp"
-                    android:paddingStart="0dp"
-                    android:weightSum="7"
-                    tools:ignore="RtlSymmetry">
+<!--                <LinearLayout-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginStart="0dp"-->
+<!--                    android:paddingStart="0dp"-->
+<!--                    android:weightSum="7"-->
+<!--                    tools:ignore="RtlSymmetry">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@xml/gx_ripple_gray"
-                        android:onClick="onURLInNewTab"
-                        tools:ignore="RtlSymmetry,UselessParent">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@xml/gx_ripple_gray"-->
+<!--                        android:onClick="onURLInNewTab"-->
+<!--                        tools:ignore="RtlSymmetry,UselessParent">-->
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="65dp"
-                            android:layout_weight="6"
-                            android:clickable="false"
-                            android:layout_marginStart="0dp"
-                            android:orientation="vertical">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="65dp"-->
+<!--                            android:layout_weight="6"-->
+<!--                            android:clickable="false"-->
+<!--                            android:layout_marginStart="0dp"-->
+<!--                            android:orientation="vertical">-->
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="12dp"
-                                android:alpha="1"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:padding="0dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp"
-                                android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/c_text_v1"
-                                android:textSize="14sp"
-                                tools:ignore="RtlSymmetry" />
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="12dp"-->
+<!--                                android:alpha="1"-->
+<!--                                android:background="@android:color/transparent"-->
+<!--                                android:clickable="false"-->
+<!--                                android:padding="0dp"-->
+<!--                                android:paddingStart="15dp"-->
+<!--                                android:paddingEnd="15dp"-->
+<!--                                android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB"-->
+<!--                                android:textAlignment="textStart"-->
+<!--                                android:textAllCaps="false"-->
+<!--                                android:textColor="@color/c_text_v1"-->
+<!--                                android:textSize="14sp"-->
+<!--                                tools:ignore="RtlSymmetry" />-->
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:alpha="1"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:padding="0dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp"
-                                android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="#757575"
-                                android:textSize="13.5sp"
-                                tools:ignore="RtlSymmetry" />
-                        </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="2dp"-->
+<!--                                android:alpha="1"-->
+<!--                                android:background="@android:color/transparent"-->
+<!--                                android:clickable="false"-->
+<!--                                android:padding="0dp"-->
+<!--                                android:paddingStart="15dp"-->
+<!--                                android:paddingEnd="15dp"-->
+<!--                                android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO"-->
+<!--                                android:textAlignment="textStart"-->
+<!--                                android:textAllCaps="false"-->
+<!--                                android:textColor="#757575"-->
+<!--                                android:textSize="13.5sp"-->
+<!--                                tools:ignore="RtlSymmetry" />-->
+<!--                        </LinearLayout>-->
 
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:layout_width="0dp"
-                            android:clickable="false"
-                            android:focusable="false"
-                            android:layout_height="match_parent"
-                            android:id="@+id/pOpenURLInNewTab"
-                            android:layout_marginEnd="10dp"
-                            android:layout_weight="1"
-                            android:theme="@style/SCBSwitch"
-                            android:contentDescription="@string/GENERAL_TODO" />
+<!--                        <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:clickable="false"-->
+<!--                            android:focusable="false"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:id="@+id/pOpenURLInNewTab"-->
+<!--                            android:layout_marginEnd="10dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:theme="@style/SCBSwitch"-->
+<!--                            android:contentDescription="@string/GENERAL_TODO" />-->
 
-                    </LinearLayout>
-                </LinearLayout>
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
 
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"

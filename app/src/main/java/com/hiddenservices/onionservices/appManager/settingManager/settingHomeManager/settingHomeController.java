@@ -109,8 +109,8 @@ public class settingHomeController extends AppCompatActivity {
 
     private void viewsInitializations() {
         activityContextManager.getInstance().setSettingController(this);
-        mOption15 = findViewById(R.id.pOption15);
-        mOption16 = findViewById(R.id.pOption16);
+        //mOption15 = findViewById(R.id.pOption15);
+        //mOption16 = findViewById(R.id.pOption16);
 
         mSettingViewController = new settingHomeViewController(this, new settingViewCallback(), mOption15, mOption16);
         mSettingViewController.onInit();

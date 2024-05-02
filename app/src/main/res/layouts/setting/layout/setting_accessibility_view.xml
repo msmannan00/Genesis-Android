@@ -298,69 +298,69 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/pSearchSettingOption5"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@xml/gx_ripple_gray"
-                android:onClick="onVoiceInputSettingUpdate"
-                android:orientation="horizontal"
-                android:weightSum="7">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pSearchSettingOption5"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="65dp"-->
+<!--                android:background="@xml/gx_ripple_gray"-->
+<!--                android:onClick="onVoiceInputSettingUpdate"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:weightSum="7">-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="65dp"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="65dp"-->
+<!--                    android:layout_weight="6"-->
+<!--                    android:clickable="false"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="@string/SETTING_ACCESSIBILITY_VOICE"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="14sp"
-                        tools:ignore="RtlSymmetry" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:paddingStart="15dp"-->
+<!--                        android:paddingEnd="15dp"-->
+<!--                        android:text="@string/SETTING_ACCESSIBILITY_VOICE"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/c_text_v1"-->
+<!--                        android:textSize="14sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="@string/SETTING_ACCESSIBILITY_VOICE_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="#757575"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:alpha="1"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:clickable="false"-->
+<!--                        android:padding="0dp"-->
+<!--                        android:paddingStart="15dp"-->
+<!--                        android:paddingEnd="15dp"-->
+<!--                        android:text="@string/SETTING_ACCESSIBILITY_VOICE_INFO"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#757575"-->
+<!--                        android:textSize="13.5sp"-->
+<!--                        tools:ignore="RtlSymmetry" />-->
+<!--                </LinearLayout>-->
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:layout_weight="1"
-                    android:id="@+id/pVoiceInput"
-                    android:theme="@style/SCBSwitch"
-                    android:contentDescription="@string/GENERAL_TODO" />
+<!--                <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:clickable="false"-->
+<!--                    android:focusable="false"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:id="@+id/pVoiceInput"-->
+<!--                    android:theme="@style/SCBSwitch"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
         </LinearLayout>
     </ScrollView>

@@ -86,27 +86,52 @@
                             tools:ignore="RtlHardcoded,UselessParent">
 
                             <ImageButton
-                                android:id="@+id/pSearchLogo"
+                                android:id="@+id/pLoginPage"
                                 android:layout_width="33dp"
                                 android:layout_height="33dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="14dp"
                                 android:background="@xml/gx_ripple_default_round"
                                 android:contentDescription="@string/GENERAL_TODO"
-                                android:onClick="onLockSecure"
-                                android:padding="6dp"
+                                android:onClick="onHomeButton"
+                                android:padding="0dp"
                                 android:scaleType="fitCenter"
-                                android:src="@xml/ic_baseline_lock"
+                                android:src="@xml/ic_home"
                                 android:translationZ="10dp"
-                                app:tint="@color/c_lock_tint"
+                                app:tint="@color/c_setting_icon_tint"
                                 tools:ignore="RtlSymmetry,TouchTargetSizeCheck,DuplicateSpeakableTextCheck,ImageContrastCheck" />
 
                             <View
-                                android:id="@+id/pSearchDivider"
                                 android:layout_width="1px"
                                 android:layout_height="20dp"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="3dp"
+                                android:layout_marginLeft="6dp"
+                                android:background="@color/c_home_side"
+                                android:translationZ="1dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <ImageButton
+                                android:id="@+id/pSearchLogo"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="6dp"
+                                android:background="@xml/gx_ripple_default_round"
+                                android:contentDescription="@string/GENERAL_TODO"
+                                android:onClick="onLoginPage"
+                                android:padding="3dp"
+                                android:scaleType="fitCenter"
+                                android:src="@xml/ic_baseline_lock"
+                                android:translationZ="10dp"
+                                app:tint="@color/c_setting_icon_tint"
+                                tools:ignore="RtlSymmetry,TouchTargetSizeCheck,DuplicateSpeakableTextCheck,ImageContrastCheck" />
+
+                            <View
+                                android:layout_width="1px"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginRight="6dp"
                                 android:background="@color/c_home_side"
                                 android:translationZ="1dp"
                                 tools:ignore="RtlSymmetry" />
@@ -125,6 +150,8 @@
                                 android:completionHintView="@layout/hint_view"
                                 android:dropDownAnchor="@id/pSearchEngineBar"
                                 android:ems="10"
+                                android:visibility="invisible"
+                                android:clickable="false"
                                 android:fadingEdgeLength="20dp"
                                 android:focusableInTouchMode="true"
                                 android:focusedByDefault="false"
@@ -717,6 +744,7 @@
                 android:layout_width="170dp"
                 android:layout_height="51dp"
                 android:paddingStart="0dp"
+                android:visibility="gone"
                 android:paddingEnd="10dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginBottom="58dp"
@@ -731,6 +759,27 @@
                 tools:ignore="RtlSymmetry" />
 
             <Button
+                android:id="@+id/ChannelID"
+                android:textSize="13sp"
+                android:layout_width="140dp"
+                android:layout_height="51dp"
+                android:paddingStart="0dp"
+                android:layoutDirection="ltr"
+                android:layout_marginStart="23dp"
+                android:layout_marginBottom="23dp"
+                android:textAlignment="textStart"
+                android:paddingEnd="10dp"
+                android:clickable="false"
+                android:alpha="0.6"
+                android:background="@xml/hox_rounded_corner_splash_no_ripple"
+                android:drawableStart="@drawable/shield"
+                android:onClick="onStartApplicationNoTor"
+                android:text="Connect"
+                app:layout_constraintBottom_toTopOf="@+id/pCopyright"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
                 android:id="@+id/ConnectNoTor"
                 android:textSize="13sp"
                 android:layout_width="170dp"
@@ -740,13 +789,35 @@
                 android:layout_marginStart="23dp"
                 android:layout_marginBottom="23dp"
                 android:textAlignment="textStart"
-                android:paddingEnd="10dp"
+                android:paddingEnd="0dp"
+                android:visibility="invisible"
+                android:clickable="false"
                 android:background="@xml/hox_rounded_corner_splash_no_ripple"
                 android:drawableStart="@drawable/shield"
                 android:onClick="onStartApplicationNoTor"
                 android:text="@string/HOME_CONNECT_NO_TOR"
-                app:layout_constraintBottom_toTopOf="@+id/pCopyright"
+                app:layout_constraintBottom_toTopOf="@+id/ChannelID"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/channel"
+                android:textSize="16sp"
+                android:layout_width="190dp"
+                android:layout_height="51dp"
+                android:layout_marginEnd="15dp"
+                android:paddingStart="15dp"
+                android:inputType="number"
+                android:layoutDirection="ltr"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="15dp"
+                android:textAlignment="textStart"
+                android:paddingEnd="10dp"
+                android:background="@xml/gx_generic_input"
+                android:onClick="onStartApplicationNoTor"
+                android:hint="Enter Channel Id"
+                app:layout_constraintTop_toTopOf="@+id/ChannelID"
+                app:layout_constraintStart_toEndOf="@+id/ChannelID"
                 tools:ignore="RtlSymmetry" />
 
             <View
@@ -777,6 +848,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/pSettings"
                 android:layout_width="53dp"
                 android:layout_height="51dp"
@@ -793,6 +865,7 @@
                 app:tint="@color/black" />
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/pOrbotLogManager"
                 android:layout_width="53dp"
                 android:layoutDirection="ltr"
@@ -831,7 +904,7 @@
                 android:textColor="@color/c_white"
                 android:textFontWeight="5"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/pSettings"
+                app:layout_constraintBottom_toTopOf="@+id/ConnectTor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="UnusedAttribute" />

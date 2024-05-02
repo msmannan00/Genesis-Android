@@ -35,7 +35,7 @@ class settingAccessibilityViewController {
     settingAccessibilityViewController(settingAccessibilityController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pZoom, SwitchMaterial pVoiceInput, SeekBar pSeekBar, TextView mSeekBarSample, TextView pScalePercentage) {
         this.mContext = pContext;
         this.mZoom = pZoom;
-        this.mVoiceInput = pVoiceInput;
+        //this.mVoiceInput = pVoiceInput;
         this.mSeekBar = pSeekBar;
         this.mSeekBarSample = mSeekBarSample;
         this.mScalePercentage = pScalePercentage;
@@ -63,7 +63,7 @@ class settingAccessibilityViewController {
 
     private void initViews() {
         mZoom.setChecked(status.sSettingEnableZoom);
-        mVoiceInput.setChecked(status.sSettingEnableVoiceInput);
+        //mVoiceInput.setChecked(status.sSettingEnableVoiceInput);
 
         mSeekBar.setProgress((int) status.sSettingFontSize / 10 - 5);
         float percentage = status.sSettingFontSize;

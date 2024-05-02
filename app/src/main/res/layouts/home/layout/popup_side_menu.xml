@@ -126,41 +126,41 @@
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/menu11"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="0dp"
-                android:background="@xml/gx_side_item"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onMenuItemInvoked"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/menu11"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_marginTop="0dp"-->
+<!--                android:background="@xml/gx_side_item"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:onClick="onMenuItemInvoked"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
 
-                <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_baseline_new_tab"
-                    app:tint="@color/c_alert_divider"
-                    tools:ignore="ImageContrastCheck" />
+<!--                <ImageView-->
+<!--                    android:layout_width="21dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_baseline_new_tab"-->
+<!--                    app:tint="@color/c_alert_divider"-->
+<!--                    tools:ignore="ImageContrastCheck" />-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="17dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:paddingStart="3dp"
-                    android:text="@string/HOME_MENU__NEW_TABS"
-                    android:textAllCaps="false"
-                    android:textColor="@color/c_text_home_menu"
-                    android:textSize="15sp"
-                    tools:ignore="RtlHardcoded,RtlSymmetry" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:layout_marginStart="17dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="start|center_vertical"-->
+<!--                    android:paddingStart="3dp"-->
+<!--                    android:text="@string/HOME_MENU__NEW_TABS"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/c_text_home_menu"-->
+<!--                    android:textSize="15sp"-->
+<!--                    tools:ignore="RtlHardcoded,RtlSymmetry" />-->
+<!--            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -281,41 +281,41 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/pMenuOpenRecentTab"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="1dp"
-                android:background="@xml/gx_side_item"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onMenuItemInvoked"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/pMenuOpenRecentTab"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_marginTop="1dp"-->
+<!--                android:background="@xml/gx_side_item"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:onClick="onMenuItemInvoked"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
 
-                <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_baseline_bookmark_menu"
-                    app:tint="@color/c_alert_divider"
-                    tools:ignore="ImageContrastCheck" />
+<!--                <ImageView-->
+<!--                    android:layout_width="21dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:contentDescription="@string/GENERAL_TODO"-->
+<!--                    android:src="@xml/ic_baseline_bookmark_menu"-->
+<!--                    app:tint="@color/c_alert_divider"-->
+<!--                    tools:ignore="ImageContrastCheck" />-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="17dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:paddingStart="3dp"
-                    android:text="@string/HOME_MENU_OPEN_RECENT_TAB"
-                    android:textAllCaps="false"
-                    android:textColor="@color/c_text_home_menu"
-                    android:textSize="15sp"
-                    tools:ignore="RtlHardcoded,RtlSymmetry" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:layout_marginStart="17dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="start|center_vertical"-->
+<!--                    android:paddingStart="3dp"-->
+<!--                    android:text="@string/HOME_MENU_OPEN_RECENT_TAB"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/c_text_home_menu"-->
+<!--                    android:textSize="15sp"-->
+<!--                    tools:ignore="RtlHardcoded,RtlSymmetry" />-->
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/pMenuOpenNewTab"

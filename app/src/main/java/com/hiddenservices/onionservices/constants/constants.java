@@ -44,6 +44,7 @@ public class constants {
     public static final String CONST_GENESIS_HELP_URL = "https://orion.onion/help";
     public static final String CONST_GENESIS_HELP_URL_SUB = "167.86.99.31/help";
     public static final String CONST_BACKEND_GENESIS_URL = "http://167.86.99.31/search?q=$s&p_num=1&s_type=all";
+    public static final String CONST_BACKEND_DEFAULT_HOST = "http://3oc.try.whistleaks.com";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_STATIC_URL = "https://duckduckgo.com";

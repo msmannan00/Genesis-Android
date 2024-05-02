@@ -268,9 +268,7 @@ public class homeController extends AppCompatActivity {
 
         orbotLocalConstants.mStartTriggered = true;
         if(status.sNoTorTriggered){
-            if(status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
-                status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
-            }
+            status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DEFAULT_HOST;
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
 
             if (OrbotService.getServiceObject() != null) {
@@ -771,7 +769,7 @@ public class homeController extends AppCompatActivity {
         dataController.getInstance().clearData(this);
         helperMethod.restart(true, this);
         status.sTorBrowsing = mTorBrowsing;
-        status.sSettingDefaultSearchEngine = mSearchEngine;
+        status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DEFAULT_HOST;
     }
 
     public void onCloseApplication(){
@@ -1464,6 +1462,10 @@ public class homeController extends AppCompatActivity {
         activityContextManager.getInstance().getTabController().onInitFirstElement();
     }
 
+    public void onLoginPage(View view) {
+        onLoadURL(status.sSettingDefaultSearchEngine+"/login");
+    }
+
     public void onLockSecure(View view) {
         boolean ssl = !mGeckoClient.getSession().getSSL();
         pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(mGeckoClient.getSession().getCurrentURL(), status.sSettingJavaStatus, status.sStatusDoNotTrack, status.sSettingTrackingProtection, status.sSettingCookieStatus, getSecurityInfo(), ssl, this), M_SECURE_CONNECTION);
@@ -1966,9 +1968,7 @@ public class homeController extends AppCompatActivity {
         status.sTorBrowsing = false;
         status.sNoTorTriggered = true;
         mGeckoClient.initRuntimeSettings(homeController.this);
-        if(status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
-            status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
-        }
+        status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DEFAULT_HOST;
         onStartBrowser();
         mHomeViewController.initHomePage();
 
@@ -1989,9 +1989,7 @@ public class homeController extends AppCompatActivity {
         status.sTorBrowsing = false;
         status.sNoTorTriggered = true;
         mGeckoClient.initRuntimeSettings(homeController.this);
-        if(status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
-            status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
-        }
+        status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DEFAULT_HOST;
         onStartBrowser();
         mHomeViewController.initHomePage();
 
@@ -2114,9 +2112,10 @@ public class homeController extends AppCompatActivity {
 
     public void onMenuItemInvoked(View view) {
         int menuId = view.getId();
-        if (menuId == R.id.menu11) {
-            onNewTab(isKeyboardOpened, true);
-        } else if (menuId == R.id.menu29) {
+//        if (menuId == R.id.menu11) {
+//            onNewTab(isKeyboardOpened, true);
+//        } else
+        if (menuId == R.id.menu29) {
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
 
@@ -2145,10 +2144,12 @@ public class homeController extends AppCompatActivity {
                 helperMethod.openActivity(settingHomeController.class, constants.CONST_LIST_HISTORY, homeController.this, true);
             } else if (menuId == R.id.pMenuDelete) {
                 pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(this, mGeckoClient.getSession().getCurrentURL()), M_BOOKMARK);
-            } else if (menuId == R.id.pMenuOpenRecentTab) {
-                onOpenTabViewBoundary(null);
-                mNewTab.setPressed(true);
-            } else if (menuId == R.id.pMenuOpenNewTab) {
+            }
+//            else if (menuId == R.id.pMenuOpenRecentTab) {
+//                onOpenTabViewBoundary(null);
+//                mNewTab.setPressed(true);
+//            }
+            else if (menuId == R.id.pMenuOpenNewTab) {
                 helperMethod.hideKeyboard(this);
                 helperMethod.openActivity(bookmarkController.class, constants.CONST_LIST_BOOKMARK, homeController.this, true);
             } else if (menuId == R.id.menu28) {
@@ -2698,6 +2699,7 @@ public class homeController extends AppCompatActivity {
                 mHomeViewController.onUpdateSearchBar((String) data.get(0), false, false, false);
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_FIRST_PAINT)) {
                 mHomeViewController.onFirstPaint();
+                status.sFirstPaintDrawn = true;
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_SESSION_RE_INIT)) {
                 mHomeViewController.onSessionReInit();
             } else if (e_type.equals(homeEnums.eGeckoCallback.BACK_LIST_EMPTY)) {
