@@ -295,7 +295,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
             mNotifyBuilder.setProgress(0, 0, false);
         }
 
-        startForeground(NOTIFY_ID, mNotifyBuilder.build());
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
+            startForeground(NOTIFY_ID, mNotifyBuilder.build());
+        }
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
