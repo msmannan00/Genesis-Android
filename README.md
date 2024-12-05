@@ -1,32 +1,134 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e)](https://app.codacy.com/gh/msmannan00/Genesis-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
+
 # Orion Browser
 
-## Overview
-The Orion browser is an innovative Android application designed to provide users with a secure and private browsing experience. Utilizing onion routing technology, it ensures enhanced anonymity by encrypting and routing internet traffic through a network of volunteer-operated servers. This unique feature enables users to access the hidden web, also known as the dark web, where conventional search engines cannot index content.
-
-Additionally, the browser facilitates secure access to local webpages, making it a versatile tool for users seeking privacy not only in accessing hidden content but also in exploring local networks securely. The Orion browser prioritizes secure connection establishment, employing encryption protocols to protect user data and communications. Despite its advanced privacy features, the application maintains a user-friendly interface, allowing seamless navigation through both the hidden and local web. Privacy settings and controls are incorporated, empowering users to customize their anonymity levels and security preferences. Regular updates are promised to address emerging threats and maintain the browser's effectiveness
+Orion Browser is an Android application designed to provide a secure, private browsing experience by leveraging onion routing technology. This browser empowers users to access hidden web content anonymously, unblock restricted sites, and browse freely while safeguarding their online identity.
 
 ## Features
-- Securely access hidden web content
-- Browse local webpages with enhanced security
-- Onion routing for anonymized browsing
 
-## Technologies Used
-- Android (Java and Kotlin)
-- Gradle
+### Core Features
+- **Unrestricted Browsing**: Access censored or restricted websites using the built-in search engine powered by the Tor network.
+- **Privacy and Security**: No cookies, JavaScript, or third-party tracking codes are utilized to ensure anonymity.
+- **Deep Web Exploration**: Explore .onion sites and other hidden web resources not indexed by traditional search engines.
+- **Simple Interface**: A user-friendly interface that allows easy navigation and filtering of search results.
+- **Ad Blocking**: Blocks intrusive advertisements for a seamless browsing experience.
 
-## Getting Started
-Follow the steps below to set up the project locally:
+### Technical Highlights
+- Built-in onion search engine for accessing the hidden web.
+- Multiple layers of IP address protection.
+- Compatible with Android 6.0 and above.
+- Lightweight APK size (~96 MB).
+
+## Installation
+
+1. **Enable Unknown Sources**:
+   - Navigate to **Settings** > **Security**.
+   - Enable **Unknown Sources** to allow installations outside the Google Play Store.
+
+2. **Download APK**:
+   - Visit the [Releases](https://github.com/msmannan00/Genesis-Android/releases) section to download the latest APK.
+
+3. **Install APK**:
+   - Locate the downloaded APK using a file manager and install it.
+   - Follow on-screen instructions to complete the process.
+
+4. **Disable Unknown Sources** (Recommended):
+   - Navigate to **Settings** > **Security** and disable **Unknown Sources**.
+
+## Development and Build Instructions
 
 ### Prerequisites
-- Android Studio installed
-- JDK installed
-- Git installed
+- Android Studio
+- Kotlin and Java support
+- Android SDK version 6.0 (API level 23) or above
+- Gradle Build System
 
-### Playstore URL
-https://play.google.com/store/apps/details?id=com.hiddenservices.onionservices&hl=en
+### Gradle Configuration
 
-### Clone the Repository
-```bash
-git clone [https://github.com/your-username/secure-browser.git](https://github.com/msmannan00/Genesis-Android.git)https://github.com/msmannan00/Genesis-Android.git
+Add the following `build.gradle` configuration for the project:
+
+```gradle
+plugins {
+    id "com.jetbrains.python.envs" version "0.0.26"
+}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion project.ext.compile_sdk_version
+    ndkVersion project.ext.ndk_version
+
+    defaultConfig {
+        applicationId project.ext.application_id
+        minSdkVersion project.ext.min_sdk_version
+        targetSdkVersion project.ext.target_sdk_version
+        versionCode project.ext.vcode
+        versionName project.ext.vname
+        ndk {
+            debugSymbolLevel project.ext.debugSymbolLevel
+        }
+    }
+    kotlinOptions {
+        jvmTarget = project.ext.jvmTarget
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled project.ext.minifyEnabled
+            shrinkResources project.ext.shrinkResources
+            proguardFiles getDefaultProguardFile(project.ext.proguard_file), project.ext.proguard_rule
+        }
+    }
+
+    productFlavors {
+        orion {
+            dimension project.ext.dimen
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = project.ext.resource_directories
+        }
+    }
+    lint {
+        disable project.ext.lintoption
+    }
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation "androidx.work:work-runtime:2.9.1"
+    implementation "org.mozilla.components:browser-engine-gecko:129.0"
+    implementation project(path: ':orbotmanager')
+}
+```
+
+### Building the Project
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/msmannan00/Genesis-Android.git
+   cd Genesis-Android
+   ```
+
+2. Open the project in Android Studio.
+
+3. Sync Gradle and build the project.
+
+4. Run the application on an Android emulator or connected device.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+**Disclaimer**: Accessing the hidden web carries inherent risks. Use this application responsibly and ensure compliance with local laws and regulations.
