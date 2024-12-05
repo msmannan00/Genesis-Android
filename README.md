@@ -1,6 +1,6 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e)](https://app.codacy.com/gh/msmannan00/Genesis-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-![Untitled design(1)](https://github.com/user-attachments/assets/b573491c-5420-4848-bc1a-a493679d62be)
+![JPJ pdf](https://github.com/user-attachments/assets/23e3e375-0b82-4a8b-8e66-68474af8ccbd)
 
 # Orion Browser
 <table>
@@ -49,7 +49,7 @@ Orion Browser is an Android application designed to provide a secure, private br
    - Enable **Unknown Sources** to allow installations outside the Google Play Store.
 
 2. **Download APK**:
-   - Visit the [Releases](https://github.com/msmannan00/Genesis-Android/releases) section to download the latest APK.
+   - Visit the [Releases](https://github.com/msmannan00/Browser-Android/releases) section to download the latest APK.
 
 3. **Install APK**:
    - Locate the downloaded APK using a file manager and install it.
@@ -137,8 +137,8 @@ dependencies {
 ### Building the Project
 1. Clone the repository:
    ```bash
-   git clone https://github.com/msmannan00/Genesis-Android.git
-   cd Genesis-Android
+   git clone https://github.com/msmannan00/Browser-Android.git
+   cd Browser-Android
    ```
 
 2. Open the project in Android Studio.
