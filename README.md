@@ -1,6 +1,6 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e)](https://app.codacy.com/gh/msmannan00/Genesis-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-![JPJ pdf](https://github.com/user-attachments/assets/23e3e375-0b82-4a8b-8e66-68474af8ccbd)
+![Uploading JPJ.pdf.png…]()
 
 # Orion Browser
 <table>
