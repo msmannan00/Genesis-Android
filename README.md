@@ -1,6 +1,5 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e)](https://app.codacy.com/gh/msmannan00/Genesis-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-
 ![WebApp](https://github.com/msmannan00/Orion-Search/blob/trusted_main/documentation/homepage.png?raw=true)
 # Orion Search
 <table>
@@ -13,19 +12,34 @@ Orion Search Engine is a web-based search tool built on top of Docker that provi
 </td>
 </tr>
 <br>
+<tr>
+<td>
+<br>
+
+**1. Unrestricted Browsing**: Allows access to censored or restricted websites using a robust, privacy-focused search engine powered by the Tor network.
+
+**2. Privacy and Security**: Ensures anonymity by not utilizing cookies, JavaScript, or third-party tracking codes, safeguarding your identity and data.
+
+**3. Deep Web Exploration**: Facilitates exploration of .onion sites and other hidden web resources not indexed by traditional search engines.
+
+**4. Ad Blocking**: Blocks intrusive advertisements, creating a seamless and distraction-free browsing experience.
+
+**5. Simple User Interface**: Provides an intuitive and user-friendly interface, making navigation and filtering search results effortless.
+
+**6. Multi-Layer Protection**: Adds multiple layers of IP address protection to maintain browsing privacy and secure communications.
+
+**7. Lightweight and Efficient**: Optimized for devices running Android 6.0 and above, with minimal APK size (~96 MB) for faster downloads and installation.
+
+<br><br>
+</td>
+</tr>
+</table>
 
 # Orion Browser
 
 Orion Browser is an Android application designed to provide a secure, private browsing experience by leveraging onion routing technology. This browser empowers users to access hidden web content anonymously, unblock restricted sites, and browse freely while safeguarding their online identity.
 
 ## Features
-
-### Core Features
-- **Unrestricted Browsing**: Access censored or restricted websites using the built-in search engine powered by the Tor network.
-- **Privacy and Security**: No cookies, JavaScript, or third-party tracking codes are utilized to ensure anonymity.
-- **Deep Web Exploration**: Explore .onion sites and other hidden web resources not indexed by traditional search engines.
-- **Simple Interface**: A user-friendly interface that allows easy navigation and filtering of search results.
-- **Ad Blocking**: Blocks intrusive advertisements for a seamless browsing experience.
 
 ### Technical Highlights
 - Built-in onion search engine for accessing the hidden web.
