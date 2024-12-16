@@ -1,156 +1,122 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e)](https://app.codacy.com/gh/msmannan00/Genesis-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a1f302d35c0f4f8c9293acabc5086512)](https://app.codacy.com/gh/msmannan00/Orion-Search/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+![CodeQL Analysis](https://github.com/msmannan00/Genesis-Search/actions/workflows/github-code-scanning/codeql/badge.svg)
 
-![JPJ pdf](https://github.com/user-attachments/assets/84c4367f-2935-434b-bf1a-513ff155181e)
+![homepage](https://github.com/user-attachments/assets/37fcf444-40be-46c9-8bd8-45a22d824141)
 
-# Orion Browser
-<table>
-<tr>
-<td>
+# Orion Platform
 <br>
-Orion Browser is an Android application designed to provide a secure, private browsing experience by leveraging onion routing technology. This browser empowers users to access hidden web content anonymously, unblock restricted sites, and browse freely while safeguarding their online identity.
-<br>
-<br>
-</td>
-</tr>
-<br>
-<tr>
-<td>
+Orion Platform is a comprehensive, web-based solution that combines the functionality of a browser, search engine, crawler, and data aggregation tools to empower OSINT (Open Source Intelligence) experts. Built on top of Docker, Orion provides a user-friendly interface to explore, search, and visualize data extracted by its powerful Orion Crawler.<br><br>
+
+The platform integrates seamlessly with machine learning models, enhancing search relevance and enabling advanced content analysis. Orion supports a broad range of functionalities, including the ability to search, filter, and visualize data across multiple categories, making it an invaluable tool for data exploration and intelligence gathering.<br>
+
+Designed with flexibility and scalability in mind, Orion enables OSINT experts to feed data directly into the platform, ensuring up-to-date and comprehensive datasets. Whether for investigative research, competitive analysis, or general information gathering, Orion provides a unified ecosystem that enhances the workflow of professionals who rely on actionable insights.<br>
 <br>
 
-**1. Unrestricted Browsing**: Allows access to censored or restricted websites using a robust, privacy-focused search engine powered by the Tor network.
+## 1. Repository Quality and Build Status
 
-**2. Privacy and Security**: Ensures anonymity by not utilizing cookies, JavaScript, or third-party tracking codes, safeguarding your identity and data.
-
-**3. Deep Web Exploration**: Facilitates exploration of .onion sites and other hidden web resources not indexed by traditional search engines.
-
-**4. Ad Blocking**: Blocks intrusive advertisements, creating a seamless and distraction-free browsing experience.
-
-**5. Simple User Interface**: Provides an intuitive and user-friendly interface, making navigation and filtering search results effortless.
-
-**6. Multi-Layer Protection**: Adds multiple layers of IP address protection to maintain browsing privacy and secure communications.
-
-**7. Lightweight and Efficient**: Optimized for devices running Android 6.0 and above, with minimal APK size (~96 MB) for faster downloads and installation.
-
-<br><br>
-</td>
-</tr>
+<table style="width:100%">
+  <thead>
+    <tr>
+      <th style="text-align:left">Repository</th>
+      <th style="text-align:center">Codacy</th>
+      <th style="text-align:center">CodeQL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/msmannan00/Orion-Browser">Orion Browser</a></td>
+      <td style="text-align:center"><img src="https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e" alt="Codacy Badge"></td>
+      <td style="text-align:center"><img src="https://github.com/msmannan00/Orion-Browser/actions/workflows/github-code-scanning/codeql/badge.svg" alt="CodeQL"></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/msmannan00/Orion-Crawler">Orion Crawler</a></td>
+      <td style="text-align:center"><img src="https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e" alt="Codacy Badge"></td>
+      <td style="text-align:center"><img src="https://github.com/msmannan00/Orion-Crawler/actions/workflows/github-code-scanning/codeql/badge.svg" alt="CodeQL"></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/msmannan00/Orion-Search">Orion Search</a></td>
+      <td style="text-align:center"><img src="https://app.codacy.com/project/badge/Grade/a1f302d35c0f4f8c9293acabc5086512" alt="Codacy Badge"></td>
+      <td style="text-align:center"><img src="https://github.com/msmannan00/Orion-Search/actions/workflows/github-code-scanning/codeql/badge.svg" alt="CodeQL"></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/msmannan00/Orion-Collector">Orion Collector</a></td>
+      <td style="text-align:center"><img src="https://app.codacy.com/project/badge/Grade/a1f302d35c0f4f8c9293acabc5086512" alt="Codacy Badge"></td>
+      <td style="text-align:center"><img src="https://github.com/msmannan00/Orion-Collector/actions/workflows/github-code-scanning/codeql/badge.svg" alt="CodeQL"></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/msmannan00/Globaleaks-Canary">Globaleaks Canary</a></td>
+      <td style="text-align:center"><img src="https://app.codacy.com/project/badge/Grade/1e26f9b0bf504a2e8c5bf0fb22cf9e0b" alt="Codacy Badge"></td>
+      <td style="text-align:center"> - </td>
+    </tr>    
+  </tbody>
 </table>
 
-### Technical Highlights
-- Built-in onion search engine for accessing the hidden web.
-- Multiple layers of IP address protection.
-- Compatible with Android 6.0 and above.
-- Lightweight APK size (~96 MB).
+## 2. Technology Stack
 
-## Installation
+The Orion platform is built using various technologies to provide optimal search capabilities and data handling. Below is the list of libraries and frameworks used:
 
-1. **Enable Unknown Sources**:
-   - Navigate to **Settings** > **Security**.
-   - Enable **Unknown Sources** to allow installations outside the Google Play Store.
+![MongoDB](https://badgen.net/badge/search-crawler/MongoDB/green)
+![Redis](https://badgen.net/badge/search-crawler/Redis/red)
+![Celery](https://badgen.net/badge/crawler/Celery/red)
+![Python](https://badgen.net/badge/search-crawler/Python/blue)
+![Tor](https://badgen.net/badge/search-crawler/Tor/purple)
+![Traefik](https://badgen.net/badge/search/Traefik/orange)
+![elastic](https://badgen.net/badge/search/elastic/pink)
+![java](https://badgen.net/badge/browser/java/cyan)
+![kotlin](https://badgen.net/badge/browser/kotlin/yellow)
 
-2. **Download APK**:
-   - Visit the [Releases](https://github.com/msmannan00/Browser-Android/releases) section to download the latest APK.
+## 3. Associated Repositories
 
-3. **Install APK**:
-   - Locate the downloaded APK using a file manager and install it.
-   - Follow on-screen instructions to complete the process.
+| Repository                                                                 | Description                                                                                                 | Stats                                                                                                     |
+|----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| [Orion Browser](https://github.com/msmannan00/Orion-Browser)               | A harvester-based browser used to scrape data as you browse.                                             | ![Stars](https://img.shields.io/github/stars/msmannan00/Orion-Browser?style=social) ![Forks](https://img.shields.io/github/forks/msmannan00/Orion-Browser?style=social) |
+| [Orion Crawler](https://github.com/msmannan00/Orion-Crawler)               | Used for monitoring and continuously crawling the hidden web.                                            | ![Stars](https://img.shields.io/github/stars/msmannan00/Orion-Crawler?style=social) ![Forks](https://img.shields.io/github/forks/msmannan00/Orion-Crawler?style=social) |
+| [Orion Search](https://github.com/msmannan00/Orion-Search)                 | A platform to visualize extracted data.                                                                 | ![Stars](https://img.shields.io/github/stars/msmannan00/Orion-Search?style=social) ![Forks](https://img.shields.io/github/forks/msmannan00/Orion-Search?style=social) |
+| [Orion Collector](https://github.com/msmannan00/Orion-Collector)           | Simplifies the task of creating custom crawling scripts for multiple websites.                          | ![Stars](https://img.shields.io/github/stars/msmannan00/Orion-Collector?style=social) ![Forks](https://img.shields.io/github/forks/msmannan00/Orion-Collector?style=social) |
+| [Globaleaks Canary](https://github.com/msmannan00/Globaleaks-Canary)       | A tool for passive intelligence and whistleblowing.                                                     | ![Stars](https://img.shields.io/github/stars/msmannan00/Globaleaks-Canary?style=social) ![Forks](https://img.shields.io/github/forks/msmannan00/Globaleaks-Canary?style=social) |
 
-4. **Disable Unknown Sources** (Recommended):
-   - Navigate to **Settings** > **Security** and disable **Unknown Sources**.
 
-## Development and Build Instructions
+## 4. Data Extraction Techniques
+This is a comprehensive flow diagram illustrating the functioning of the multithreaded crawler. It outlines the entire process, from initializing threads and managing task distribution to efficiently retrieving and processing data from multiple sources concurrently. The diagram highlights key components, such as task queues, thread synchronization mechanisms, and data handling workflows, providing a clear and detailed representation of the crawler's architecture and operational flow
 
-### Prerequisites
-- Android Studio
-- Kotlin and Java support
-- Android SDK version 6.0 (API level 23) or above
-- Gradle Build System
+![image(1)](https://github.com/user-attachments/assets/696cf009-a0f3-4995-91fe-58e53b128825)
 
-### Gradle Configuration
 
-Add the following `build.gradle` configuration for the project:
+## 5. Deep Data Linting Roadmap
+This document outlines the proposed solution and future roadmap for deep data linting, focusing on integrating insights from multiple sources into a unified platform. The solution emphasizes advanced data validation, cross-source correlation, and seamless integration to ensure comprehensive data quality checks. The roadmap highlights phased development, scalability enhancements, and feature expansions aimed at providing a robust and centralized approach to data insight and linting
 
-```gradle
-plugins {
-    id "com.jetbrains.python.envs" version "0.0.26"
-}
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+![linting(2)](https://github.com/user-attachments/assets/ce1885dc-e701-45f6-89ab-9f412b057373)
 
-android {
-    compileSdkVersion project.ext.compile_sdk_version
-    ndkVersion project.ext.ndk_version
+## 6. Browser Support
 
-    defaultConfig {
-        applicationId project.ext.application_id
-        minSdkVersion project.ext.min_sdk_version
-        targetSdkVersion project.ext.target_sdk_version
-        versionCode project.ext.vcode
-        versionName project.ext.vname
-        ndk {
-            debugSymbolLevel project.ext.debugSymbolLevel
-        }
-    }
-    kotlinOptions {
-        jvmTarget = project.ext.jvmTarget
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildTypes {
-        release {
-            minifyEnabled project.ext.minifyEnabled
-            shrinkResources project.ext.shrinkResources
-            proguardFiles getDefaultProguardFile(project.ext.proguard_file), project.ext.proguard_rule
-        }
-    }
+Orion Browser is an Android application designed to provide a secure, private browsing experience by leveraging onion routing technology. This browser empowers users to access hidden web content anonymously, unblock restricted sites, and browse freely while safeguarding their online identity.
 
-    productFlavors {
-        orion {
-            dimension project.ext.dimen
-        }
-    }
+![JPJ pdf](https://github.com/user-attachments/assets/399fd130-988d-4e0d-acef-2f60d6220a81)
 
-    sourceSets {
-        main {
-            res.srcDirs = project.ext.resource_directories
-        }
-    }
-    lint {
-        disable project.ext.lintoption
-    }
-    buildFeatures {
-        buildConfig true
-    }
-}
+## 🌟Contribution
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.google.android.material:material:1.12.0'
-    implementation "androidx.work:work-runtime:2.9.1"
-    implementation "org.mozilla.components:browser-engine-gecko:129.0"
-    implementation project(path: ':orbotmanager')
-}
-```
+We welcome contributions to improve Orion Search. If you'd like to contribute, please fork the repository and submit a pull request.
 
-### Building the Project
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/msmannan00/Browser-Android.git
-   cd Browser-Android
-   ```
+### Steps to Contribute
 
-2. Open the project in Android Studio.
-
-3. Sync Gradle and build the project.
-
-4. Run the application on an Android emulator or connected device.
+1. Fork the repository.  
+2. Create a new feature branch (`git checkout -b feature-branch`).  
+3. Commit your changes (`git commit -m 'Add some feature'`).  
+4. Push to the branch (`git push origin feature-branch`).  
+5. Create a new Pull Request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Orion Search is licensed under the [MIT License](LICENSE).
 
----
+## Disclaimer
 
-**Disclaimer**: Accessing the hidden web carries inherent risks. Use this application responsibly and ensure compliance with local laws and regulations.
+This project is intended for research purposes only. The authors of Orion Search do not support or endorse illegal activities, and users of this project are responsible for ensuring their actions comply with the law.
+
+## GitHub Repository
+
+GitHub Repository URL: [https://github.com/msmannan00/Orion-Search.git](https://github.com/msmannan00/Orion-Search)
+
+## Project Information
+
+https://www.canva.com/design/DAF8Sa8KkDE/1H8z3RVausdHIMcE98Kvfg/edit
